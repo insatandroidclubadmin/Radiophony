@@ -1,22 +1,51 @@
 package tn.iac.radiostreaming;
 
+import java.io.IOException;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
-import android.view.Menu;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	Button startButton, pauseButton;
+	MediaPlayer mediaPlayer = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-	}
+/*		
+		startButton = (Button) findViewById(R.id.start);
+		pauseButton = (Button) findViewById(R.id.pause);
+*/		
+		mediaPlayer = new MediaPlayer();
+		OnClickListener clickListener = new ClickListener(mediaPlayer);
+		mediaPlayer.setOnPreparedListener(new PreparedListener());
+/*		
+		startButton.setOnClickListener(clickListener);
+		pauseButton.setOnClickListener(clickListener);
+*/		
+		try {
+			mediaPlayer.setDataSource("http://radioifm.ice.infomaniak.ch/radioifm-128.mp3");
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
+		} catch (IllegalArgumentException e) {
+			Toast.makeText(MainActivity.this, "erreurIllegalArgument",
+					Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			Toast.makeText(MainActivity.this, "erreurIllegalState",
+					Toast.LENGTH_LONG).show();
+			e.printStackTrace();
+		} catch (IOException e) {
+			Toast.makeText(MainActivity.this, "erreurIO", Toast.LENGTH_LONG)
+					.show();
+			e.printStackTrace();
+		}
+		
+		mediaPlayer.prepareAsync();
 	}
 
 }
