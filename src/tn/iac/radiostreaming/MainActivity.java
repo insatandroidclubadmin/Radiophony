@@ -12,6 +12,7 @@ public class MainActivity extends Activity {
 
 	Button startButton, pauseButton;
 	MediaPlayer mediaPlayer = null;
+	Radios radios = new Radios();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class MainActivity extends Activity {
 		pauseButton.setOnClickListener(clickListener);
 */		
 		try {
-			mediaPlayer.setDataSource("http://radioifm.ice.infomaniak.ch/radioifm-128.mp3");
+			mediaPlayer.setDataSource(radios.getUrl("express"));
 
 		} catch (IllegalArgumentException e) {
 			Toast.makeText(MainActivity.this, "erreurIllegalArgument",
