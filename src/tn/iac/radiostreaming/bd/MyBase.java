@@ -14,7 +14,7 @@ public class MyBase extends SQLiteOpenHelper {
 	private static final String COL_URL = "url";
 	private static final String COL_TYPE = "type";
 	private static final String COL_FLAG = "favoris";
-	private static final String CREATE_BDD = "CREATE TABLE " + TABLE_RADIO_CHANNEL + " ("  + COL_ID + " INTEGER PRIMARY KEY NOT NULL, " + COL_NAME + " TEXT NOT NULL, "+ COL_URL+ " TEXT NOT NULL, " + COL_TAG + " TEXT NOT NULL, "  + COL_TYPE + " TEXT NOT NULL, "+COL_FLAG+" INTEGER NOT NULL );";   
+	private static final String CREATE_DB = "CREATE TABLE " + TABLE_RADIO_CHANNEL + " ("  + COL_ID + " INTEGER PRIMARY KEY NOT NULL, " + COL_NAME + " TEXT NOT NULL, "+ COL_URL+ " TEXT NOT NULL, " + COL_TAG + " TEXT NOT NULL, "  + COL_TYPE + " TEXT NOT NULL, "+COL_FLAG+" INTEGER NOT NULL );";   
 	
 	
 	public MyBase(Context context, String name, CursorFactory factory, int version) {
@@ -23,7 +23,7 @@ public class MyBase extends SQLiteOpenHelper {
 	
 	@Override  
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(CREATE_BDD); 
+		db.execSQL(CREATE_DB); 
 	}  
 	
 	@Override  

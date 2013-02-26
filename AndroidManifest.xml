@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="tn.iac.radiostreaming.MainActivity" >
+        <activity android:name="tn.iac.radiostreaming.MainActivity" android:launchMode="singleTop">
         </activity>
         <activity
             android:name="tn.iac.radiostreaming.MyBase"
