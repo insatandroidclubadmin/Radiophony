@@ -1,7 +1,7 @@
 <resources>
 
-   <style name="AppTheme" parent="android:Theme.Light" />
-    
+    <style name="AppTheme" parent="android:Theme.Light" />
+
     <color name="black_color">#000</color>
 
 </resources>
