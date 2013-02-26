@@ -11,11 +11,12 @@ public class RadioChannel{
 	private int id;
 	private String name;
 	private String url;
+	private String tag;
 	private String type;
 	private int flag;
 	
-	
-	public RadioChannel(String name,String url,String type, int flag){
+	public RadioChannel(){}
+	public RadioChannel(String name,String tag,String url,String type, int flag){
 		this.name = name;
 		this.url=url;
 		this.type = type;
@@ -41,6 +42,16 @@ public class RadioChannel{
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+	
+	
+	public String getTag() {
+		return tag;
+	}
+
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 
