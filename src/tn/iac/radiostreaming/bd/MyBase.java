@@ -19,19 +19,15 @@ public class MyBase extends SQLiteOpenHelper {
 	
 	public MyBase(Context context, String name, CursorFactory factory, int version) {
 		super(context, name, factory, version);  
-		}   
-	
-	
+	}   
 	
 	@Override  
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(CREATE_BDD); 
-		}  
+	}  
 	
-	
-	
-	
-	@Override  public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {   
+	@Override  
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {   
 		db.execSQL("DROP TABLE " + TABLE_RADIO_CHANNEL + ";");   
 		onCreate(db); 
 	}
