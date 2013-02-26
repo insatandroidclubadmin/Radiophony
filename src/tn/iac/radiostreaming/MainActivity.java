@@ -9,22 +9,25 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 public class MainActivity extends Activity {
 
+	private static final int NOTIFICATION_ID = 1;
+	
 	ImageView mosaiqueButton, shemsButton , pauseButton;
-	MediaPlayer mediaPlayer = null;
 	Radios radios = new Radios();
 	NotificationManager notificationManager;
 	RadioChannelTable radioChannels;
+	ClickListener clickListener;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		createNotification();
 		
 		//***************************INITIALISATION BASE***************************************
 		radioChannels = new RadioChannelTable(this);
@@ -39,7 +42,7 @@ public class MainActivity extends Activity {
 		shemsButton = (ImageView) findViewById(R.id.playShems);
 		pauseButton = (ImageView) findViewById(R.id.pause);
 		
-		OnClickListener clickListener = new ClickListener(MainActivity.this, radioChannels);
+		clickListener = new ClickListener(MainActivity.this, radioChannels);
 		
 		mosaiqueButton.setOnClickListener(clickListener);
 		shemsButton.setOnClickListener(clickListener);
@@ -48,25 +51,32 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		mediaPlayer = null;
+	protected void onStop() {
+		super.onStop();
+		if(clickListener.isPlaying())
+			createNotification();
+	}
+	
+	@Override
+	protected void onRestart() {
+		super.onRestart();
+		deleteNotification();
 	}
 	
 	private final void createNotification(){
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         /* Create a notification */
-        String MyText = "Text inside: By Firstdroid.com";
+        String MyText = "Radio streaming ON";
         Notification mNotification = new Notification(
-               R.drawable.back,                // An Icon to display
+               R.drawable.ic_stat_play,                // An Icon to display
                MyText,                         // the text to display in the ticker
                System.currentTimeMillis()       ); // the time for the notification
 
         /* Starting an intent */
-        String MyNotifyTitle = "Firstdroid Rocks!!!";
-        String MyNotifiyText  = "Firstdroid: our forum at www.firstdroid.com";
-        Intent MyIntent = new Intent( getApplicationContext(), MainActivity.class );
+        String MyNotifyTitle = "Radio streaming ON";
+        String MyNotifiyText  = "Go to the Radio Streaming application ...";
+        Intent MyIntent = new Intent( this, MainActivity.class );
         MyIntent.putExtra("extendedTitle", MyNotifyTitle);
         MyIntent.putExtra("extendedText" , MyNotifiyText);
         PendingIntent StartIntent = PendingIntent.getActivity(  getApplicationContext(),
@@ -81,11 +91,15 @@ public class MainActivity extends Activity {
                                    StartIntent);
 
   
-
         /* Sent Notification to notification bar */
-        notificationManager.notify(  1 , mNotification );            
+        notificationManager.notify( NOTIFICATION_ID , mNotification );            
 
-     }/* End of method onClick */
+     }
+	
+	private void deleteNotification(){
+    	final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
+    	notificationManager.cancel(NOTIFICATION_ID);
+    }
 
    }
 

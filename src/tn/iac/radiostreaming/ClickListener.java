@@ -16,7 +16,6 @@ import android.widget.Toast;
 public class ClickListener implements OnClickListener {
 
 	MediaPlayer mediaPlayer;
-	Radios radios = new Radios();
 	RadioChannelTable radioChannelTable; 
 	Context applicationContext;
 	boolean playing;
@@ -79,5 +78,11 @@ public class ClickListener implements OnClickListener {
 					"Big Undefined Problem", Toast.LENGTH_SHORT).show();
 		}
 	}
+
+
+	public boolean isPlaying() {
+		return playing;
+	}
+	
 
 }
