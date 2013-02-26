@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import tn.iac.radiostreaming.bd.RadioChannel;
 import tn.iac.radiostreaming.bd.RadioChannelTable;
-import android.iac.sql.User;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
