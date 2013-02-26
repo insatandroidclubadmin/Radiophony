@@ -4,7 +4,6 @@ import java.io.IOException;
 import tn.iac.radiostreaming.bd.RadioChannelTable;
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Toast;

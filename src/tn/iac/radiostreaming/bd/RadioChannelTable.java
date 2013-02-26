@@ -7,7 +7,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class RadioChannelTable {
 
@@ -39,75 +38,7 @@ public class RadioChannelTable {
 	public void open() {
 		database = mySQLiteBase.getWritableDatabase();
 	}
-
-	public void close() {
-		database.close();
-	}
-
-	public RadioChannel getRadioChannel(String tag) {
-		Cursor c = database.query(TABLE_RADIO_CHANNEL, new String[] { COL_ID,
-				COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, COL_TAG
-				+ "=?", new String[] { tag }, null, null, null);
-		
-		RadioChannel radioChannel = null;
-		if (c.getCount() != 0) {
-			c.moveToFirst();
-			radioChannel = cursorToRadioChannel(c);
-			c.close();
-		}
-		return radioChannel;
-	}
-
-	private RadioChannel cursorToRadioChannel(Cursor c) {
-		RadioChannel radiochannel = new RadioChannel();
-
-		radiochannel.setId(c.getInt(NUM_COL_ID));
-		radiochannel.setName(c.getString(NUM_COL_NAME));
-		radiochannel.setUrl(c.getString(NUM_COL_URL));
-		radiochannel.setTag(c.getString(NUM_COL_TAG));
-		radiochannel.setType(c.getString(NUM_COL_TYPE));
-		radiochannel.setFlag(c.getInt(NUM_COL_FLAG));
-
-		return radiochannel;
-	}
-
-	public List<RadioChannel> getAllRadioChannels() {
-		Cursor c = database.query(TABLE_RADIO_CHANNEL, 
-				new String[] { COL_ID,COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG },
-				null, null, null, null, COL_FLAG + " DESC");
-		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
-		if (c.getCount() != 0) {
-			Log.d("count", "" + c.getCount());
-			c.moveToFirst();
-			for (int i = 0; i < c.getCount(); i++) {
-				c.moveToNext();
-			}
-		}
-		c.close();
-		return radioChannels;
-	}
-
-	public long insertRadioChannel(RadioChannel radiochannel) {
-		RadioChannel radioChannel = getRadioChannel(radiochannel.getTag());
-		long count = 0;
-		if (radioChannel == null) {
-			ContentValues values = new ContentValues();
-			values.put(COL_NAME, radiochannel.getName());
-			values.put(COL_TAG, radiochannel.getTag());
-			values.put(COL_TYPE, radiochannel.getType());
-			values.put(COL_FLAG, radiochannel.getFlag());
-			values.put(COL_URL, radiochannel.getUrl());
-			count = database.insert(TABLE_RADIO_CHANNEL, null, values);
-		}
-
-		return count;
-	}
-
-	public int removeRadioWithID(int id) {
-		return database.delete(TABLE_RADIO_CHANNEL, COL_ID + "=" + id, null);
-
-	}
-
+	
 	public void fillInitialTable() {
 
 		RadioChannel mosaique, ifm, shems, express;
@@ -126,6 +57,84 @@ public class RadioChannelTable {
 		insertRadioChannel(ifm);
 		insertRadioChannel(shems);
 		insertRadioChannel(express);
+	}
+
+	public long insertRadioChannel(RadioChannel radiochannel) {
+		RadioChannel radioChannel = getRadioChannel(radiochannel.getTag());
+		long count = 0;
+		if (radioChannel == null) {
+			ContentValues values = new ContentValues();
+			values.put(COL_NAME, radiochannel.getName());
+			values.put(COL_TAG, radiochannel.getTag());
+			values.put(COL_TYPE, radiochannel.getType());
+			values.put(COL_FLAG, radiochannel.getFlag());
+			values.put(COL_URL, radiochannel.getUrl());
+			count = database.insert(TABLE_RADIO_CHANNEL, null, values);
+		}
+
+		return count;
+	}
+	
+	public RadioChannel getRadioChannel(String tag) {
+		Cursor c = database.query(TABLE_RADIO_CHANNEL, new String[] { COL_ID,
+				COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, COL_TAG
+				+ "=?", new String[] { tag }, null, null, null);
+		
+		RadioChannel radioChannel = null;
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			radioChannel = cursorToRadioChannel(c);
+			c.close();
+		}
+		return radioChannel;
+	}
+
+	public List<RadioChannel> getAllRadioChannels() {
+		Cursor c = database.query(TABLE_RADIO_CHANNEL, 
+				new String[] { COL_ID,COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG },
+				null, null, null, null, COL_FLAG + " DESC");
+		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			for (int i = 0; i < c.getCount(); i++) {
+				radioChannels.add(cursorToRadioChannel(c));
+				c.moveToNext();
+			}
+		}
+		c.close();
+		return radioChannels;
+	}
+	
+	private RadioChannel cursorToRadioChannel(Cursor c) {
+		RadioChannel radioChannel = new RadioChannel();
+
+		radioChannel.setId(c.getInt(NUM_COL_ID));
+		radioChannel.setName(c.getString(NUM_COL_NAME));
+		radioChannel.setUrl(c.getString(NUM_COL_URL));
+		radioChannel.setTag(c.getString(NUM_COL_TAG));
+		radioChannel.setType(c.getString(NUM_COL_TYPE));
+		radioChannel.setFlag(c.getInt(NUM_COL_FLAG));
+		return radioChannel;
+	}
+
+	public void setFavoriteChannel(String tag){
+		ContentValues values = new ContentValues();
+		values.put(COL_FLAG, 1);
+		database.update(TABLE_RADIO_CHANNEL, values, COL_TAG + "=?", new String[] {tag});
+	}
+	
+	public void unSetFavoriteChannel(String tag){
+		ContentValues values = new ContentValues();
+		values.put(COL_FLAG, 0);
+		database.update(TABLE_RADIO_CHANNEL, values, COL_TAG + "=?", new String[] {tag});
+	}
+	
+	public int removeRadioWithID(int id) {
+		return database.delete(TABLE_RADIO_CHANNEL, COL_ID + "=" + id, null);
+	}
+	
+	public void close() {
+		database.close();
 	}
 
 }
