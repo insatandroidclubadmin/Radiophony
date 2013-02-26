@@ -20,10 +20,10 @@ public class RadioChannelTable{
 	private static final int NUM_COL_ID = 0;
 	private static final String COL_NAME = "name";
 	private static final int NUM_COL_NAME = 1;
-	private static final String COL_TAG = "tag";
-	private static final int NUM_COL_TAG = 2;
 	private static final String COL_URL = "url";
-	private static final int NUM_COL_URL = 3;
+	private static final int NUM_COL_URL = 2;
+	private static final String COL_TAG = "tag";
+	private static final int NUM_COL_TAG = 3;
 	private static final String COL_TYPE = "type";
 	private static final int NUM_COL_TYPE = 4;
 	private static final String COL_FLAG = "favoris";
@@ -70,7 +70,6 @@ public class RadioChannelTable{
 		 } 
 	
 	public long insertRadioChannel(RadioChannel radiochannel){
-		
 		ContentValues values = new ContentValues(); 
 		values.put(COL_NAME, radiochannel.getName());
 		values.put(COL_TAG, radiochannel.getTag());
