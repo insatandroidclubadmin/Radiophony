@@ -14,7 +14,7 @@ public class RadioChannel{
 	private String type;
 	private int flag;
 	
-	
+	public RadioChannel(){}
 	public RadioChannel(String name,String url,String type, int flag){
 		this.name = name;
 		this.url=url;

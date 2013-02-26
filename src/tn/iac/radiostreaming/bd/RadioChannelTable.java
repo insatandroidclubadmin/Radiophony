@@ -4,7 +4,9 @@ package tn.iac.radiostreaming.bd;
 import tn.iac.radiostreaming.bd.MyBase;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 
 
 
@@ -43,8 +45,30 @@ public class RadioChannelTable{
 		
 	}
  
-	
+	public RadioChannel getRadioChannel(String name){
+		
+		Cursor c = bdd.query(TABLE_RADIO_CHANNEL, new String[] {COL_ID, COL_NAME, COL_URL,COL_TYPE,COL_FLAG}, COL_NAME + "=? ", new String[] {name}, null, null, null, null);   
+		return cursorToRadioChannel(c); 
+	}
  
+	
+	private RadioChannel cursorToRadioChannel(Cursor c){   
+		 if (c.getCount() == 0)    
+			 return null;     	 
+		 c.moveToFirst();   
+		
+		 RadioChannel radiochannel=new RadioChannel();   
+		    
+		 radiochannel.setId(c.getInt(NUM_COL_ID));   
+		 radiochannel.setName(c.getString(NUM_COL_NAME));   
+		 radiochannel.setUrl(c.getString(NUM_COL_URL));   
+		 radiochannel.setType(c.getString(NUM_COL_TYPE));   
+		 radiochannel.setFlag(c.getInt(NUM_COL_FLAG));   
+  
+		 c.close();       
+		 return radiochannel; 
+		 } 
+	
 	public long insertRadioChannel(RadioChannel radiochannel){
 		
 		ContentValues values = new ContentValues(); 
