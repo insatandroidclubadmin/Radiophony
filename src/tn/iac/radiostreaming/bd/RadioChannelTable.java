@@ -1,6 +1,9 @@
 package tn.iac.radiostreaming.bd;
 
 
+import java.util.LinkedList;
+import java.util.List;
+
 import tn.iac.radiostreaming.bd.MyBase;
 import android.content.ContentValues;
 import android.content.Context;
@@ -47,15 +50,15 @@ public class RadioChannelTable{
  
 	public RadioChannel getRadioChannel(String tag){
 		Cursor c = bdd.query(TABLE_RADIO_CHANNEL, new String[] {COL_ID, COL_NAME, COL_URL, COL_TAG, COL_TYPE,COL_FLAG}, COL_TAG + "=?", new String[] {tag}, null, null, null);
-		return cursorToRadioChannel(c); 
+		c.moveToFirst();
+		RadioChannel radioChannel = cursorToRadioChannel(c);
+		c.close();
+		getAllRadioChannels();
+		return radioChannel; 
 	}
- 
 	
 	private RadioChannel cursorToRadioChannel(Cursor c){   
-		 if (c.getCount() == 0)    
-			 return null;     	 
-		 c.moveToFirst();   
-		
+	 
 		 RadioChannel radiochannel=new RadioChannel();   
 		    
 		 radiochannel.setId(c.getInt(NUM_COL_ID));   
@@ -65,9 +68,25 @@ public class RadioChannelTable{
 		 radiochannel.setType(c.getString(NUM_COL_TYPE));   
 		 radiochannel.setFlag(c.getInt(NUM_COL_FLAG));   
   
-		 c.close();       
+		 Log.d("radio", radiochannel.getName());
+       
 		 return radiochannel; 
 		 } 
+	
+	public List<RadioChannel> getAllRadioChannels(){
+		Cursor c = bdd.query(TABLE_RADIO_CHANNEL, new String[] {COL_ID, COL_NAME, COL_URL, COL_TAG, COL_TYPE,COL_FLAG}, null, null, null, null, COL_FLAG + " DESC");
+		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
+		if(c.getCount() != 0){
+			Log.d("count", ""+c.getCount());
+			c.moveToFirst();
+			for (int i = 0; i<c.getCount(); i++){
+				radioChannels.add(cursorToRadioChannel(c));
+				c.moveToNext();
+			}
+		}
+		c.close();
+		return radioChannels; 
+	}
 	
 	public long insertRadioChannel(RadioChannel radiochannel){
 		ContentValues values = new ContentValues(); 
@@ -91,7 +110,7 @@ public class RadioChannelTable{
 		
 		mosaique = new RadioChannel("Mosaique FM","mosaique","http://radio.mosaiquefm.net:8000/mosalive","nationale", 0);
 		shems = new RadioChannel("Shems FM","shems", "http://stream8.tanitweb.com/shems","nationale",0);
-		ifm = new RadioChannel("IFM","ifm", "http://radioifm.ice.infomaniak.ch/radioifm-128.mp3","nationale",0);
+		ifm = new RadioChannel("IFM","ifm", "http://radioifm.ice.infomaniak.ch/radioifm-128.mp3","nationale",1);
 		express = new RadioChannel("Express FM","express", "http://217.114.200.125/;stream.mp3","nationale",0);
 		
 		
