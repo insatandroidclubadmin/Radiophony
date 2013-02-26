@@ -2,6 +2,10 @@ package tn.iac.radiostreaming;
 
 import java.io.IOException;
 
+import tn.iac.radiostreaming.bd.RadioChannel;
+import tn.iac.radiostreaming.bd.RadioChannelTable;
+
+import android.app.Application;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -13,12 +17,14 @@ public class ClickListener implements OnClickListener {
 
 	MediaPlayer mediaPlayer;
 	Radios radios = new Radios();
+	RadioChannelTable radioChannelTable; 
 	Context applicationContext;
 	boolean playing;
 	
 	public ClickListener(Context applicationContext) {
 		super();
 		this.applicationContext = applicationContext;
+		radioChannelTable = new RadioChannelTable(applicationContext);
 		playing = false;
 	}
 
@@ -26,7 +32,7 @@ public class ClickListener implements OnClickListener {
 	@Override
 	public synchronized void onClick(View view) {
 		try{
-			Log.d("aa", "try");
+		Log.d("aa", "try");
 		if(view.getId()==R.id.pause){
 			Log.d("aa", "if pause");
 			if (playing)
@@ -45,7 +51,9 @@ public class ClickListener implements OnClickListener {
 			String radioName = view.getTag().toString();
 			Log.d("aa", "new media");
 			try {
-				mediaPlayer.setDataSource(radios.getUrl(radioName));
+				String url = radioChannelTable.getRadioChannel(radioName).getUrl();
+				Log.d("el url", url);
+				mediaPlayer.setDataSource(url);
 				mediaPlayer.prepare();
 				mediaPlayer.start();
 				Log.d("aa", "started");
@@ -63,8 +71,7 @@ public class ClickListener implements OnClickListener {
 				Toast.makeText(applicationContext,
 						"Network connection disabled", Toast.LENGTH_SHORT).show();
 			}catch (Exception e) {
-				Toast.makeText(applicationContext,
-						"Undefined Problem", Toast.LENGTH_SHORT).show();
+				e.printStackTrace();
 			}
 		}
 		}catch (Exception e) {

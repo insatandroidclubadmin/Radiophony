@@ -47,9 +47,9 @@ public class RadioChannelTable{
 		
 	}
  
-	public RadioChannel getRadioChannel(String name){
+	public RadioChannel getRadioChannel(String tag){
 		
-		Cursor c = bdd.query(TABLE_RADIO_CHANNEL, new String[] {COL_ID, COL_NAME, COL_TAG, COL_URL,COL_TYPE,COL_FLAG}, COL_NAME + "=? ", new String[] {name}, null, null, null, null);   
+		Cursor c = bdd.query(TABLE_RADIO_CHANNEL, new String[] {COL_ID, COL_NAME, COL_URL, COL_TAG, COL_TYPE,COL_FLAG}, COL_TAG + "=? ", new String[] {tag}, null, null, null, null);   
 		return cursorToRadioChannel(c); 
 	}
  

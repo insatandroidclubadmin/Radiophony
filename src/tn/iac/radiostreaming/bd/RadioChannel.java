@@ -16,8 +16,9 @@ public class RadioChannel{
 	private int flag;
 	
 	public RadioChannel(){}
-	public RadioChannel(String name,String tag,String url,String type, int flag){
+	public RadioChannel(String name,String tag,String url, String type, int flag){
 		this.name = name;
+		this.tag = tag;
 		this.url=url;
 		this.type = type;
 		this.flag = flag;
