@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">streaming radio</string>
+    <string name="hello_world">Radio MBM</string>
+    <string name="menu_settings">Parametres</string>
+    <string name="mozaiqueRadio">Mosaique FM</string>
+    <string name="ezitounaRadio">Ezitouna FM</string>
+    <string name="ifmRadio">IFM</string>
+    <string name="title_activity_my_base">Ma Base</string>
+    <string name="title_activity_radio_channel">canal radio</string>
+    <string name="title_activity_radio_channel_table">Tableau de radios</string>
+
+</resources>
