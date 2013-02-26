@@ -25,11 +25,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
-		//***************************INITIALISATION BASE***************************************
 		radioChannels = new RadioChannelTable(this);
-		radioChannels.open();
-		radioChannels.fillInitialTable();
-		//***************************************************************************************
+
 		mosaiqueButton = (ImageView) findViewById(R.id.playMozaique);
 		shemsButton = (ImageView) findViewById(R.id.playShems);
 		pauseButton = (ImageView) findViewById(R.id.pause);

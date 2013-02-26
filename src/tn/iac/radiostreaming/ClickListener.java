@@ -40,13 +40,11 @@ public class ClickListener implements OnClickListener {
 				
 			mediaPlayer = new MediaPlayer();
 			String radioName = view.getTag().toString();
-			Log.d("aa", "new media");
 			try {
 				String url = radioChannelTable.getRadioChannel(radioName).getUrl();
 				mediaPlayer.setDataSource(url);
 				mediaPlayer.prepare();
 				mediaPlayer.start();
-				Log.d("aa", "started");
 				playing = true;
 			} catch (IllegalArgumentException e1) {
 				Toast.makeText(applicationContext,
