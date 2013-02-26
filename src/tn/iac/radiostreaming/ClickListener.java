@@ -1,5 +1,7 @@
 package tn.iac.radiostreaming;
 
+import java.io.IOException;
+
 import android.media.MediaPlayer;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -7,6 +9,7 @@ import android.view.View.OnClickListener;
 public class ClickListener implements OnClickListener {
 
 	MediaPlayer mediaPlayer;
+	Radios radios = new Radios();
 	
 	public ClickListener(MediaPlayer mediaPlayer) {
 		super();
@@ -16,19 +19,29 @@ public class ClickListener implements OnClickListener {
 
 	@Override
 	public void onClick(View view) {
-/*		switch (view.getId()) {
-		
-		case R.id.start:
-			mediaPlayer.start();
-			break;
-
-		case R.id.pause:
+		if(view.getId()==R.id.pause){
 			mediaPlayer.pause();
-			break;
-		default:
-			mediaPlayer.stop();
 		}
-*/
+		else{
+			mediaPlayer.stop();
+			
+			mediaPlayer = new MediaPlayer();
+			String radioName = view.getTag().toString();
+			
+			try {
+				mediaPlayer.setDataSource(radios.getUrl(radioName));
+				mediaPlayer.prepare();
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				e.printStackTrace();
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			mediaPlayer.start();
+		}
 	}
 
 }
