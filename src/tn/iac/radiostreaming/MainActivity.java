@@ -1,6 +1,5 @@
 package tn.iac.radiostreaming;
 
-import java.io.IOException;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
@@ -9,11 +8,8 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -32,9 +28,7 @@ public class MainActivity extends Activity {
 		shemsButton = (ImageView) findViewById(R.id.playShems);
 		pauseButton = (ImageView) findViewById(R.id.pause);
 		
-		mediaPlayer = new MediaPlayer();
-		OnClickListener clickListener = new ClickListener(mediaPlayer);
-		mediaPlayer.setOnPreparedListener(new PreparedListener());
+		OnClickListener clickListener = new ClickListener(MainActivity.this);
 		
 		mosaiqueButton.setOnClickListener(clickListener);
 		shemsButton.setOnClickListener(clickListener);
@@ -42,6 +36,12 @@ public class MainActivity extends Activity {
 		
 	}
 
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		mediaPlayer = null;
+	}
+	
 	private final void createNotification(){
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
