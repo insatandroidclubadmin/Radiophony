@@ -1,7 +1,18 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
    <style name="AppTheme" parent="android:Theme.Light" />
     
     <color name="black_color">#000</color>
-
+    
+    <style name = "whiteText">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">italic</item>
+        
+        </style>
+        
+    
+    <style name="WidgetBackground"> 
+        <item name="android:textColor">@android:color/darker_gray</item>      
+        <item name="android:dividerHeight">12sp</item> 
+     </style> 
 </resources>

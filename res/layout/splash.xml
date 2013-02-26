@@ -2,7 +2,7 @@
     android:id="@+id/splash"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/fond"
+    android:background="@drawable/splash"
     android:orientation="vertical" >
 
     <TextView

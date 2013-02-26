@@ -2,101 +2,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity" 
+    android:gravity="center"
+    android:background="@drawable/back3">
 
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:background="@drawable/back2" >
+    <ListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="368dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentTop="true"
+        android:divider="@drawable/devider"
+        android:dividerHeight="2dp"
+        android:textAlignment="center"
+        android:listSelector="@drawable/rien" >
 
-        <RelativeLayout
-            android:id="@+id/mozaiqueLayout"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:background="@drawable/buble" >
+"
 
-            <ImageView
-                android:id="@+id/playMozaique"
-                android:tag="mosaique"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="36dp"
-                android:src="@drawable/play3" />
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/playMozaique"
-                android:layout_centerHorizontal="true"
-                android:text="@string/mozaiqueRadio"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/shemsLayout"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
-            android:background="@drawable/buble" >
-
-            <ImageView
-                android:id="@+id/playShems"
-                android:tag="shems"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="36dp"
-                android:src="@drawable/play3" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/shemsRadio"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/ifmLayout"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:background="@drawable/buble" >
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:tag="ifm"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="36dp"
-                android:src="@drawable/play3" />
-
-            <TextView
-                android:id="@+id/playIfm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/ifmRadio"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        </RelativeLayout>
-    </TableLayout>
+    </ListView>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:background="@drawable/bar"
+        android:background="@drawable/bar2"
         android:orientation="vertical" >
 
         <ImageView
@@ -105,8 +35,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="3dp"
             android:paddingTop="2dp"
-            android:src="@drawable/pause3" />
-        
+            android:src="@drawable/pause5" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -1,6 +1,12 @@
 package tn.iac.radiostreaming;
 
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+
+import tn.iac.radiostreaming.bd.RadioChannel;
 import tn.iac.radiostreaming.bd.RadioChannelTable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Notification;
@@ -8,16 +14,27 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
 	private static final int NOTIFICATION_ID = 1;
 	
-	ImageView mosaiqueButton, shemsButton , pauseButton;
+	ImageView ChannelButton,pauseButton;
 	NotificationManager notificationManager;
 	RadioChannelTable radioChannels;
 	ClickListener clickListener;
+	List<RadioChannel> myChannels;
+	List<String> AllUrls;
+
 	
 	
 	@Override
@@ -26,17 +43,43 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		radioChannels = new RadioChannelTable(this);
+		
+		setTheme(R.style.WidgetBackground);
 
-		mosaiqueButton = (ImageView) findViewById(R.id.playMozaique);
-		shemsButton = (ImageView) findViewById(R.id.playShems);
-		pauseButton = (ImageView) findViewById(R.id.pause);
+		//ChannelButton = (ImageView) findViewById(R.id.playMozaique);
 		
+		
+		pauseButton = (ImageView) findViewById(R.id.pause);		
 		clickListener = new ClickListener(MainActivity.this, radioChannels);
-		
-		mosaiqueButton.setOnClickListener(clickListener);
-		shemsButton.setOnClickListener(clickListener);
 		pauseButton.setOnClickListener(clickListener);
 		
+		//*********************************Interface*********************************************
+		//On récupére toutes les chaines radio	
+		myChannels = radioChannels.getAllRadioChannels();
+		//On met leurs noms dans une liste		
+		AllUrls=new LinkedList<String>();
+		for(int i=0;i<myChannels.size();i++){
+			AllUrls.add(myChannels.get(i).getName());		
+		}
+		
+		ListView listView = (ListView) findViewById(R.id.list);	
+		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, AllUrls);	
+		listView.setAdapter(adapter); 
+
+			
+			
+		listView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				
+				String item = ((TextView)view).getText().toString();
+						
+				// LE LISTENER DE CHAQUE ITEM ???? :S
+						
+			}
+		});
 	}
 
 	@Override

@@ -88,6 +88,21 @@ public class RadioChannelTable {
 		}
 		return radioChannel;
 	}
+	
+	
+	public RadioChannel getNameRadioChannel(String name) {
+		Cursor c = database.query(TABLE_RADIO_CHANNEL, new String[] { COL_ID,
+				COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, COL_NAME
+				+ "=?", new String[] { name }, null, null, null);
+		
+		RadioChannel radioChannel = null;
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			radioChannel = cursorToRadioChannel(c);
+			c.close();
+		}
+		return radioChannel;
+	}
 
 	public List<RadioChannel> getAllRadioChannels() {
 		Cursor c = database.query(TABLE_RADIO_CHANNEL, 
