@@ -1,12 +1,5 @@
 package tn.iac.radiostreaming.bd;
 
-import tn.iac.radiostreaming.R;
-import tn.iac.radiostreaming.R.layout;
-import tn.iac.radiostreaming.R.menu;
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-
 public class RadioChannel{
 	private int id;
 	private String name;
@@ -22,7 +15,6 @@ public class RadioChannel{
 		this.url=url;
 		this.type = type;
 		this.flag = flag;
-		
 	}
 
 
@@ -85,9 +77,6 @@ public class RadioChannel{
 		this.flag = flag;
 	}
 	
-	
-	
-	
-	}
+}
 
 

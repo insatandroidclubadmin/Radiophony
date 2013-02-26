@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 
 
@@ -38,18 +39,14 @@ public class RadioChannelTable{
  
 	public void open(){ 
 		bdd = mySQLiteBase.getWritableDatabase(); 
-		
-		
 	}
  
 	public void close(){
 		bdd.close();
-		
 	}
  
 	public RadioChannel getRadioChannel(String tag){
-		
-		Cursor c = bdd.query(TABLE_RADIO_CHANNEL, new String[] {COL_ID, COL_NAME, COL_URL, COL_TAG, COL_TYPE,COL_FLAG}, COL_TAG + "=? ", new String[] {tag}, null, null, null, null);   
+		Cursor c = bdd.query(TABLE_RADIO_CHANNEL, new String[] {COL_ID, COL_NAME, COL_URL, COL_TAG, COL_TYPE,COL_FLAG}, COL_TAG + "=?", new String[] {tag}, null, null, null);
 		return cursorToRadioChannel(c); 
 	}
  
@@ -63,8 +60,8 @@ public class RadioChannelTable{
 		    
 		 radiochannel.setId(c.getInt(NUM_COL_ID));   
 		 radiochannel.setName(c.getString(NUM_COL_NAME)); 
-		 radiochannel.setTag(c.getString(NUM_COL_TAG)); 
-		 radiochannel.setUrl(c.getString(NUM_COL_URL));   
+		 radiochannel.setUrl(c.getString(NUM_COL_URL));
+		 radiochannel.setTag(c.getString(NUM_COL_TAG));    
 		 radiochannel.setType(c.getString(NUM_COL_TYPE));   
 		 radiochannel.setFlag(c.getInt(NUM_COL_FLAG));   
   

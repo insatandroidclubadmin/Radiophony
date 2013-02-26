@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 		shemsButton = (ImageView) findViewById(R.id.playShems);
 		pauseButton = (ImageView) findViewById(R.id.pause);
 		
-		OnClickListener clickListener = new ClickListener(MainActivity.this);
+		OnClickListener clickListener = new ClickListener(MainActivity.this, radioChannels);
 		
 		mosaiqueButton.setOnClickListener(clickListener);
 		shemsButton.setOnClickListener(clickListener);

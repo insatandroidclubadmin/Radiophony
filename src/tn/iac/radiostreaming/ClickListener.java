@@ -21,10 +21,10 @@ public class ClickListener implements OnClickListener {
 	Context applicationContext;
 	boolean playing;
 	
-	public ClickListener(Context applicationContext) {
+	public ClickListener(Context applicationContext, RadioChannelTable radioChannelTable) {
 		super();
 		this.applicationContext = applicationContext;
-		radioChannelTable = new RadioChannelTable(applicationContext);
+		this.radioChannelTable= radioChannelTable;
 		playing = false;
 	}
 
