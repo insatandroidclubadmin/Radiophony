@@ -1,7 +1,6 @@
 package tn.iac.radiostreaming;
 
 import tn.iac.radiostreaming.bd.RadioChannelTable;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.Notification;
@@ -9,8 +8,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 public class MainActivity extends Activity {
@@ -18,7 +15,6 @@ public class MainActivity extends Activity {
 	private static final int NOTIFICATION_ID = 1;
 	
 	ImageView mosaiqueButton, shemsButton , pauseButton;
-	Radios radios = new Radios();
 	NotificationManager notificationManager;
 	RadioChannelTable radioChannels;
 	ClickListener clickListener;
@@ -32,11 +28,7 @@ public class MainActivity extends Activity {
 		//***************************INITIALISATION BASE***************************************
 		radioChannels = new RadioChannelTable(this);
 		radioChannels.open();
-		
 		radioChannels.fillInitialTable();
-		
-		//On récupére la chaine grâce au nom choisi par l'utilisateur (implicitement, lors du clic sur play
-		//RadioChannel radiochannel=radioChannels.getRadioChannel(name.getText().toString());  
 		//***************************************************************************************
 		mosaiqueButton = (ImageView) findViewById(R.id.playMozaique);
 		shemsButton = (ImageView) findViewById(R.id.playShems);
