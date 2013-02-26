@@ -7,8 +7,9 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="8" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.VIBRATE"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -23,6 +24,18 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="tn.iac.radiostreaming.MyBase"
+            android:label="@string/title_activity_my_base" >
+        </activity>
+        <activity
+            android:name="tn.iac.radiostreaming.RadioChannel"
+            android:label="@string/title_activity_radio_channel" >
+        </activity>
+        <activity
+            android:name="tn.iac.radiostreaming.RadioChannelTable"
+            android:label="@string/title_activity_radio_channel_table" >
         </activity>
     </application>
 

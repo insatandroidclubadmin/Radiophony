@@ -7,5 +7,8 @@
     <string name="mozaiqueRadio">Mozaique FM</string>
     <string name="ezitounaRadio">Ezitouna FM</string>
     <string name="ifmRadio">IFM</string>
+    <string name="title_activity_my_base">MyBase</string>
+    <string name="title_activity_radio_channel">RadioChannel</string>
+    <string name="title_activity_radio_channel_table">RadioChannelTable</string>
 
 </resources>
