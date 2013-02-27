@@ -15,9 +15,10 @@
         android:divider="@drawable/devider"
         android:dividerHeight="2dp"
         android:textAlignment="center"
-        android:listSelector="@drawable/rien" >
+        android:listSelector="@drawable/rien"
+        >
+	
 
-"
 
     </ListView>
 

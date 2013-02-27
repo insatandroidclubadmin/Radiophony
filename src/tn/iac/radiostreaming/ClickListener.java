@@ -4,11 +4,15 @@ import java.io.IOException;
 import tn.iac.radiostreaming.bd.RadioChannelTable;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-public class ClickListener implements OnClickListener {
+public class ClickListener implements OnClickListener, OnItemClickListener{
 
 	MediaPlayer mediaPlayer;
 	RadioChannelTable radioChannelTable; 
@@ -18,7 +22,7 @@ public class ClickListener implements OnClickListener {
 	public ClickListener(Context applicationContext, RadioChannelTable radioChannelTable) {
 		super();
 		this.applicationContext = applicationContext;
-		this.radioChannelTable= radioChannelTable;
+		this.radioChannelTable = radioChannelTable;
 		playing = false;
 	}
 
@@ -26,48 +30,57 @@ public class ClickListener implements OnClickListener {
 	@Override
 	public synchronized void onClick(View view) {
 		try{
-		if(view.getId()==R.id.pause){
-			if (playing)
-				mediaPlayer.pause();
-			playing = false;
-		}
-		else{
-			if(playing){
-				mediaPlayer.stop();
-				playing= false;
-			}
-				
-			mediaPlayer = new MediaPlayer();
-			String radioName = view.getTag().toString();
-			try {
-				String url = radioChannelTable.getRadioChannel(radioName).getUrl();
-				mediaPlayer.setDataSource(url);
-				mediaPlayer.prepare();
-				mediaPlayer.start();
-				playing = true;
-			} catch (IllegalArgumentException e1) {
+			if(mediaPlayer == null)
 				Toast.makeText(applicationContext,
-						"Illegal argument probelm", Toast.LENGTH_SHORT).show();
-			} catch (SecurityException e1) {
-				Toast.makeText(applicationContext,
-						"Security problem", Toast.LENGTH_SHORT).show();
-			} catch (IllegalStateException e1) {
-				Toast.makeText(applicationContext,
-						"Illegal state problem", Toast.LENGTH_SHORT).show();
-			} catch (IOException e1) {
-				Toast.makeText(applicationContext,
-						"Network connection disabled", Toast.LENGTH_SHORT).show();
-			}catch (Exception e) {
-				Toast.makeText(applicationContext,
-						"Stange problem", Toast.LENGTH_SHORT).show();
-			}
-		}
+						"Null Undefined Problem", Toast.LENGTH_SHORT).show();
+			mediaPlayer.pause();
 		}catch (Exception e) {
 			Toast.makeText(applicationContext,
 					"Big Undefined Problem", Toast.LENGTH_SHORT).show();
 		}
 	}
 
+	@Override
+	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+		mediaPlayer = new MediaPlayer();
+		String item = ((TextView)view).getText().toString();
+		Toast.makeText(applicationContext,item,Toast.LENGTH_LONG).show(); 
+		try{
+
+				if(playing){
+					mediaPlayer.stop();
+					playing= false;
+				}
+
+				try {
+					String url = radioChannelTable.getNameRadioChannel(item).getUrl();
+					Log.d("url", url);
+					mediaPlayer.setDataSource(url);
+					mediaPlayer.prepare();
+					mediaPlayer.start();
+					playing = true;
+				} catch (IllegalArgumentException e1) {
+					Toast.makeText(applicationContext,
+							"Illegal argument probelm", Toast.LENGTH_SHORT).show();
+				} catch (SecurityException e1) {
+					Toast.makeText(applicationContext,
+							"Security problem", Toast.LENGTH_SHORT).show();
+				} catch (IllegalStateException e1) {
+					Toast.makeText(applicationContext,
+							"Illegal state problem", Toast.LENGTH_SHORT).show();
+				} catch (IOException e1) {
+					Toast.makeText(applicationContext,
+							"Network connection disabled", Toast.LENGTH_SHORT).show();
+				}catch (Exception e) {
+					Toast.makeText(applicationContext,
+							"Stange problem", Toast.LENGTH_SHORT).show();
+				}
+			
+			}catch (Exception e) {
+				Toast.makeText(applicationContext,
+						"Big Undefined Problem", Toast.LENGTH_SHORT).show();
+			}
+	}
 
 	public boolean isPlaying() {
 		return playing;

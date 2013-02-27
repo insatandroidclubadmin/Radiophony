@@ -14,6 +14,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -41,15 +42,11 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 		radioChannels = new RadioChannelTable(this);
 		
 		setTheme(R.style.WidgetBackground);
+		pauseButton = (ImageView) findViewById(R.id.pause);	
 
-		//ChannelButton = (ImageView) findViewById(R.id.playMozaique);
-		
-		
-		pauseButton = (ImageView) findViewById(R.id.pause);		
 		clickListener = new ClickListener(MainActivity.this, radioChannels);
 		pauseButton.setOnClickListener(clickListener);
 		
@@ -65,21 +62,8 @@ public class MainActivity extends Activity {
 		ListView listView = (ListView) findViewById(R.id.list);	
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, AllUrls);	
 		listView.setAdapter(adapter); 
-
+		listView.setOnItemClickListener(clickListener);
 			
-			
-		listView.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position,
-					long id) {
-				
-				String item = ((TextView)view).getText().toString();
-						
-				// LE LISTENER DE CHAQUE ITEM ???? :S
-						
-			}
-		});
 	}
 
 	@Override
@@ -132,6 +116,8 @@ public class MainActivity extends Activity {
     	final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
     	notificationManager.cancel(NOTIFICATION_ID);
     }
+	
+	
 
    }
 

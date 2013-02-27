@@ -14,5 +14,6 @@
     <style name="WidgetBackground"> 
         <item name="android:textColor">@android:color/darker_gray</item>      
         <item name="android:dividerHeight">12sp</item> 
+        <item name="android:animateOnClick">true</item>
      </style> 
 </resources>
