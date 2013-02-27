@@ -49,8 +49,8 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
 
-		TextView itemView = (TextView)((ViewGroup)view).getChildAt(0);
-		ImageView imageView = (ImageView)((ViewGroup)view).getChildAt(1);
+		ImageView imageView = (ImageView)((ViewGroup)view).getChildAt(0);
+		TextView itemView = (TextView)((ViewGroup)view).getChildAt(1);
 //		imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.buble));
 		String item = itemView.getText().toString();
 		//***************SCROLLING TEXT*********************************
