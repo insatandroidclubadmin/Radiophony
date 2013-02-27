@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -30,10 +31,8 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 	@Override
 	public synchronized void onClick(View view) {
 		try{
-			if(mediaPlayer == null)
-				Toast.makeText(applicationContext,
-						"Null Undefined Problem", Toast.LENGTH_SHORT).show();
 			mediaPlayer.pause();
+			playing = false;
 		}catch (Exception e) {
 			Toast.makeText(applicationContext,
 					"Big Undefined Problem", Toast.LENGTH_SHORT).show();
@@ -42,17 +41,18 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-		mediaPlayer = new MediaPlayer();
-		String item = ((TextView)view).getText().toString();
+		
+		TextView itemView = (TextView)((ViewGroup)view).getChildAt(0);
+		String item = itemView.getText().toString();
 		Toast.makeText(applicationContext,item,Toast.LENGTH_LONG).show(); 
 		try{
-
 				if(playing){
 					mediaPlayer.stop();
 					playing= false;
 				}
-
+				
 				try {
+					mediaPlayer = new MediaPlayer();
 					String url = radioChannelTable.getNameRadioChannel(item).getUrl();
 					Log.d("url", url);
 					mediaPlayer.setDataSource(url);

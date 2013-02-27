@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
 		}
 		
 		ListView listView = (ListView) findViewById(R.id.list);	
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, android.R.id.text1, AllUrls);	
+		ArrayAdapter<String> adapter = new MySimpleArrayAdapter(this,AllUrls);	
 		listView.setAdapter(adapter); 
 		listView.setOnItemClickListener(clickListener);
 			
