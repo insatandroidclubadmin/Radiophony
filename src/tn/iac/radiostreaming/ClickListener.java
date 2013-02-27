@@ -1,6 +1,8 @@
 package tn.iac.radiostreaming;
 
 import java.io.IOException;
+import java.io.InputStream;
+
 import tn.iac.radiostreaming.bd.RadioChannelTable;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
@@ -31,6 +34,10 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 	@Override
 	public synchronized void onClick(View view) {
 		try{
+			
+			ImageView imageView = (ImageView)view;
+			imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pauze));
+			
 			mediaPlayer.pause();
 			playing = false;
 		}catch (Exception e) {
@@ -41,8 +48,10 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-		
+
 		TextView itemView = (TextView)((ViewGroup)view).getChildAt(0);
+		ImageView imageView = (ImageView)((ViewGroup)view).getChildAt(1);
+//		imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.buble));
 		String item = itemView.getText().toString();
 		Toast.makeText(applicationContext,item,Toast.LENGTH_LONG).show(); 
 		try{
@@ -54,10 +63,15 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 				try {
 					mediaPlayer = new MediaPlayer();
 					String url = radioChannelTable.getNameRadioChannel(item).getUrl();
-					Log.d("url", url);
+					
+					Log.d("status", "charging");
 					mediaPlayer.setDataSource(url);
 					mediaPlayer.prepare();
 					mediaPlayer.start();
+	//				ImageView equalizer = (ImageView) ((ViewGroup)view).getChildAt(1);
+			
+	//				equalizer.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.eq));
+					Log.d("status", "playing");
 					playing = true;
 				} catch (IllegalArgumentException e1) {
 					Toast.makeText(applicationContext,
@@ -86,5 +100,4 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 		return playing;
 	}
 	
-
 }

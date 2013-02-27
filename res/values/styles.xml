@@ -3,6 +3,7 @@
    <style name="AppTheme" parent="android:Theme.Light" />
     
     <color name="black_color">#000</color>
+    <color name="light_grey">#C7C7C7</color>
     
     <style name = "whiteText">
         <item name="android:textColor">@android:color/white</item>
@@ -12,7 +13,7 @@
         
     
     <style name="WidgetBackground"> 
-        <item name="android:textColor">@android:color/darker_gray</item>      
+        <item name="android:textColor">@color/light_grey</item>      
         <item name="android:dividerHeight">12sp</item> 
         <item name="android:animateOnClick">true</item>
      </style> 
