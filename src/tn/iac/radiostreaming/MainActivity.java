@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+
 import tn.iac.radiostreaming.bd.RadioChannel;
 import tn.iac.radiostreaming.bd.RadioChannelTable;
 import android.media.MediaPlayer;
@@ -42,6 +43,12 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		//***************************TEXT DEFILANT *********************************
+		TextView tView = (TextView) findViewById(R.id.scrollingText);
+		
+		tView.setSelected(true);
+		//**************************************************************************
+		
 		radioChannels = new RadioChannelTable(this);
 		
 		setTheme(R.style.WidgetBackground);

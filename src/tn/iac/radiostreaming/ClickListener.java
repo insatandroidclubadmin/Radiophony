@@ -53,6 +53,11 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 		ImageView imageView = (ImageView)((ViewGroup)view).getChildAt(1);
 //		imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.buble));
 		String item = itemView.getText().toString();
+		//***************SCROLLING TEXT*********************************
+		TextView tView = (TextView) ((MainActivity)applicationContext).findViewById(R.id.scrollingText);
+		tView.setText("---------------Playing now: "+item+"---------------");
+		//**************************************************************
+		
 		Toast.makeText(applicationContext,item,Toast.LENGTH_LONG).show(); 
 		try{
 				if(playing){
