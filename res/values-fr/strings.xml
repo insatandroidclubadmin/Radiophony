@@ -12,8 +12,12 @@
     <string name="title_activity_radio_channel_table">Tableau de radios</string>
     <string name="redirect">Passer</string>
     <string name="quitter">Quitter</string>
+    <string name="favoriteMenu">Menu Favoris</string>
+    <string name="setFavorite">Marquer comme Favori</string>
+    <string name="unsetFavorite">Supprimer Favori</string>
     <string name="notifTitle">Radio streaming est activé</string>
     <string name="notifText">Aller à l\'application Radio Streaming &#8230;</string>
     <string name="play">-------------------Radio en écoute : Aucun --------------------</string>
+    <string name="play2">---------------Radio en écoute :  </string>
 
 </resources>

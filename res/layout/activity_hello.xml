@@ -9,23 +9,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HelloActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" 
-        android:gravity="center"
-        android:textColor="@color/light_grey"/>
-
     <Button
         android:id="@+id/red"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="62dp"
-        android:layout_marginLeft="45dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="74dp"
         android:text="@string/redirect" />
 
     <Button
@@ -35,8 +27,26 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/red"
         android:layout_alignBottom="@+id/red"
-        android:layout_marginLeft="45dp"
-        android:layout_toRightOf="@+id/red"
+        android:layout_toRightOf="@+id/textView1"
         android:text="@string/quitter" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="27dp"
+        android:gravity="center"
+        android:text="@string/hello_world"
+        android:textColor="@color/light_grey" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/image" />
 
 </RelativeLayout>
