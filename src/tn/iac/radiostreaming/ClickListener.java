@@ -1,13 +1,6 @@
 package tn.iac.radiostreaming;
 
 import java.io.IOException;
-<<<<<<< HEAD
-import java.io.InputStream;
-import java.util.Timer;
-
-
-=======
->>>>>>> 6bc75d71e8a9d5c308580f361d18b65536794510
 import tn.iac.radiostreaming.bd.RadioChannelTable;
 import android.content.Context;
 import android.media.MediaPlayer;
