@@ -1,10 +1,13 @@
 package tn.iac.radiostreaming;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.io.InputStream;
 import java.util.Timer;
 
 
+=======
+>>>>>>> 6bc75d71e8a9d5c308580f361d18b65536794510
 import tn.iac.radiostreaming.bd.RadioChannelTable;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -71,7 +74,7 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 				
 				try {
 					mediaPlayer = new MediaPlayer();
-					String url = radioChannelTable.getNameRadioChannel(item).getUrl();
+					String url = radioChannelTable.getRadioChannelByCol(RadioChannelTable.COL_NAME, item).getUrl();
 					
 					Log.d("status", "charging");
 					

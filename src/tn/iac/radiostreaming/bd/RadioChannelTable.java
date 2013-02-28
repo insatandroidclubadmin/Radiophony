@@ -2,7 +2,7 @@ package tn.iac.radiostreaming.bd;
 
 import java.util.LinkedList;
 import java.util.List;
-import tn.iac.radiostreaming.bd.MyBase;
+import tn.iac.radiostreaming.bd.RadioChannelDB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -15,7 +15,7 @@ public class RadioChannelTable {
 	private static final String TABLE_RADIO_CHANNEL = "radiochannel";
 	private static final String COL_ID = "ID";
 	private static final int NUM_COL_ID = 0;
-	private static final String COL_NAME = "name";
+	public static final String COL_NAME = "name";
 	private static final int NUM_COL_NAME = 1;
 	private static final String COL_URL = "url";
 	private static final int NUM_COL_URL = 2;
@@ -27,10 +27,10 @@ public class RadioChannelTable {
 	private static final int NUM_COL_FLAG = 5;
 
 	private SQLiteDatabase database;
-	private MyBase mySQLiteBase;
+	private RadioChannelDB mySQLiteBase;
 
 	public RadioChannelTable(Context context) {
-		mySQLiteBase = new MyBase(context, DB_NAME, null, DB_VERSION);
+		mySQLiteBase = new RadioChannelDB(context, DB_NAME, null, DB_VERSION);
 		this.open();
 		this.fillInitialTable();
 	}
@@ -41,23 +41,24 @@ public class RadioChannelTable {
 	
 	public void fillInitialTable() {
 
-		RadioChannel mosaique, ifm, shems, express, fun, nrj, rtl2;
+		RadioChannel mosaique, ifm, shems, express, fun, nrj, rtl2, skyrock;
 
 		mosaique = new RadioChannel("Mosaique FM", "mosaique",
 				"http://radio.mosaiquefm.net:8000/mosalive", "nationale", 0);
 		shems = new RadioChannel("Shems FM", "shems",
 				"http://stream8.tanitweb.com/shems", "nationale", 0);
-		ifm = new RadioChannel("IFM", "ifm",
-				"http://radioifm.ice.infomaniak.ch/radioifm-128.mp3",
-				"nationale", 1);
+		ifm = new RadioChannel("ifm", "ifm",
+				"http://radioifm.ice.infomaniak.ch/radioifm-128.mp3", "nationale", 1);
 		express = new RadioChannel("Express FM", "express",
 				"http://217.114.200.125/;stream.mp3", "nationale", 0);
 		fun = new RadioChannel("Fun Radio", "fun",
 				"http://streaming.radio.funradio.fr/fun-1-44-96?.wma", "internationale", 0);
 		nrj = new RadioChannel("NRJ", "nrj",
-				"mms://vipnrj.yacast.net/encodernrj", "internationale", 0);
+				"http://mp3.live.tv-radio.com/nrj/all/nrj_113225.mp3", "internationale", 0);
 		rtl2 = new RadioChannel("RTL2", "rtl2",
 				"http://streaming.radio.rtl2.fr/rtl2-1-44-96?.wma", "internationale", 0);
+		skyrock = new RadioChannel("Skyrock", "skyrock",
+				"http://player.skyrock.fm/V4/skyrock/skyrock.m3u", "internationale", 0);
 		insertRadioChannel(mosaique);
 		insertRadioChannel(ifm);
 		insertRadioChannel(shems);
@@ -65,10 +66,11 @@ public class RadioChannelTable {
 		insertRadioChannel(fun);
 		insertRadioChannel(nrj);
 		insertRadioChannel(rtl2);
+		insertRadioChannel(skyrock);
 	}
 
 	public long insertRadioChannel(RadioChannel radiochannel) {
-		RadioChannel radioChannel = getRadioChannel(radiochannel.getTag());
+		RadioChannel radioChannel = getRadioChannelByCol(COL_TAG,radiochannel.getTag());
 		long count = 0;
 		if (radioChannel == null) {
 			ContentValues values = new ContentValues();
@@ -83,25 +85,10 @@ public class RadioChannelTable {
 		return count;
 	}
 	
-	public RadioChannel getRadioChannel(String tag) {
+	public RadioChannel getRadioChannelByCol(String col, String value){
 		Cursor c = database.query(TABLE_RADIO_CHANNEL, new String[] { COL_ID,
-				COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, COL_TAG
-				+ "=?", new String[] { tag }, null, null, null);
-		
-		RadioChannel radioChannel = null;
-		if (c.getCount() != 0) {
-			c.moveToFirst();
-			radioChannel = cursorToRadioChannel(c);
-			c.close();
-		}
-		return radioChannel;
-	}
-	
-	
-	public RadioChannel getNameRadioChannel(String name) {
-		Cursor c = database.query(TABLE_RADIO_CHANNEL, new String[] { COL_ID,
-				COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, COL_NAME
-				+ "=?", new String[] { name }, null, null, null);
+				COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, col
+				+ "=?", new String[] { value }, null, null, null);
 		
 		RadioChannel radioChannel = null;
 		if (c.getCount() != 0) {
@@ -146,7 +133,7 @@ public class RadioChannelTable {
 		database.update(TABLE_RADIO_CHANNEL, values, COL_NAME + "=?", new String[] {name});
 	}
 	
-	public void unSetFavoriteChannel(String name){
+	public void unsetFavoriteChannel(String name){
 		ContentValues values = new ContentValues();
 		values.put(COL_FLAG, 0);
 		database.update(TABLE_RADIO_CHANNEL, values, COL_NAME + "=?", new String[] {name});

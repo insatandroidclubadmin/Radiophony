@@ -95,27 +95,18 @@ public class MainActivity extends Activity {
 
         /* Create a notification */
         String MyText = "Radio streaming ON";
-        Notification mNotification = new Notification(
-               R.drawable.ic_stat_play,                // An Icon to display
-               MyText,                         // the text to display in the ticker
-               System.currentTimeMillis()       ); // the time for the notification
+        Notification mNotification = new Notification( R.drawable.ic_stat_play, MyText, System.currentTimeMillis()       ); // the time for the notification
 
         /* Starting an intent */
-        String MyNotifyTitle =  (String)findViewById(R.string.notifTitle).toString();
-        String MyNotifiyText  = (String)findViewById(R.string.notifText).toString();
+        String MyNotifyTitle =  getString(R.string.notifTitle);
+        String MyNotifiyText  = getString(R.string.notifText);
         Intent MyIntent = new Intent( this, MainActivity.class );
         MyIntent.putExtra("extendedTitle", MyNotifyTitle);
         MyIntent.putExtra("extendedText" , MyNotifiyText);
-        PendingIntent StartIntent = PendingIntent.getActivity(  getApplicationContext(),
-                                                  0,
-                                                  MyIntent,
-                                                  0);
+        PendingIntent StartIntent = PendingIntent.getActivity(  getApplicationContext(),0,MyIntent,0);
 
         /* Set notification message */
-        mNotification.setLatestEventInfo(   getApplicationContext(),
-                                   MyNotifyTitle,
-                                   MyNotifiyText,
-                                   StartIntent);
+        mNotification.setLatestEventInfo(   getApplicationContext(), MyNotifyTitle, MyNotifiyText, StartIntent);
 
   
         /* Sent Notification to notification bar */

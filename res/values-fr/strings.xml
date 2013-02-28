@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Streamingradio en Francais</string>
-    <string name="hello_world">Radio MBM FR</string>
+    <string name="app_name">Radiophony</string>
+    <string name="hello_world">Radiophony</string>
     <string name="menu_settings">Parametres</string>
     <string name="mozaiqueRadio">Mosaique FM</string>
     <string name="ezitounaRadio">Ezitouna FM</string>
@@ -13,7 +13,7 @@
     <string name="redirect">Passer</string>
     <string name="quitter">Quitter</string>
     <string name="notifTitle">Radio streaming est activé</string>
-    <string name="notifText">Aller à l\'application Radio Streaming ...</string>
+    <string name="notifText">Aller à l\'application Radio Streaming &#8230;</string>
     <string name="play">-------------------Radio en écoute : Aucun --------------------</string>
 
 </resources>
