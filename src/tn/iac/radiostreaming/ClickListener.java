@@ -2,6 +2,7 @@ package tn.iac.radiostreaming;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Timer;
 
 
 import tn.iac.radiostreaming.bd.RadioChannelTable;
@@ -34,11 +35,14 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 
 	@Override
 	public synchronized void onClick(View view) {
+		
+		
 		try{
+			
 			if(playing){
 				ImageView imageView = (ImageView)view;
 				imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pauze));
-				wait(400);
+				Thread.sleep(12);
 				imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pause));
 				mediaPlayer.pause();
 				playing = false;
