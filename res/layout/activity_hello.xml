@@ -11,17 +11,6 @@
      >
 
     <Button
-        android:id="@+id/red"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="108dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/redirect" />
-
-    <Button
         android:id="@+id/qt"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="40dp"
@@ -31,5 +20,16 @@
         android:layout_marginRight="36dp"
         android:layout_toLeftOf="@+id/red"
         android:background="@drawable/quit" />
+
+    <Button
+        android:id="@+id/red"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="17dp"
+        android:layout_marginRight="79dp"
+        android:background="@drawable/redirect" />
 
 </RelativeLayout>
