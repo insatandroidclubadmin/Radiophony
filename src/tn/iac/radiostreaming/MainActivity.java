@@ -11,6 +11,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -72,11 +79,40 @@ public class MainActivity extends Activity {
 		adapter = new MySimpleArrayAdapter(this, channelNames);	
 		listView.setAdapter(adapter); 
 		listView.setOnItemClickListener(clickListener);
+		registerForContextMenu(listView);
 		
 		pauseButton.setOnClickListener(clickListener);
 		scrollingText.setSelected(true);
 	}
 
+	String selectedRadioName;
+	
+	@Override  
+	public void onCreateContextMenu(ContextMenu menu, View view,ContextMenuInfo menuInfo) {  
+		super.onCreateContextMenu(menu, view, menuInfo); 
+	    menu.setHeaderTitle(getString(R.string.favoriteMenu)); 
+	    menu.add(0, view.getId(), 0, getString(R.string.setFavorite));  
+	    menu.add(0, view.getId(), 0, getString(R.string.unsetFavorite));  
+	} 
+	
+	 @Override  
+	 public boolean onContextItemSelected(MenuItem item) { 
+		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
+	    long id = this.listView.getItemIdAtPosition(info.position);
+	    String radioName = listView.getItemAtPosition((int)id).toString();
+	    
+	    if(item.getTitle()==getString(R.string.setFavorite)){
+	        radioChannels.setFavoriteChannel(radioName);
+	    }  
+	    else if(item.getTitle()==getString(R.string.unsetFavorite)){
+	    	radioChannels.unsetFavoriteChannel(radioName);
+	    }  
+	    else {
+	    	return false;
+	    }  
+	 return true;  
+	 } 
+	 
 	@Override
 	protected void onStop() {
 		super.onStop();
