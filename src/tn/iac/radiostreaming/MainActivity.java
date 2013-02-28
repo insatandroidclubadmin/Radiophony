@@ -16,13 +16,16 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,13 +46,19 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		radioChannels = new RadioChannelTable(this);
+		
+		//***************************STAR*******************************************
+		
+		
+		
 		//***************************TEXT DEFILANT *********************************
 		TextView tView = (TextView) findViewById(R.id.scrollingText);
 		
 		tView.setSelected(true);
 		//**************************************************************************
 		
-		radioChannels = new RadioChannelTable(this);
+		
 		
 		setTheme(R.style.WidgetBackground);
 		pauseButton = (ImageView) findViewById(R.id.pause);	
@@ -70,7 +79,7 @@ public class MainActivity extends Activity {
 		ArrayAdapter<String> adapter = new MySimpleArrayAdapter(this,AllUrls);	
 		listView.setAdapter(adapter); 
 		listView.setOnItemClickListener(clickListener);
-			
+		
 	}
 
 	@Override
@@ -123,6 +132,10 @@ public class MainActivity extends Activity {
     	final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
     	notificationManager.cancel(NOTIFICATION_ID);
     }
+
+	public RadioChannelTable getRadioChannels() {
+		return radioChannels;
+	}
 	
 	
 

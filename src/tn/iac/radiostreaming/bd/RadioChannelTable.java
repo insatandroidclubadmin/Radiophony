@@ -140,16 +140,16 @@ public class RadioChannelTable {
 		return radioChannel;
 	}
 
-	public void setFavoriteChannel(String tag){
+	public void setFavoriteChannel(String name){
 		ContentValues values = new ContentValues();
 		values.put(COL_FLAG, 1);
-		database.update(TABLE_RADIO_CHANNEL, values, COL_TAG + "=?", new String[] {tag});
+		database.update(TABLE_RADIO_CHANNEL, values, COL_NAME + "=?", new String[] {name});
 	}
 	
-	public void unSetFavoriteChannel(String tag){
+	public void unSetFavoriteChannel(String name){
 		ContentValues values = new ContentValues();
 		values.put(COL_FLAG, 0);
-		database.update(TABLE_RADIO_CHANNEL, values, COL_TAG + "=?", new String[] {tag});
+		database.update(TABLE_RADIO_CHANNEL, values, COL_NAME + "=?", new String[] {name});
 	}
 	
 	public int removeRadioWithID(int id) {
