@@ -11,22 +11,24 @@ import android.view.animation.AnimationSet;
 import android.view.animation.Transformation;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HelloActivity extends Activity implements OnClickListener {
 
-	Button redirect = null;
-
+	TextView redirect;
+	TextView quit;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hello);
 
-		redirect = (Button) findViewById(R.id.red);
+		redirect = (TextView) findViewById(R.id.red);
 		redirect.setOnClickListener(this);
 
-		Button q = (Button) findViewById(R.id.qt);
-		q.setOnClickListener(new View.OnClickListener() {
+		quit = (TextView) findViewById(R.id.qt);
+		quit.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
 				finish();
