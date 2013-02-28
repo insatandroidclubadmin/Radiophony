@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
 	private static final int NOTIFICATION_ID = 1;
 	
 	ImageView ChannelButton,pauseButton;
+	Button backButton;
 	NotificationManager notificationManager;
 	RadioChannelTable radioChannels;
 	ClickListener clickListener;
@@ -38,7 +39,24 @@ public class MainActivity extends Activity {
 		setTheme(R.style.WidgetBackground);
 		
 		radioChannels = new RadioChannelTable(this);
+<<<<<<< HEAD
 		clickListener = new ClickListener(MainActivity.this, radioChannels);
+=======
+		
+		setTheme(R.style.WidgetBackground);
+		pauseButton = (ImageView) findViewById(R.id.pause);	
+		backButton = (ImageView) findViewById(R.drawable.back45);
+
+		clickListener = new ClickListener(MainActivity.this, radioChannels);
+		pauseButton.setOnClickListener(clickListener);
+		backButton.setOnClickListener(new View.OnClickListener() {
+ 
+			public void onClick(View v) {
+				MainActivity.this.finish();
+ 
+			}
+		});
+>>>>>>> 5825addfb8b4aedb0566fdb63c834f6fd003cc5a
 		
 		scrollingText = (TextView) findViewById(R.id.scrollingText);
 		pauseButton = (ImageView) findViewById(R.id.pause);
@@ -82,8 +100,8 @@ public class MainActivity extends Activity {
                System.currentTimeMillis()       ); // the time for the notification
 
         /* Starting an intent */
-        String MyNotifyTitle = "Radio streaming ON";
-        String MyNotifiyText  = "Go to the Radio Streaming application ...";
+        String MyNotifyTitle =  (String)findViewById(R.string.notifTitle).toString();
+        String MyNotifiyText  = (String)findViewById(R.string.notifText).toString();
         Intent MyIntent = new Intent( this, MainActivity.class );
         MyIntent.putExtra("extendedTitle", MyNotifyTitle);
         MyIntent.putExtra("extendedText" , MyNotifiyText);
