@@ -1,33 +1,20 @@
 package tn.iac.radiostreaming;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-
-
 import tn.iac.radiostreaming.bd.RadioChannel;
 import tn.iac.radiostreaming.bd.RadioChannelTable;
-import android.media.MediaPlayer;
-import android.os.Bundle;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -37,49 +24,38 @@ public class MainActivity extends Activity {
 	NotificationManager notificationManager;
 	RadioChannelTable radioChannels;
 	ClickListener clickListener;
-	List<RadioChannel> myChannels;
-	List<String> AllUrls;
-
+	List<RadioChannel> channels;
+	List<String> channelNames;
+	ArrayAdapter<String> adapter;
+	TextView scrollingText;
+	ListView listView;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		radioChannels = new RadioChannelTable(this);
-		
-		//***************************STAR*******************************************
-		
-		
-		
-		//***************************TEXT DEFILANT *********************************
-		TextView tView = (TextView) findViewById(R.id.scrollingText);
-		
-		tView.setSelected(true);
-		//**************************************************************************
-		
-		
-		
 		setTheme(R.style.WidgetBackground);
-		pauseButton = (ImageView) findViewById(R.id.pause);	
-
+		
+		radioChannels = new RadioChannelTable(this);
 		clickListener = new ClickListener(MainActivity.this, radioChannels);
-		pauseButton.setOnClickListener(clickListener);
 		
-		//*********************************Interface*********************************************
-		//On récupére toutes les chaines radio	
-		myChannels = radioChannels.getAllRadioChannels();
-		//On met leurs noms dans une liste		
-		AllUrls=new LinkedList<String>();
-		for(int i=0;i<myChannels.size();i++){
-			AllUrls.add(myChannels.get(i).getName());		
+		scrollingText = (TextView) findViewById(R.id.scrollingText);
+		pauseButton = (ImageView) findViewById(R.id.pause);
+		listView = (ListView) findViewById(R.id.list);				
+		
+		channels = radioChannels.getAllRadioChannels();	
+		channelNames = new LinkedList<String>();
+		for(int i=0 ; i<channels.size() ; i++){
+			channelNames.add(channels.get(i).getName());		
 		}
-		
-		ListView listView = (ListView) findViewById(R.id.list);	
-		ArrayAdapter<String> adapter = new MySimpleArrayAdapter(this,AllUrls);	
+			
+		adapter = new MySimpleArrayAdapter(this, channelNames);	
 		listView.setAdapter(adapter); 
 		listView.setOnItemClickListener(clickListener);
 		
+		pauseButton.setOnClickListener(clickListener);
+		scrollingText.setSelected(true);
 	}
 
 	@Override

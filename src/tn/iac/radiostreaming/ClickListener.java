@@ -34,12 +34,15 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 	@Override
 	public synchronized void onClick(View view) {
 		try{
-			
-			ImageView imageView = (ImageView)view;
-			imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pauze));
-			
-			mediaPlayer.pause();
-			playing = false;
+			if(playing){
+				ImageView imageView = (ImageView)view;
+				imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pauze));
+				wait(400);
+				imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pause));
+				mediaPlayer.pause();
+				playing = false;
+			}
+
 		}catch (Exception e) {
 			Toast.makeText(applicationContext,
 					"Big Undefined Problem", Toast.LENGTH_SHORT).show();
@@ -48,17 +51,12 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-
-		ImageView imageView = (ImageView)((ViewGroup)view).getChildAt(0);
-		TextView itemView = (TextView)((ViewGroup)view).getChildAt(1);
-//		imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.buble));
-		String item = itemView.getText().toString();
-		//***************SCROLLING TEXT*********************************
-		TextView tView = (TextView) ((MainActivity)applicationContext).findViewById(R.id.scrollingText);
-		tView.setText("---------------Playing now: "+item+"---------------");
-		//**************************************************************
 		
+		TextView itemView = (TextView)((ViewGroup)view).getChildAt(1);
+		String item = itemView.getText().toString();
+		TextView tView = (TextView) ((MainActivity)applicationContext).findViewById(R.id.scrollingText);
 		Toast.makeText(applicationContext,item,Toast.LENGTH_LONG).show(); 
+		
 		try{
 				if(playing){
 					mediaPlayer.stop();
@@ -70,14 +68,16 @@ public class ClickListener implements OnClickListener, OnItemClickListener{
 					String url = radioChannelTable.getNameRadioChannel(item).getUrl();
 					
 					Log.d("status", "charging");
+					
 					mediaPlayer.setDataSource(url);
 					mediaPlayer.prepare();
 					mediaPlayer.start();
-	//				ImageView equalizer = (ImageView) ((ViewGroup)view).getChildAt(1);
-			
-	//				equalizer.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.eq));
+					
 					Log.d("status", "playing");
+					
 					playing = true;
+					tView.setText("---------------Playing now: "+item+"---------------");
+					
 				} catch (IllegalArgumentException e1) {
 					Toast.makeText(applicationContext,
 							"Illegal argument probelm", Toast.LENGTH_SHORT).show();

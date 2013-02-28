@@ -28,15 +28,8 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
     ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
     TextView textView = (TextView) rowView.findViewById(R.id.label);
-    RatingBar ratingBar = (RatingBar) rowView.findViewById(R.id.ratingStar);
     textView.setText(values.get(position));
-    ratingBar.setOnRatingBarChangeListener(new FavoriteListener(((MainActivity)context).getRadioChannels()));
-    // Change the icon for Windows and iPhone
-    String s = values.get(position);
-    
-      imageView.setImageResource(R.drawable.play4);
-
-
+    imageView.setImageResource(R.drawable.play4);
     return rowView;
   }
 } 
