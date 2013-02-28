@@ -17,5 +17,5 @@
     <string name="notifTitle">Radio streaming ON</string>
     <string name="notifText">Go to the Radio Streaming application &#8230;</string>
     <string name="play">-------------------Now playing : None --------------------</string>
-
+	 <string name="playin">---------------Playing now:  </string>
 </resources>

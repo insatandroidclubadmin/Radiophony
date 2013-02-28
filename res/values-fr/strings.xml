@@ -15,5 +15,6 @@
     <string name="notifTitle">Radio streaming est activé</string>
     <string name="notifText">Aller à l\'application Radio Streaming &#8230;</string>
     <string name="play">-------------------Radio en écoute : Aucun --------------------</string>
+    <string name="play2">---------------Radio en écoute :  </string>
 
 </resources>
