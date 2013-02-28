@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class MySimpleArrayAdapter extends ArrayAdapter<String> {
@@ -21,7 +20,7 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
 		this.values = values;
 	}
 
-<<<<<<< HEAD
+
   @Override
   public View getView(int position, View convertView, ViewGroup parent) {
     LayoutInflater inflater = (LayoutInflater) context
@@ -34,20 +33,3 @@ public class MySimpleArrayAdapter extends ArrayAdapter<String> {
     return rowView;
   }
 } 
-=======
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		LayoutInflater inflater = (LayoutInflater) context
-				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
-		TextView textView = (TextView) rowView.findViewById(R.id.label);
-		ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-		textView.setText(values.get(position));
-		// Change the icon for Windows and iPhone
-		String s = values.get(position);
-		imageView.setImageResource(R.drawable.play3);
-
-		return rowView;
-	}
-}
->>>>>>> 5825addfb8b4aedb0566fdb63c834f6fd003cc5a

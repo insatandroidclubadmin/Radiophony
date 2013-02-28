@@ -12,6 +12,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,10 +40,10 @@ public class MainActivity extends Activity {
 		setTheme(R.style.WidgetBackground);
 		
 		radioChannels = new RadioChannelTable(this);
-<<<<<<< HEAD
+
 		clickListener = new ClickListener(MainActivity.this, radioChannels);
-=======
-		
+
+	/*	
 		setTheme(R.style.WidgetBackground);
 		pauseButton = (ImageView) findViewById(R.id.pause);	
 		backButton = (ImageView) findViewById(R.drawable.back45);
@@ -56,7 +57,7 @@ public class MainActivity extends Activity {
  
 			}
 		});
->>>>>>> 5825addfb8b4aedb0566fdb63c834f6fd003cc5a
+*/
 		
 		scrollingText = (TextView) findViewById(R.id.scrollingText);
 		pauseButton = (ImageView) findViewById(R.id.pause);
