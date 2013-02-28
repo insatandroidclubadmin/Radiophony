@@ -41,7 +41,7 @@ public class RadioChannelTable {
 	
 	public void fillInitialTable() {
 
-		RadioChannel mosaique, ifm, shems, express;
+		RadioChannel mosaique, ifm, shems, express, fun, nrj, rtl2;
 
 		mosaique = new RadioChannel("Mosaique FM", "mosaique",
 				"http://radio.mosaiquefm.net:8000/mosalive", "nationale", 0);
@@ -52,11 +52,19 @@ public class RadioChannelTable {
 				"nationale", 1);
 		express = new RadioChannel("Express FM", "express",
 				"http://217.114.200.125/;stream.mp3", "nationale", 0);
-
+		fun = new RadioChannel("Fun Radio", "fun",
+				"http://streaming.radio.funradio.fr/fun-1-44-96?.wma", "internationale", 0);
+		nrj = new RadioChannel("NRJ", "nrj",
+				"mms://vipnrj.yacast.net/encodernrj", "internationale", 0);
+		rtl2 = new RadioChannel("RTL2", "rtl2",
+				"http://streaming.radio.rtl2.fr/rtl2-1-44-96?.wma", "internationale", 0);
 		insertRadioChannel(mosaique);
 		insertRadioChannel(ifm);
 		insertRadioChannel(shems);
 		insertRadioChannel(express);
+		insertRadioChannel(fun);
+		insertRadioChannel(nrj);
+		insertRadioChannel(rtl2);
 	}
 
 	public long insertRadioChannel(RadioChannel radiochannel) {
