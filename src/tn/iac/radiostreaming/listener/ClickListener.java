@@ -120,9 +120,11 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	}
 
 	public void stopMediaPlayer() {
-		mediaPlayer.stop();
-		mediaPlayer=null;
-		playing = false;
+		if(mediaPlayer != null){
+			mediaPlayer.stop();
+			mediaPlayer=null;
+			playing = false;
+		}
 	}
 	
 	

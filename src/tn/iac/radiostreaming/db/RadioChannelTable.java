@@ -23,9 +23,9 @@ public class RadioChannelTable {
 	private static final int NUM_COL_URL = 2;
 	private static final String COL_TAG = "tag";
 	private static final int NUM_COL_TAG = 3;
-	private static final String COL_TYPE = "type";
+	public static final String COL_TYPE = "type";
 	private static final int NUM_COL_TYPE = 4;
-	private static final String COL_FLAG = "favoris";
+	public static final String COL_FLAG = "favoris";
 	private static final int NUM_COL_FLAG = 5;
 
 	private SQLiteDatabase database;
@@ -101,10 +101,10 @@ public class RadioChannelTable {
 		return radioChannel;
 	}
 
-	public List<RadioChannel> getAllRadioChannels() {
+	public List<RadioChannel> getAllRadioChannels(String col, String value) {
 		Cursor c = database.query(TABLE_RADIO_CHANNEL, 
 				new String[] { COL_ID,COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG },
-				null, null, null, null, COL_FLAG + " DESC");
+				col+ "=?", new String[] { value }, null, null, COL_FLAG + " DESC");
 		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
 		if (c.getCount() != 0) {
 			c.moveToFirst();
@@ -117,8 +117,8 @@ public class RadioChannelTable {
 		return radioChannels;
 	}
 	
-	public List<String> getAllRadioChannelNames() {
-		List<RadioChannel> radioChannels = getAllRadioChannels();
+	public List<String> getAllRadioChannelNames(String col, String value) {
+		List<RadioChannel> radioChannels = getAllRadioChannels(col, value);
 		List<String> channelNames = new LinkedList<String>();
 		for(int i=0 ; i<radioChannels.size() ; i++){
 			channelNames.add(radioChannels.get(i).getName());

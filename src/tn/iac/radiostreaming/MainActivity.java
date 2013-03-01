@@ -29,6 +29,9 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private static final int NOTIFICATION_ID = 1;
+	public static final int NATIONAL = 0;
+	public static final int INTERNATIONAL = 1;
+	public static final int FAVORITE = 2;
 	
 	ImageView pauseButton;
 	NotificationManager notificationManager;
@@ -40,12 +43,17 @@ public class MainActivity extends Activity {
 	TextView scrollingText;
 	ListView listView;
 	
+	String column;
+	String value;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		setTheme(R.style.WidgetBackground);
+		
+		setRadioChannelsToDisplay();
 		
 		radioChannels = new RadioChannelTable(this);
 		clickListener = new ClickListener(MainActivity.this, radioChannels);
@@ -55,7 +63,7 @@ public class MainActivity extends Activity {
 		listView = (ListView) findViewById(R.id.list);				
 
 		channelNames = new LinkedList<String>();
-		channelNames = radioChannels.getAllRadioChannelNames();
+		channelNames = radioChannels.getAllRadioChannelNames(column, value);
 		
 		adapter = new ListArrayAdapter(this, channelNames);	
 		listView.setAdapter(adapter); 
@@ -66,6 +74,27 @@ public class MainActivity extends Activity {
 		scrollingText.setSelected(true);
 	}
 	
+	private void setRadioChannelsToDisplay() {
+		Bundle bundle = getIntent().getExtras();
+		int list = (Integer) bundle.get("list");
+		
+		switch (list) {
+		case NATIONAL:
+			column = RadioChannelTable.COL_TYPE;
+			value = "nationale";
+			break;
+		case INTERNATIONAL:
+			column = RadioChannelTable.COL_TYPE;
+			value = "internationale";
+			break;
+		case FAVORITE:
+			column = RadioChannelTable.COL_FLAG;
+			value = "1";
+			break;
+		}
+		
+	}
+
 	@Override  
 	public void onCreateContextMenu(ContextMenu menu, View view,ContextMenuInfo menuInfo) {  
 		super.onCreateContextMenu(menu, view, menuInfo); 

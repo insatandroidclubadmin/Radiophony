@@ -5,22 +5,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class HelloActivity extends Activity implements OnClickListener {
 
-	TextView redirect;
-	TextView quit;
+	Button national, international, favorite;
+	Button quit;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hello);
 
-		redirect = (TextView) findViewById(R.id.red);
-		redirect.setOnClickListener(this);
+		national = (Button) findViewById(R.id.national);
+		national.setOnClickListener(this);
 
-		quit = (TextView) findViewById(R.id.qt);
+		international = (Button) findViewById(R.id.international);
+		international.setOnClickListener(this);
+		
+		favorite = (Button) findViewById(R.id.favorite);
+		favorite.setOnClickListener(this);
+		
+		quit = (Button) findViewById(R.id.quit);
 		quit.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -31,9 +38,24 @@ public class HelloActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
-	public void onClick(View v) {
+	public void onClick(View view) {
+		Bundle bundle = new Bundle();
+		
+		switch (view.getId()) {
+		case R.id.national:
+			bundle.putInt("list", MainActivity.NATIONAL);
+			break;
+		case R.id.international:
+			bundle.putInt("list",  MainActivity.INTERNATIONAL);
+			break;
+		case R.id.favorite:
+			bundle.putInt("list", MainActivity.FAVORITE);
+			break;
+		}
+		
 		Intent intent = new Intent(HelloActivity.this, MainActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtras(bundle);
 		startActivityIfNeeded(intent, -1);
 	}
 
