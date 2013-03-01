@@ -1,10 +1,6 @@
 package tn.iac.radiostreaming;
 
 import java.io.IOException;
-
-import java.io.InputStream;
-import java.util.Timer;
-
 import tn.iac.radiostreaming.bd.RadioChannelTable;
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -116,5 +112,13 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	public boolean isPlaying() {
 		return playing;
 	}
+
+	public void stopMediaPlayer() {
+		mediaPlayer.stop();
+		mediaPlayer=null;
+		playing = false;
+	}
+	
+	
 
 }

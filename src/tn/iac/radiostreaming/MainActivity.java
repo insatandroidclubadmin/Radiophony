@@ -11,12 +11,10 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -28,8 +26,7 @@ public class MainActivity extends Activity {
 
 	private static final int NOTIFICATION_ID = 1;
 	
-	ImageView ChannelButton,pauseButton;
-	Button backButton;
+	ImageView pauseButton;
 	NotificationManager notificationManager;
 	RadioChannelTable radioChannels;
 	ClickListener clickListener;
@@ -47,25 +44,8 @@ public class MainActivity extends Activity {
 		setTheme(R.style.WidgetBackground);
 		
 		radioChannels = new RadioChannelTable(this);
-
 		clickListener = new ClickListener(MainActivity.this, radioChannels);
-
-	/*	
-		setTheme(R.style.WidgetBackground);
-		pauseButton = (ImageView) findViewById(R.id.pause);	
-		backButton = (ImageView) findViewById(R.drawable.back45);
-
-		clickListener = new ClickListener(MainActivity.this, radioChannels);
-		pauseButton.setOnClickListener(clickListener);
-		backButton.setOnClickListener(new View.OnClickListener() {
- 
-			public void onClick(View v) {
-				MainActivity.this.finish();
- 
-			}
-		});
-*/
-		
+	
 		scrollingText = (TextView) findViewById(R.id.scrollingText);
 		pauseButton = (ImageView) findViewById(R.id.pause);
 		listView = (ListView) findViewById(R.id.list);				
@@ -84,8 +64,6 @@ public class MainActivity extends Activity {
 		pauseButton.setOnClickListener(clickListener);
 		scrollingText.setSelected(true);
 	}
-
-	String selectedRadioName;
 	
 	@Override  
 	public void onCreateContextMenu(ContextMenu menu, View view,ContextMenuInfo menuInfo) {  
@@ -126,6 +104,13 @@ public class MainActivity extends Activity {
 		deleteNotification();
 	}
 	
+	@Override
+    public void onBackPressed() {
+        super.onBackPressed(); 
+        clickListener.stopMediaPlayer();
+        finish();
+    }
+	
 	private final void createNotification(){
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -154,12 +139,6 @@ public class MainActivity extends Activity {
     	final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
     	notificationManager.cancel(NOTIFICATION_ID);
     }
-
-	public RadioChannelTable getRadioChannels() {
-		return radioChannels;
-	}
-	
-	
 
    }
 
