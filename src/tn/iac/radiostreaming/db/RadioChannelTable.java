@@ -1,12 +1,14 @@
-package tn.iac.radiostreaming.bd;
+package tn.iac.radiostreaming.db;
 
 import java.util.LinkedList;
 import java.util.List;
-import tn.iac.radiostreaming.bd.RadioChannelDB;
+
+import tn.iac.radiostreaming.db.RadioChannelDB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class RadioChannelTable {
 
@@ -41,7 +43,7 @@ public class RadioChannelTable {
 	
 	public void fillInitialTable() {
 
-		RadioChannel mosaique, ifm, shems, express, fun, nrj, rtl2, skyrock;
+		RadioChannel mosaique, ifm, shems, express, fun, nrj, rtl2, skyrock, skyrocke;
 
 		mosaique = new RadioChannel("Mosaique FM", "mosaique",
 				"http://radio.mosaiquefm.net:8000/mosalive", "nationale", 0);
@@ -113,6 +115,15 @@ public class RadioChannelTable {
 		}
 		c.close();
 		return radioChannels;
+	}
+	
+	public List<String> getAllRadioChannelNames() {
+		List<RadioChannel> radioChannels = getAllRadioChannels();
+		List<String> channelNames = new LinkedList<String>();
+		for(int i=0 ; i<radioChannels.size() ; i++){
+			channelNames.add(radioChannels.get(i).getName());
+		}
+		return channelNames;
 	}
 	
 	private RadioChannel cursorToRadioChannel(Cursor c) {

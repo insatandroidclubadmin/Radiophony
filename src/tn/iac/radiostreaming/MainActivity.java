@@ -2,8 +2,11 @@ package tn.iac.radiostreaming;
 
 import java.util.LinkedList;
 import java.util.List;
-import tn.iac.radiostreaming.bd.RadioChannel;
-import tn.iac.radiostreaming.bd.RadioChannelTable;
+
+import tn.iac.radiostreaming.db.RadioChannel;
+import tn.iac.radiostreaming.db.RadioChannelTable;
+import tn.iac.radiostreaming.listener.ClickListener;
+import tn.iac.radiostreaming.listener.ListArrayAdapter;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -11,6 +14,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
@@ -49,14 +53,11 @@ public class MainActivity extends Activity {
 		scrollingText = (TextView) findViewById(R.id.scrollingText);
 		pauseButton = (ImageView) findViewById(R.id.pause);
 		listView = (ListView) findViewById(R.id.list);				
-		
-		channels = radioChannels.getAllRadioChannels();	
+
 		channelNames = new LinkedList<String>();
-		for(int i=0 ; i<channels.size() ; i++){
-			channelNames.add(channels.get(i).getName());		
-		}
-			
-		adapter = new MySimpleArrayAdapter(this, channelNames);	
+		channelNames = radioChannels.getAllRadioChannelNames();
+		
+		adapter = new ListArrayAdapter(this, channelNames);	
 		listView.setAdapter(adapter); 
 		listView.setOnItemClickListener(clickListener);
 		registerForContextMenu(listView);

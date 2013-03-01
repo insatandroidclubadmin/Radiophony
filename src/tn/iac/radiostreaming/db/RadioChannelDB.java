@@ -1,4 +1,4 @@
-package tn.iac.radiostreaming.bd;
+package tn.iac.radiostreaming.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

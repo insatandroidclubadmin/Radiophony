@@ -1,4 +1,4 @@
-package tn.iac.radiostreaming.bd;
+package tn.iac.radiostreaming.db;
 
 public class RadioChannel{
 	private int id;

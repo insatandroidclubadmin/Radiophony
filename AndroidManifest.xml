@@ -42,7 +42,7 @@
             android:label="@string/title_activity_radio_channel_table" >
         </activity>
         <activity
-            android:name=".HelloActivity"
+            android:name="tn.iac.radiostreaming.HelloActivity"
             android:label="@string/title_activity_hello" >
         </activity>
     </application>
