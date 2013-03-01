@@ -43,7 +43,7 @@ public class RadioChannelTable {
 	
 	public void fillInitialTable() {
 
-		RadioChannel mosaique, ifm, shems, express, fun, nrj, rtl2, skyrock, skyrocke;
+		RadioChannel mosaique, ifm, shems, express, sabra, oasis, cap, fun, nrj, rtl2, skyrock;
 
 		mosaique = new RadioChannel("Mosaique FM", "mosaique",
 				"http://radio.mosaiquefm.net:8000/mosalive", "nationale", 0);
@@ -53,6 +53,12 @@ public class RadioChannelTable {
 				"http://radioifm.ice.infomaniak.ch/radioifm-128.mp3", "nationale", 1);
 		express = new RadioChannel("Express FM", "express",
 				"http://217.114.200.125/;stream.mp3", "nationale", 0);
+		sabra = new RadioChannel("Sabra FM", "sabra",
+				"http://188.165.248.163:8000/;stream.mp3", "nationale", 0);
+		oasis = new RadioChannel("Oasis FM", "oasis",
+				"http://stream8.tanitweb.com/Oasis", "nationale", 0);
+		cap = new RadioChannel("Cap FM", "cap",
+				"http://stream8.tanitweb.com/capfm", "nationale", 0);
 		fun = new RadioChannel("Fun Radio", "fun",
 				"http://streaming.radio.funradio.fr/fun-1-44-96?.wma", "internationale", 0);
 		nrj = new RadioChannel("NRJ", "nrj",
@@ -60,11 +66,16 @@ public class RadioChannelTable {
 		rtl2 = new RadioChannel("RTL2", "rtl2",
 				"http://streaming.radio.rtl2.fr/rtl2-1-44-96?.wma", "internationale", 0);
 		skyrock = new RadioChannel("Skyrock", "skyrock",
-				"http://player.skyrock.fm/V4/skyrock/skyrock.m3u", "internationale", 0);
+				"http://playerservices.streamtheworld.com/pls/CBC_R1_CGY_H.pls", "internationale", 0);
+		
+		
 		insertRadioChannel(mosaique);
 		insertRadioChannel(ifm);
 		insertRadioChannel(shems);
 		insertRadioChannel(express);
+		insertRadioChannel(sabra);
+		insertRadioChannel(oasis);
+		insertRadioChannel(cap);
 		insertRadioChannel(fun);
 		insertRadioChannel(nrj);
 		insertRadioChannel(rtl2);
