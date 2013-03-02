@@ -1,5 +1,6 @@
 package tn.iac.radiostreaming;
 
+import tn.iac.radiostreaming.db.RadioChannel;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,13 +44,13 @@ public class HelloActivity extends Activity implements OnClickListener {
 		
 		switch (view.getId()) {
 		case R.id.national:
-			bundle.putInt("list", MainActivity.NATIONAL);
+			bundle.putInt("list", RadioChannel.NATIONAL);
 			break;
 		case R.id.international:
-			bundle.putInt("list",  MainActivity.INTERNATIONAL);
+			bundle.putInt("list",  RadioChannel.INTERNATIONAL);
 			break;
 		case R.id.favorite:
-			bundle.putInt("list", MainActivity.FAVORITE);
+			bundle.putInt("list", RadioChannel.FAVORITE);
 			break;
 		}
 		

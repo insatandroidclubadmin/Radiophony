@@ -10,11 +10,10 @@ public class RadioChannelDB extends SQLiteOpenHelper {
 	private static final String TABLE_RADIO_CHANNEL = "radiochannel";
 	private static final String COL_ID = "ID";
 	private static final String COL_NAME = "name";
-	private static final String COL_TAG = "tag";
 	private static final String COL_URL = "url";
 	private static final String COL_TYPE = "type";
 	private static final String COL_FLAG = "favoris";
-	private static final String CREATE_DB = "CREATE TABLE " + TABLE_RADIO_CHANNEL + " ("  + COL_ID + " INTEGER PRIMARY KEY NOT NULL, " + COL_NAME + " TEXT NOT NULL, "+ COL_URL+ " TEXT NOT NULL, " + COL_TAG + " TEXT NOT NULL, "  + COL_TYPE + " TEXT NOT NULL, "+COL_FLAG+" INTEGER NOT NULL );";   
+	private static final String CREATE_DB = "CREATE TABLE " + TABLE_RADIO_CHANNEL + " ("  + COL_ID + " INTEGER PRIMARY KEY NOT NULL, " + COL_NAME + " TEXT NOT NULL, "+ COL_URL+ " TEXT NOT NULL, " + COL_TYPE + " INTEGER NOT NULL, "+COL_FLAG+" INTEGER NOT NULL );";   
 	
 	
 	public RadioChannelDB(Context context, String name, CursorFactory factory, int version) {

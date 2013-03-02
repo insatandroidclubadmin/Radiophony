@@ -29,9 +29,6 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private static final int NOTIFICATION_ID = 1;
-	public static final int NATIONAL = 0;
-	public static final int INTERNATIONAL = 1;
-	public static final int FAVORITE = 2;
 	
 	ImageView pauseButton;
 	NotificationManager notificationManager;
@@ -79,15 +76,15 @@ public class MainActivity extends Activity {
 		int list = (Integer) bundle.get("list");
 		
 		switch (list) {
-		case NATIONAL:
+		case RadioChannel.NATIONAL:
 			column = RadioChannelTable.COL_TYPE;
-			value = "nationale";
+			value = "1";
 			break;
-		case INTERNATIONAL:
+		case RadioChannel.INTERNATIONAL:
 			column = RadioChannelTable.COL_TYPE;
-			value = "internationale";
+			value = "2";
 			break;
-		case FAVORITE:
+		case RadioChannel.FAVORITE:
 			column = RadioChannelTable.COL_FLAG;
 			value = "1";
 			break;

@@ -1,17 +1,20 @@
 package tn.iac.radiostreaming.db;
 
 public class RadioChannel{
+	
+	public static final int NATIONAL = 0;
+	public static final int INTERNATIONAL = 1;
+	public static final int FAVORITE = 2;
+	
 	private int id;
 	private String name;
 	private String url;
-	private String tag;
-	private String type;
+	private int type;
 	private int flag;
 	
 	public RadioChannel(){}
-	public RadioChannel(String name,String tag,String url, String type, int flag){
+	public RadioChannel(String name,String url, int type, int flag){
 		this.name = name;
-		this.tag = tag;
 		this.url=url;
 		this.type = type;
 		this.flag = flag;
@@ -37,17 +40,6 @@ public class RadioChannel{
 		this.url = url;
 	}
 	
-	
-	public String getTag() {
-		return tag;
-	}
-
-
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-
-
 	public String getName() {
 		return name;
 	}
@@ -58,12 +50,12 @@ public class RadioChannel{
 	}
 
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 
