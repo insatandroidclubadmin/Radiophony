@@ -46,7 +46,7 @@ public class RadioChannelTable {
 		insertRadioChannel(new RadioChannel("Mosaique FM", "http://radio.mosaiquefm.net:8000/mosalive","http://www.mosaiquefm.net/", "mosaiquefm" , 1, 0));
 		insertRadioChannel(new RadioChannel("Shems FM", "http://stream8.tanitweb.com/shems","http://www.shemsfm.net/", "shemsfm" , 1, 0));
 		insertRadioChannel(new RadioChannel("ifm", "http://radioifm.ice.infomaniak.ch/radioifm-128.mp3","http://www.ifm.tn/", "ifm" , 1, 0));
-		insertRadioChannel(new RadioChannel("Jawhara FM", "http://streaming2.toutech.net:8000/jawharafm","", "jawharafm" , 1, 0));
+		insertRadioChannel(new RadioChannel("Jawhara FM", "http://streaming2.toutech.net:8000/jawharafm","http://www.jawharafm.net/", "jawharafm" , 1, 0));
 		insertRadioChannel(new RadioChannel("Express FM", "http://217.114.200.125/;stream.mp3","http://www.radioexpressfm.com/", "expressfm" , 1, 0));
 		insertRadioChannel(new RadioChannel("Sabra FM", "http://188.165.248.163:8000/;stream.mp3","http://www.radiosabrafm.net/", "sabrafm" , 1, 0));
 		insertRadioChannel(new RadioChannel("Oasis FM", "http://stream8.tanitweb.com/Oasis","http://www.oasisfm.tn/", "oasisfm" , 1, 0));
@@ -105,24 +105,13 @@ public class RadioChannelTable {
 	}
 	
 	
-	public List<String> getAllRadioChannelUrls(){
-		Cursor c = database.query(false, TABLE_RADIO_CHANNEL, 
-				new String[] { COL_ID,COL_NAME, COL_URL, COL_WEBSITE,COL_LOGO, COL_TYPE, COL_FLAG }, null, null, null, null, null, null);
-		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
-		if (c.getCount() != 0) {
-			c.moveToFirst();
-			for (int i = 0; i < c.getCount(); i++) {
-				radioChannels.add(cursorToRadioChannel(c));
-				c.moveToNext();
-			}
-		}
-		c.close();
-		
-		List<String> channelUrls = new LinkedList<String>();
+	public List<String> getAllRadioChannelWebsites(String col, String value){
+		List<RadioChannel> radioChannels = getAllRadioChannels(col, value);
+		List<String> channelWebsites = new LinkedList<String>();
 		for(int i=0 ; i<radioChannels.size() ; i++){
-			channelUrls.add(radioChannels.get(i).getUrl());
+			channelWebsites.add(radioChannels.get(i).getWebsite());
 		}
-		return channelUrls;
+		return channelWebsites;
 		
 	}
 	

@@ -26,14 +26,8 @@ public class InternationalChanActivity extends Activity {
 		setContentView(R.layout.activity_intenational_chan);
 		
 		channels = new LinkedList<RadioChannel>();
-		channelUrls = new LinkedList<String>();	
-		radioChannels = new RadioChannelTable(this);
-		
-		channels = radioChannels.getAllRadioChannels(RadioChannelTable.COL_TYPE, "2");
-		for(int i=0;i<channels.size();i++){
-			channelUrls.add(channels.get(i).getUrl());
-		}
-		
+		radioChannels = new RadioChannelTable(this);	
+		channelUrls = radioChannels.getAllRadioChannelWebsites(RadioChannelTable.COL_TYPE, "2");
 		
 		listView = (ListView) findViewById(R.id.listUrlsInt);	
 		

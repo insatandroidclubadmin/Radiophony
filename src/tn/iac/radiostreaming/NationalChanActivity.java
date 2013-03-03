@@ -25,14 +25,8 @@ public class NationalChanActivity extends Activity {
 		setContentView(R.layout.activity_national_chan);
 		
 		channels = new LinkedList<RadioChannel>();
-		channelUrls = new LinkedList<String>();
 		radioChannels = new RadioChannelTable(this);
-		
-		channels = radioChannels.getAllRadioChannels(RadioChannelTable.COL_TYPE, "1");
-		for(int i=0;i<channels.size();i++){
-			channelUrls.add(channels.get(i).getUrl());
-		}
-		
+		channelUrls = radioChannels.getAllRadioChannelWebsites(RadioChannelTable.COL_TYPE, "1");
 		
 		listView = (ListView) findViewById(R.id.listUrlsNat);	
 		
