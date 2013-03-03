@@ -68,7 +68,6 @@
         android:layout_marginLeft="14dp"
         android:layout_toRightOf="@+id/favorite"
         android:background="@drawable/about"
-        android:onClick="onClickAbout"
          />
 
     <ImageView

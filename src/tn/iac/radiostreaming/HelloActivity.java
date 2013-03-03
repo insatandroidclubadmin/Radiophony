@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 
 public class HelloActivity extends Activity implements OnClickListener {
 
@@ -28,7 +27,8 @@ public class HelloActivity extends Activity implements OnClickListener {
 		favorite = (Button) findViewById(R.id.favorite);
 		favorite.setOnClickListener(this);
 		
-		//about = (Button) findViewById(R.id.about);
+		about = (Button) findViewById(R.id.about);
+		about.setOnClickListener(this);
 		
 		quit = (Button) findViewById(R.id.quit);
 		quit.setOnClickListener(new View.OnClickListener() {
@@ -43,6 +43,8 @@ public class HelloActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		Bundle bundle = new Bundle();
+		Intent intent = new Intent(HelloActivity.this, MainActivity.class);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		
 		switch (view.getId()) {
 		case R.id.national:
@@ -54,19 +56,14 @@ public class HelloActivity extends Activity implements OnClickListener {
 		case R.id.favorite:
 			bundle.putInt("list", RadioChannel.FAVORITE);
 			break;
-			
+		case R.id.about:
+			intent = new Intent(HelloActivity.this, AboutActivity.class);
+			break;	
 		}
 		
-		Intent intent = new Intent(HelloActivity.this, MainActivity.class);
-		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		intent.putExtras(bundle);
 		startActivityIfNeeded(intent, -1);
 	}
-	
-	
-	public void onClickAbout(View view){
-		
-		Intent intent = new Intent(getApplicationContext(),AboutActivity.class);
-		startActivity(intent);	}
+
 
 }
