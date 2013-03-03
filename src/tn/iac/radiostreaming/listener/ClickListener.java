@@ -31,12 +31,15 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	TextView tView;
 	String item;
 	boolean playing;
+	String lastChannelPlaying;
+
 
 	public ClickListener(Context applicationContext,
 			RadioChannelTable radioChannelTable) {
 		super();
 		this.applicationContext = applicationContext;
 		this.radioChannelTable = radioChannelTable;
+		this.lastChannelPlaying = "";
 		playing = false;
 	}
 
@@ -44,16 +47,21 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	public synchronized void onClick(View view) {
 
 		try {
+			ImageView imageView = (ImageView) view;
 
-			if (playing) {
-				ImageView imageView = (ImageView) view;
-				imageView.setImageDrawable(applicationContext.getResources()
-						.getDrawable(R.drawable.pauze));
+			if (playing) {			
+				//imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pauze));
+				imageView.setImageResource(R.drawable.play4);
 				Thread.sleep(12);
-				imageView.setImageDrawable(applicationContext.getResources()
-						.getDrawable(R.drawable.pause));
-				mediaPlayer.pause();
+				//imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pause));
+				mediaPlayer.pause();			
 				playing = false;
+			}
+			
+			else {
+				imageView.setImageResource(R.drawable.pause);
+				new ProgressTask().execute();
+				
 			}
 
 		} catch (Exception e) {
@@ -114,7 +122,7 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
             mediaPlayer.start();
 
 			Log.d("status", "playing");
-
+			
 			playing = true;
 			tView.setText(applicationContext.getResources().getText(
 					R.string.playing)
@@ -128,6 +136,7 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 				mediaPlayer = new MediaPlayer();
 				String url = radioChannelTable.getRadioChannelByCol(
 						RadioChannelTable.COL_NAME, item).getUrl();
+				
 
 				Log.d("status", "charging");
 
