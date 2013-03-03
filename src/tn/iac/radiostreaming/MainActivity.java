@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -124,6 +125,25 @@ public class MainActivity extends Activity {
 	    }  
 	 return true;  
 	 } 
+	 
+	 @Override
+		public boolean onCreateOptionsMenu(Menu menu) {
+			getMenuInflater().inflate(R.menu.menu, menu);
+			return true;
+		}
+
+		@Override
+		public boolean onOptionsItemSelected(MenuItem item) {
+			switch(item.getItemId())
+	        {
+	            case R.id.menu_about:
+	                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
+	                startActivityIfNeeded(intent, -1);
+	                return true;
+	            default:
+	            	return super.onOptionsItemSelected(item);
+	        }
+		}
 	 
 	@Override
 	protected void onStop() {

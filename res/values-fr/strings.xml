@@ -2,24 +2,19 @@
 <resources>
 
     <string name="app_name">Radiophony</string>
-    <string name="hello_world">Radiophony</string>
-    <string name="menu_settings">Parametres</string>
-    <string name="mozaiqueRadio">Mosaique FM</string>
-    <string name="ezitounaRadio">Ezitouna FM</string>
-    <string name="ifmRadio">IFM</string>
-    <string name="title_activity_my_base">Ma Base</string>
-    <string name="title_activity_radio_channel">canal radio</string>
-    <string name="title_activity_radio_channel_table">Tableau de radios</string>
-    <string name="redirect">Passer</string>
-    <string name="quitter">Quitter</string>
+    <string name="hello_world">Radiophony</string><string name="menu_about">A propos</string>
+    <string name="title_activity_hello">Accueil</string><string name="title_activity_about">A propos de Radiophony</string><string name="redirect">Passer</string>
     <string name="favoriteMenu">Menu Favoris</string>
     <string name="setFavorite">Marquer comme Favori</string>
     <string name="unsetFavorite">Supprimer Favori</string>
     <string name="notifTitle">Radio streaming est activé</string>
     <string name="notifText">Aller à l\'application Radio Streaming &#8230;</string>
     <string name="play">-------------------Radio en écoute : Aucun --------------------</string>
-    <string name="play2">---------------Radio en écoute :  </string>
-    <string name="VisitWebsite">Aller au site web</string>
+    <string name="playin">---------------Radio en écoute :  </string>
+    <string name="visitWebsite">Aller au site web</string>
     <string name="networkProblem">Connexion internet indisponible</string>
+    
+    
+    
 
 </resources>

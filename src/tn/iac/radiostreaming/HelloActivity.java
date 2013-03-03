@@ -4,6 +4,8 @@ import tn.iac.radiostreaming.db.RadioChannel;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -64,6 +66,24 @@ public class HelloActivity extends Activity implements OnClickListener {
 		intent.putExtras(bundle);
 		startActivityIfNeeded(intent, -1);
 	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
+	}
 
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId())
+        {
+            case R.id.menu_about:
+                Intent intent = new Intent(HelloActivity.this, AboutActivity.class);
+                startActivityIfNeeded(intent, -1);
+                return true;
+            default:
+            	return super.onOptionsItemSelected(item);
+        }
+	}
 
 }

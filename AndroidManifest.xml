@@ -30,32 +30,12 @@
             android:launchMode="singleTop" >
         </activity>
         <activity
-            android:name="bd.MyBase"
-            android:label="@string/title_activity_my_base" >
-        </activity>
-        <activity
-            android:name="bd.RadioChannel"
-            android:label="@string/title_activity_radio_channel" >
-        </activity>
-        <activity
-            android:name="bd.RadioChannelTable"
-            android:label="@string/title_activity_radio_channel_table" >
-        </activity>
-        <activity
             android:name="tn.iac.radiostreaming.HelloActivity"
             android:label="@string/title_activity_hello">
         </activity>
         <activity
             android:name="tn.iac.radiostreaming.AboutActivity"
             android:label="@string/title_activity_about" android:theme="@android:style/Theme.Dialog">
-        </activity>
-        <activity
-            android:name="tn.iac.radiostreaming.InternationalChanActivity"
-            android:label="@string/title_activity_intenational_chan" >
-        </activity>
-        <activity
-            android:name="tn.iac.radiostreaming.NationalChanActivity"
-            android:label="@string/title_activity_national_chan" >
         </activity>
     </application>
 
