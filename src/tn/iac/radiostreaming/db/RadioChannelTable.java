@@ -47,13 +47,13 @@ public class RadioChannelTable {
 		insertRadioChannel(new RadioChannel("Jawhara FM", "http://streaming2.toutech.net:8000/jawharafm", 1, 0));
 		insertRadioChannel(new RadioChannel("Express FM", "http://217.114.200.125/;stream.mp3", 1, 0));
 		insertRadioChannel(new RadioChannel("Sabra FM", "http://188.165.248.163:8000/;stream.mp3", 1, 0));
+		insertRadioChannel(new RadioChannel("Cap FM", "http://stream8.tanitweb.com/capfm", 1, 0));
 		insertRadioChannel(new RadioChannel("Oasis FM", "http://stream8.tanitweb.com/Oasis", 1, 0));
 		insertRadioChannel(new RadioChannel("Cap FM", "http://stream8.tanitweb.com/capfm", 1, 0));
 		insertRadioChannel(new RadioChannel("Fun Radio", "http://streaming.radio.funradio.fr/fun-1-44-96?.wma", 2, 0));
 		insertRadioChannel(new RadioChannel("NRJ", "http://mp3.live.tv-radio.com/nrj/all/nrj_113225.mp3", 2, 0));
 		insertRadioChannel(new RadioChannel("RTL2", "http://streaming.radio.rtl2.fr/rtl2-1-44-96?.wma", 2, 0));
 		insertRadioChannel(new RadioChannel("Europe 1", "http://vipicecast.yacast.net/europe1", 2, 0));
-		
 	}
 
 	public long insertRadioChannel(RadioChannel radiochannel) {
