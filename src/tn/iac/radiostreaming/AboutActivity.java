@@ -38,7 +38,7 @@ public class AboutActivity extends TabActivity{
  
 
         TabSpec tab2 = tabHost.newTabSpec("Nationales");
-        tab2.setIndicator("", getResources().getDrawable(R.drawable.flag));
+        tab2.setIndicator("", getResources().getDrawable(R.drawable.national));
         Intent songsIntent = new Intent(this, NationalChanActivity.class);
         tab2.setContent(songsIntent);
  
