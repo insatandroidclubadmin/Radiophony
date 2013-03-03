@@ -13,6 +13,7 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
@@ -97,7 +98,8 @@ public class MainActivity extends Activity {
 		super.onCreateContextMenu(menu, view, menuInfo); 
 	    menu.setHeaderTitle(getString(R.string.favoriteMenu)); 
 	    menu.add(0, view.getId(), 0, getString(R.string.setFavorite));  
-	    menu.add(0, view.getId(), 0, getString(R.string.unsetFavorite));  
+	    menu.add(0, view.getId(), 0, getString(R.string.unsetFavorite)); 
+	    menu.add(0, view.getId(), 0, getString(R.string.visitWebsite));
 	} 
 	
 	 @Override  
@@ -112,6 +114,11 @@ public class MainActivity extends Activity {
 	    else if(item.getTitle()==getString(R.string.unsetFavorite)){
 	    	radioChannels.unsetFavoriteChannel(radioName);
 	    }  
+	    else if(item.getTitle()==getString(R.string.visitWebsite)){
+	    	String uri = radioChannels.getRadioChannelWebsite(radioName);
+	    	Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+	    	startActivity(browser);
+	    } 
 	    else {
 	    	return false;
 	    }  
