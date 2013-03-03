@@ -29,7 +29,7 @@ public class InternationalChanActivity extends Activity {
 		channelUrls = new LinkedList<String>();	
 		radioChannels = new RadioChannelTable(this);
 		
-		channels = radioChannels.getAllRadioChannels("type", "internationale");
+		channels = radioChannels.getAllRadioChannels(RadioChannelTable.COL_TYPE, "2");
 		for(int i=0;i<channels.size();i++){
 			channelUrls.add(channels.get(i).getUrl());
 		}

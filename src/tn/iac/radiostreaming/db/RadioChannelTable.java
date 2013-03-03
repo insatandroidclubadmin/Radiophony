@@ -8,8 +8,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Debug;
-import android.util.Log;
 
 public class RadioChannelTable {
 
@@ -109,7 +107,7 @@ public class RadioChannelTable {
 	
 	public List<String> getAllRadioChannelUrls(){
 		Cursor c = database.query(false, TABLE_RADIO_CHANNEL, 
-				new String[] { COL_ID,COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, null, null, null, null, null, null);
+				new String[] { COL_ID,COL_NAME, COL_URL, COL_WEBSITE,COL_LOGO, COL_TYPE, COL_FLAG }, null, null, null, null, null, null);
 		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
 		if (c.getCount() != 0) {
 			c.moveToFirst();

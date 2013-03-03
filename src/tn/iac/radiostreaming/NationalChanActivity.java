@@ -28,7 +28,7 @@ public class NationalChanActivity extends Activity {
 		channelUrls = new LinkedList<String>();
 		radioChannels = new RadioChannelTable(this);
 		
-		channels = radioChannels.getAllRadioChannels("type", "nationale");
+		channels = radioChannels.getAllRadioChannels(RadioChannelTable.COL_TYPE, "1");
 		for(int i=0;i<channels.size();i++){
 			channelUrls.add(channels.get(i).getUrl());
 		}
