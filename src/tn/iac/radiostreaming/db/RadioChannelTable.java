@@ -106,6 +106,28 @@ public class RadioChannelTable {
 		return radioChannels;
 	}
 	
+	
+	public List<String> getAllRadioChannelUrls(){
+		Cursor c = database.query(false, TABLE_RADIO_CHANNEL, 
+				new String[] { COL_ID,COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, null, null, null, null, null, null);
+		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			for (int i = 0; i < c.getCount(); i++) {
+				radioChannels.add(cursorToRadioChannel(c));
+				c.moveToNext();
+			}
+		}
+		c.close();
+		
+		List<String> channelUrls = new LinkedList<String>();
+		for(int i=0 ; i<radioChannels.size() ; i++){
+			channelUrls.add(radioChannels.get(i).getUrl());
+		}
+		return channelUrls;
+		
+	}
+	
 	public List<String> getAllRadioChannelNames(String col, String value) {
 		List<RadioChannel> radioChannels = getAllRadioChannels(col, value);
 		List<String> channelNames = new LinkedList<String>();

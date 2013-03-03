@@ -4,7 +4,7 @@
     
     <color name="black_color">#000</color>
     <color name="light_grey">#C7C7C7</color>
-    
+    <color name="white">#FFFFFF</color>
     
     <style name = "whiteText">
         <item name="android:textColor">@android:color/white</item>

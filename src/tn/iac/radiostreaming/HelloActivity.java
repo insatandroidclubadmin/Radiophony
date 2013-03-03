@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class HelloActivity extends Activity implements OnClickListener {
 
-	Button national, international, favorite;
+	Button national, international, favorite, about;
 	Button quit;
 	
 	@Override
@@ -27,6 +27,8 @@ public class HelloActivity extends Activity implements OnClickListener {
 		
 		favorite = (Button) findViewById(R.id.favorite);
 		favorite.setOnClickListener(this);
+		
+		//about = (Button) findViewById(R.id.about);
 		
 		quit = (Button) findViewById(R.id.quit);
 		quit.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +54,7 @@ public class HelloActivity extends Activity implements OnClickListener {
 		case R.id.favorite:
 			bundle.putInt("list", RadioChannel.FAVORITE);
 			break;
+			
 		}
 		
 		Intent intent = new Intent(HelloActivity.this, MainActivity.class);
@@ -59,5 +62,11 @@ public class HelloActivity extends Activity implements OnClickListener {
 		intent.putExtras(bundle);
 		startActivityIfNeeded(intent, -1);
 	}
+	
+	
+	public void onClickAbout(View view){
+		
+		Intent intent = new Intent(getApplicationContext(),AboutActivity.class);
+		startActivity(intent);	}
 
 }
