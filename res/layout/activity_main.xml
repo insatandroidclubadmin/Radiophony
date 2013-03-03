@@ -10,11 +10,13 @@
         android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="368dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentTop="true"
         android:divider="@drawable/devider"
         android:dividerHeight="2dp"
         android:listSelector="@drawable/rien"
         android:textAlignment="center" >
+
     </ListView>
 
     <LinearLayout
