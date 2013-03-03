@@ -25,5 +25,6 @@
     <string name="title_activity_intenational_chan">IntenationalChanActivity</string>
     <string name="title_activity_national_chan">NationalChanActivity</string>
     <string name="visitWebsite">Visit Website</string>
+    <string name="networkProblem">Network connection disabled</string>
 
 </resources>

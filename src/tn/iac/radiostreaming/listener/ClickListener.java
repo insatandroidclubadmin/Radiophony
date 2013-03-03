@@ -93,7 +93,7 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 						+ item + "---------------");
 
 			} catch (IllegalArgumentException e1) {
-				Toast.makeText(applicationContext, "Illegal argument probelm",
+				Toast.makeText(applicationContext, "Illegal argument problem",
 						Toast.LENGTH_SHORT).show();
 			} catch (SecurityException e1) {
 				Toast.makeText(applicationContext, "Security problem",
@@ -103,10 +103,10 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 						Toast.LENGTH_SHORT).show();
 			} catch (IOException e1) {
 				Toast.makeText(applicationContext,
-						"Network connection disabled", Toast.LENGTH_SHORT)
+						applicationContext.getString(R.string.networkProblem), Toast.LENGTH_SHORT)
 						.show();
 			} catch (Exception e) {
-				Toast.makeText(applicationContext, "Stange problem",
+				Toast.makeText(applicationContext, "Strange problem",
 						Toast.LENGTH_SHORT).show();
 			}
 		} catch (Exception e) {
