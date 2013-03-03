@@ -22,11 +22,11 @@ public class ListArrayAdapter extends ArrayAdapter<String> {
 	private final List<String> values;
 	private final RadioChannelTable radioChannelTable;
 
-	public ListArrayAdapter(Context context, List<String> values) {
+	public ListArrayAdapter(Context context, List<String> values, RadioChannelTable radioChannelTable) {
 		super(context, R.layout.rowlayout, values);
 		this.context = context;
 		this.values = values;
-		radioChannelTable = new RadioChannelTable(context);
+		this.radioChannelTable = radioChannelTable;
 	}
 
 
@@ -41,8 +41,8 @@ public class ListArrayAdapter extends ArrayAdapter<String> {
     
     textView.setText(values.get(position));
     play.setImageResource(R.drawable.play4);
-//    RadioChannel radioChannel = radioChannelTable.getRadioChannelByCol(RadioChannelTable.COL_NAME, values.get(position));
-    logo.setImageResource(context.getResources().getIdentifier("drawable/logo_mosaiquefm", "drawable", context.getPackageName()));
+    String logoName = radioChannelTable.getRadioChannelLogo(values.get(position));
+    logo.setImageResource(context.getResources().getIdentifier("drawable/logo_"+logoName, "drawable", context.getPackageName()));
     return rowView;
   }
 } 

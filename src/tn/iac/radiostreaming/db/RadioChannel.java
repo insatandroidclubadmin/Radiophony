@@ -9,13 +9,17 @@ public class RadioChannel{
 	private int id;
 	private String name;
 	private String url;
+	private String website;
+	private String logo;
 	private int type;
 	private int flag;
 	
 	public RadioChannel(){}
-	public RadioChannel(String name,String url, int type, int flag){
+	public RadioChannel(String name, String url, String website, String logo ,int type, int flag){
 		this.name = name;
 		this.url=url;
+		this.website= website;
+		this.logo= logo;
 		this.type = type;
 		this.flag = flag;
 	}
@@ -67,6 +71,22 @@ public class RadioChannel{
 
 	public void setFlag(int flag) {
 		this.flag = flag;
+	}
+	
+	public String getWebsite() {
+		return website;
+	}
+	
+	public void setWebsite(String website) {
+		this.website = website;
+	}
+	
+	public String getLogo() {
+		return logo;
+	}
+	
+	public void setLogo(String logo) {
+		this.logo = logo;
 	}
 	
 }

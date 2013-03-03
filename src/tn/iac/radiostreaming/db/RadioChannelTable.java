@@ -22,10 +22,14 @@ public class RadioChannelTable {
 	private static final int NUM_COL_NAME = 1;
 	private static final String COL_URL = "url";
 	private static final int NUM_COL_URL = 2;
+	private static final String COL_WEBSITE = "website";
+	private static final int NUM_COL_WEBSITE = 3;
+	private static final String COL_LOGO = "logo";
+	private static final int NUM_COL_LOGO = 4;
 	public static final String COL_TYPE = "type";
-	private static final int NUM_COL_TYPE = 3;
+	private static final int NUM_COL_TYPE = 5;
 	public static final String COL_FLAG = "favoris";
-	private static final int NUM_COL_FLAG = 4;
+	private static final int NUM_COL_FLAG = 6;
 
 	private SQLiteDatabase database;
 	private RadioChannelDB mySQLiteBase;
@@ -41,19 +45,18 @@ public class RadioChannelTable {
 	}
 	
 	public void fillInitialTable() {
-		insertRadioChannel(new RadioChannel("Mosaique FM", "http://radio.mosaiquefm.net:8000/mosalive", 1, 0));
-		insertRadioChannel(new RadioChannel("Shems FM", "http://stream8.tanitweb.com/shems", 1, 0));
-		insertRadioChannel(new RadioChannel("ifm", "http://radioifm.ice.infomaniak.ch/radioifm-128.mp3", 1, 0));
-		insertRadioChannel(new RadioChannel("Jawhara FM", "http://streaming2.toutech.net:8000/jawharafm", 1, 0));
-		insertRadioChannel(new RadioChannel("Express FM", "http://217.114.200.125/;stream.mp3", 1, 0));
-		insertRadioChannel(new RadioChannel("Sabra FM", "http://188.165.248.163:8000/;stream.mp3", 1, 0));
-		insertRadioChannel(new RadioChannel("Cap FM", "http://stream8.tanitweb.com/capfm", 1, 0));
-		insertRadioChannel(new RadioChannel("Oasis FM", "http://stream8.tanitweb.com/Oasis", 1, 0));
-		insertRadioChannel(new RadioChannel("Cap FM", "http://stream8.tanitweb.com/capfm", 1, 0));
-		insertRadioChannel(new RadioChannel("Fun Radio", "http://streaming.radio.funradio.fr/fun-1-44-96?.wma", 2, 0));
-		insertRadioChannel(new RadioChannel("NRJ", "http://mp3.live.tv-radio.com/nrj/all/nrj_113225.mp3", 2, 0));
-		insertRadioChannel(new RadioChannel("RTL2", "http://streaming.radio.rtl2.fr/rtl2-1-44-96?.wma", 2, 0));
-		insertRadioChannel(new RadioChannel("Europe 1", "http://vipicecast.yacast.net/europe1", 2, 0));
+		insertRadioChannel(new RadioChannel("Mosaique FM", "http://radio.mosaiquefm.net:8000/mosalive","http://www.mosaiquefm.net/", "mosaiquefm" , 1, 0));
+		insertRadioChannel(new RadioChannel("Shems FM", "http://stream8.tanitweb.com/shems","http://www.shemsfm.net/", "shemsfm" , 1, 0));
+		insertRadioChannel(new RadioChannel("ifm", "http://radioifm.ice.infomaniak.ch/radioifm-128.mp3","http://www.ifm.tn/", "ifm" , 1, 0));
+		insertRadioChannel(new RadioChannel("Jawhara FM", "http://streaming2.toutech.net:8000/jawharafm","", "jawharafm" , 1, 0));
+		insertRadioChannel(new RadioChannel("Express FM", "http://217.114.200.125/;stream.mp3","http://www.radioexpressfm.com/", "expressfm" , 1, 0));
+		insertRadioChannel(new RadioChannel("Sabra FM", "http://188.165.248.163:8000/;stream.mp3","http://www.radiosabrafm.net/", "sabrafm" , 1, 0));
+		insertRadioChannel(new RadioChannel("Oasis FM", "http://stream8.tanitweb.com/Oasis","http://www.oasisfm.tn/", "oasisfm" , 1, 0));
+		insertRadioChannel(new RadioChannel("Cap FM", "http://stream8.tanitweb.com/capfm", "http://www.capradio.tn/", "capfm" ,1, 0));
+		insertRadioChannel(new RadioChannel("Fun Radio", "http://streaming.radio.funradio.fr/fun-1-44-96?.wma","http://www.funradio.fr/", "funradio" , 2, 0));
+		insertRadioChannel(new RadioChannel("NRJ", "http://mp3.live.tv-radio.com/nrj/all/nrj_113225.mp3","http://www.nrj.fr/", "nrj" , 2, 0));
+		insertRadioChannel(new RadioChannel("RTL2", "http://streaming.radio.rtl2.fr/rtl2-1-44-96?.wma","http://www.rtl2.fr/", "rtl2" , 2, 0));
+		insertRadioChannel(new RadioChannel("Europe 1", "http://vipicecast.yacast.net/europe1","http://www.europe1.fr/", "europe1" , 2, 0));
 	}
 
 	public long insertRadioChannel(RadioChannel radiochannel) {
@@ -63,6 +66,8 @@ public class RadioChannelTable {
 			ContentValues values = new ContentValues();
 			values.put(COL_NAME, radiochannel.getName());
 			values.put(COL_URL, radiochannel.getUrl());
+			values.put(COL_WEBSITE, radiochannel.getWebsite());
+			values.put(COL_LOGO, radiochannel.getLogo());
 			values.put(COL_TYPE, radiochannel.getType());
 			values.put(COL_FLAG, radiochannel.getFlag());
 			count = database.insert(TABLE_RADIO_CHANNEL, null, values);
@@ -73,7 +78,7 @@ public class RadioChannelTable {
 	
 	public RadioChannel getRadioChannelByCol(String col, String value){
 		Cursor c = database.query(TABLE_RADIO_CHANNEL, new String[] { COL_ID,
-				COL_NAME, COL_URL, COL_TYPE, COL_FLAG }, col
+				COL_NAME, COL_URL,COL_WEBSITE,COL_LOGO, COL_TYPE, COL_FLAG }, col
 				+ "=?", new String[] { value }, null, null, null);
 		
 		RadioChannel radioChannel = null;
@@ -87,9 +92,8 @@ public class RadioChannelTable {
 
 	public List<RadioChannel> getAllRadioChannels(String col, String value) {
 		Cursor c = database.query(TABLE_RADIO_CHANNEL, 
-				new String[] { COL_ID,COL_NAME, COL_URL, COL_TYPE, COL_FLAG },
+				new String[] { COL_ID,COL_NAME, COL_URL,COL_WEBSITE,COL_LOGO, COL_TYPE, COL_FLAG },
 				col + "=?", new String[]{value}, null, null, COL_FLAG + " DESC");
-		Log.d("debugg", col + " " + value + " " + c.getCount());	///////////////////////////////////////////////
 		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
 		if (c.getCount() != 0) {
 			c.moveToFirst();
@@ -105,7 +109,6 @@ public class RadioChannelTable {
 	public List<String> getAllRadioChannelNames(String col, String value) {
 		List<RadioChannel> radioChannels = getAllRadioChannels(col, value);
 		List<String> channelNames = new LinkedList<String>();
-		Log.d("debug", ""+radioChannels.size());    ///////////////////////////////////////////////////////////
 		for(int i=0 ; i<radioChannels.size() ; i++){
 			channelNames.add(radioChannels.get(i).getName());
 		}
@@ -118,12 +121,25 @@ public class RadioChannelTable {
 		radioChannel.setId(c.getInt(NUM_COL_ID));
 		radioChannel.setName(c.getString(NUM_COL_NAME));
 		radioChannel.setUrl(c.getString(NUM_COL_URL));
+		radioChannel.setWebsite(c.getString(NUM_COL_WEBSITE));
+		radioChannel.setLogo(c.getString(NUM_COL_LOGO));
 		radioChannel.setType(c.getInt(NUM_COL_TYPE));
 		radioChannel.setFlag(c.getInt(NUM_COL_FLAG));
-		Log.d("debuug", ""+radioChannel.getType());	////////////////////////////////////////////////////////////
 		return radioChannel;
 	}
 
+	public String getRadioChannelLogo(String name){
+		Cursor c = database.query(TABLE_RADIO_CHANNEL, new String[] { COL_LOGO }, COL_NAME
+				+ "=?", new String[] { name }, null, null, null);
+		String logo="None";
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			logo = c.getString(0);
+			c.close();
+		}
+		return logo;
+	}
+	
 	public void setFavoriteChannel(String name){
 		ContentValues values = new ContentValues();
 		values.put(COL_FLAG, 1);

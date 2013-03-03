@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 		channelNames = new LinkedList<String>();
 		channelNames = radioChannels.getAllRadioChannelNames(column, value);
 		
-		adapter = new ListArrayAdapter(this, channelNames);	
+		adapter = new ListArrayAdapter(this, channelNames, radioChannels);	
 		listView.setAdapter(adapter); 
 		listView.setOnItemClickListener(clickListener);
 		registerForContextMenu(listView);
