@@ -169,7 +169,7 @@ public class MainActivity extends Activity {
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         /* Create a notification */
-        String MyText = "Radio streaming ON";
+        String MyText = getString(R.string.notif_title);;
         Notification mNotification = new Notification( R.drawable.ic_stat_play, MyText, System.currentTimeMillis()       ); // the time for the notification
 
         /* Starting an intent */
