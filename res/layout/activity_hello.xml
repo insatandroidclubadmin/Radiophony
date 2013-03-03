@@ -2,68 +2,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@drawable/back2"
+
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".HelloActivity"
-    android:background="@drawable/helloback" >
+    tools:context=".HelloActivity" >
 
     <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/LinearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/bar4"
         android:orientation="vertical" >
+
     </LinearLayout>
 
     <Button
         android:id="@+id/quit"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/linearLayout1"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="18dp"
+        android:layout_marginLeft="14dp"
         android:background="@drawable/quit" />
-
-    <Button
-        android:id="@+id/international"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_alignBaseline="@+id/favorite"
-        android:layout_alignBottom="@+id/favorite"
-        android:layout_marginRight="24dp"
-        android:layout_toLeftOf="@+id/favorite"
-        android:background="@drawable/international" />
 
     <Button
         android:id="@+id/national"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@+id/about"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@+id/favorite"
         android:background="@drawable/national" />
+
+    <Button
+        android:id="@+id/international"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="123dp"
+        android:background="@drawable/globe" />
 
     <Button
         android:id="@+id/favorite"
         style="?android:attr/buttonStyleSmall"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/international"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_marginLeft="50dp"
         android:background="@drawable/favorite" />
 
     <Button
         android:id="@+id/about"
-        android:layout_width="37dp"
-        android:layout_height="37dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="21dp"
-        android:layout_toLeftOf="@+id/international"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/favorite"
         android:background="@drawable/about"
-        android:onClick="onClickAbout" />
+        android:onClick="onClickAbout"
+         />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="112dp"
+        android:layout_marginBottom="112dp"
+        android:src="@drawable/guitar" />
 
 </RelativeLayout>
