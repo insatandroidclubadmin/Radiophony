@@ -14,7 +14,7 @@
     <string name="notif_title">Radiophony est activé</string>
     <string name="notif_text">Aller à l\'application Radiophony &#8230;</string>
     
-    <string name="playing_none">------------------- Radio en écoute : Aucun --------------------</string>
+    <string name="playing_none">----------------------------------------  Radio en écoute : Aucun ---------------------------------------- </string>
     <string name="playing">--------------- Radio en écoute : </string>
     
     <string name="exception_network">Connexion internet indisponible</string>

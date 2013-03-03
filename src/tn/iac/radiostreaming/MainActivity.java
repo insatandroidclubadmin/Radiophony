@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 
 	private static final int NOTIFICATION_ID = 1;
 	
-	ImageView pauseButton;
+	ImageView playerButton;
 	NotificationManager notificationManager;
 	RadioChannelTable radioChannels;
 	ClickListener clickListener;
@@ -58,7 +58,6 @@ public class MainActivity extends Activity {
 		clickListener = new ClickListener(MainActivity.this, radioChannels);
 	
 		scrollingText = (TextView) findViewById(R.id.scrollingText);
-		pauseButton = (ImageView) findViewById(R.id.pause);
 		listView = (ListView) findViewById(R.id.list);				
 
 		channelNames = new LinkedList<String>();
@@ -69,7 +68,6 @@ public class MainActivity extends Activity {
 		listView.setOnItemClickListener(clickListener);
 		registerForContextMenu(listView);
 		
-		pauseButton.setOnClickListener(clickListener);
 		scrollingText.setSelected(true);
 	}
 	

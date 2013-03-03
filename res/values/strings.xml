@@ -10,8 +10,8 @@
     <string name="option_unset_favorite">Unset Favorite</string>
     <string name="option_visit_website">Visit Website</string><string name="notif_title">Radiophony ON</string>
     <string name="notif_text">Go to Radiophony application …</string>
-    <string name="playing_none">-------------------Now playing : None --------------------</string>
-    <string name="playing">---------------Playing now : </string>
+    <string name="playing_none">----------------------------------------  Now playing : None ----------------------------------------                                                                                          </string>
+    <string name="playing">--------------- Playing now : </string>
     <string name="exception_network">Network connection disabled</string>
 
 </resources>

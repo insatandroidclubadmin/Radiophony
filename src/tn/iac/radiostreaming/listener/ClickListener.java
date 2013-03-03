@@ -1,12 +1,8 @@
 package tn.iac.radiostreaming.listener;
 
 import java.io.IOException;
-
 import tn.iac.radiostreaming.MainActivity;
 import tn.iac.radiostreaming.R;
-import tn.iac.radiostreaming.R.drawable;
-import tn.iac.radiostreaming.R.id;
-import tn.iac.radiostreaming.R.string;
 import tn.iac.radiostreaming.db.RadioChannelTable;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -27,19 +23,18 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	MediaPlayer mediaPlayer;
 	RadioChannelTable radioChannelTable;
 	Context applicationContext;
-	View view;
-	TextView tView;
-	String item;
+	TextView scrollingText;
+	ImageView playerButton;
+	String radioName;
 	boolean playing;
-	String lastChannelPlaying;
-
+	
 
 	public ClickListener(Context applicationContext,
 			RadioChannelTable radioChannelTable) {
 		super();
 		this.applicationContext = applicationContext;
 		this.radioChannelTable = radioChannelTable;
-		this.lastChannelPlaying = "";
+		this.playerButton = (ImageView) ((MainActivity)applicationContext).findViewById(R.id.pause);
 		playing = false;
 	}
 
@@ -47,21 +42,17 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	public synchronized void onClick(View view) {
 
 		try {
-			ImageView imageView = (ImageView) view;
+			playerButton = (ImageView) view;
 
 			if (playing) {			
-				//imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pauze));
-				imageView.setImageResource(R.drawable.play4);
-				Thread.sleep(12);
-				//imageView.setImageDrawable(applicationContext.getResources().getDrawable(R.drawable.pause));
+				playerButton.setImageResource(R.drawable.play4);
 				mediaPlayer.pause();			
 				playing = false;
 			}
 			
 			else {
-				imageView.setImageResource(R.drawable.pause);
+				playerButton.setImageResource(R.drawable.pause);
 				new ProgressTask().execute();
-				
 			}
 
 		} catch (Exception e) {
@@ -72,12 +63,11 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View view, int position,
-			long id) {
-		this.view = view;
+	public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+		
 		TextView itemView = (TextView) ((ViewGroup) view).getChildAt(1);
-		this.item = itemView.getText().toString();
-		this.tView = (TextView) ((MainActivity) applicationContext)
+		this.radioName = itemView.getText().toString();
+		this.scrollingText = (TextView) ((MainActivity) applicationContext)
 				.findViewById(R.id.scrollingText);
 
 		try {
@@ -120,13 +110,15 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
             @Override
         protected void onPostExecute(final Boolean success) {
             mediaPlayer.start();
-
+            
 			Log.d("status", "playing");
 			
 			playing = true;
-			tView.setText(applicationContext.getResources().getText(
+			playerButton.setOnClickListener(ClickListener.this);
+			scrollingText.setText(applicationContext.getResources().getText(
 					R.string.playing)
-					+ " " + item + " ---------------");
+					+ " " + radioName + " ---------------");
+			playerButton.setImageResource(R.drawable.pause);
 			this.dialog.dismiss();
         }
 
@@ -135,14 +127,12 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
         	try {
 				mediaPlayer = new MediaPlayer();
 				String url = radioChannelTable.getRadioChannelByCol(
-						RadioChannelTable.COL_NAME, item).getUrl();
+						RadioChannelTable.COL_NAME, radioName).getUrl();
 				
-
 				Log.d("status", "charging");
 
 				mediaPlayer.setDataSource(url);
 				mediaPlayer.prepare();
-				mediaPlayer.start();
 				return true;
 
 			} catch (IllegalArgumentException e1) {
