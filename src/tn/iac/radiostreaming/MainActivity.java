@@ -97,10 +97,10 @@ public class MainActivity extends Activity {
 	@Override  
 	public void onCreateContextMenu(ContextMenu menu, View view,ContextMenuInfo menuInfo) {  
 		super.onCreateContextMenu(menu, view, menuInfo); 
-	    menu.setHeaderTitle(getString(R.string.favoriteMenu)); 
-	    menu.add(0, view.getId(), 0, getString(R.string.setFavorite));  
-	    menu.add(0, view.getId(), 0, getString(R.string.unsetFavorite)); 
-	    menu.add(0, view.getId(), 0, getString(R.string.visitWebsite));
+	    menu.setHeaderTitle(getString(R.string.option_menu_title)); 
+	    menu.add(0, view.getId(), 0, getString(R.string.option_set_favorite));  
+	    menu.add(0, view.getId(), 0, getString(R.string.option_unset_favorite)); 
+	    menu.add(0, view.getId(), 0, getString(R.string.option_visit_website));
 	} 
 	
 	 @Override  
@@ -109,13 +109,13 @@ public class MainActivity extends Activity {
 	    long id = this.listView.getItemIdAtPosition(info.position);
 	    String radioName = listView.getItemAtPosition((int)id).toString();
 	    
-	    if(item.getTitle()==getString(R.string.setFavorite)){
+	    if(item.getTitle()==getString(R.string.option_set_favorite)){
 	        radioChannels.setFavoriteChannel(radioName);
 	    }  
-	    else if(item.getTitle()==getString(R.string.unsetFavorite)){
+	    else if(item.getTitle()==getString(R.string.option_unset_favorite)){
 	    	radioChannels.unsetFavoriteChannel(radioName);
 	    }  
-	    else if(item.getTitle()==getString(R.string.visitWebsite)){
+	    else if(item.getTitle()==getString(R.string.option_visit_website)){
 	    	String uri = radioChannels.getRadioChannelWebsite(radioName);
 	    	Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
 	    	startActivity(browser);
@@ -173,8 +173,8 @@ public class MainActivity extends Activity {
         Notification mNotification = new Notification( R.drawable.ic_stat_play, MyText, System.currentTimeMillis()       ); // the time for the notification
 
         /* Starting an intent */
-        String MyNotifyTitle =  getString(R.string.notifTitle);
-        String MyNotifiyText  = getString(R.string.notifText);
+        String MyNotifyTitle =  getString(R.string.notif_title);
+        String MyNotifiyText  = getString(R.string.notif_text);
         Intent MyIntent = new Intent( this, MainActivity.class );
         MyIntent.putExtra("extendedTitle", MyNotifyTitle);
         MyIntent.putExtra("extendedText" , MyNotifiyText);

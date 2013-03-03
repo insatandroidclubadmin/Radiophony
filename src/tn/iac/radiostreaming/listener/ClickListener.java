@@ -89,8 +89,8 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 
 				playing = true;
 				tView.setText(applicationContext.getResources().getText(
-						R.string.playin)
-						+ item + "---------------");
+						R.string.playing)
+						+ item + " ---------------");
 
 			} catch (IllegalArgumentException e1) {
 				Toast.makeText(applicationContext, "Illegal argument problem",
@@ -103,7 +103,7 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 						Toast.LENGTH_SHORT).show();
 			} catch (IOException e1) {
 				Toast.makeText(applicationContext,
-						applicationContext.getString(R.string.networkProblem), Toast.LENGTH_SHORT)
+						applicationContext.getString(R.string.exception_network), Toast.LENGTH_SHORT)
 						.show();
 			} catch (Exception e) {
 				Toast.makeText(applicationContext, "Strange problem",

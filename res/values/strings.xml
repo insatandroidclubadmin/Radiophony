@@ -2,20 +2,16 @@
 <resources>
 
     <string name="app_name">Radiophony</string>
-    <string name="hello_world">Radiophony</string>
     <string name="menu_about">About us</string>
     <string name="title_activity_hello">Home</string>
     <string name="title_activity_about">About Radiophony</string>
-    <string name="redirect">Redirect</string>
-    <string name="favoriteMenu">Favorite Menu</string>
-    <string name="setFavorite">Set Favorite</string>
-    <string name="unsetFavorite">Unset Favorite</string>
-    <string name="notifTitle">Radio streaming ON</string>
-    <string name="notifText">Go to the Radio Streaming application &#8230;</string>
-    <string name="play">-------------------Now playing : None --------------------</string>
-    <string name="playin">---------------Playing now: </string>
-    
-    <string name="visitWebsite">Visit Website</string>
-    <string name="networkProblem">Network connection disabled</string>
+    <string name="option_menu_title">Options</string>
+    <string name="option_set_favorite">Set Favorite</string>
+    <string name="option_unset_favorite">Unset Favorite</string>
+    <string name="option_visit_website">Visit Website</string><string name="notif_title">Radiophony ON</string>
+    <string name="notif_text">Go to Radiophony application …</string>
+    <string name="playing_none">-------------------Now playing : None --------------------</string>
+    <string name="playing">---------------Playing now: </string>
+    <string name="exception_network">Network connection disabled</string>
 
 </resources>

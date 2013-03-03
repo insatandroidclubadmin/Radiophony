@@ -38,7 +38,7 @@
             android:paddingRight="15dip"
             android:scrollHorizontally="true"
             android:singleLine="true"
-            android:text="@string/play"
+            android:text="@string/playing_none"
             android:textColor="@color/light_grey" >
         </TextView>
 
