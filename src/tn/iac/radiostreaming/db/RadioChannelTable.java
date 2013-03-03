@@ -1,12 +1,14 @@
-package tn.iac.radiostreaming.bd;
+package tn.iac.radiostreaming.db;
 
 import java.util.LinkedList;
 import java.util.List;
-import tn.iac.radiostreaming.bd.RadioChannelDB;
+
+import tn.iac.radiostreaming.db.RadioChannelDB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class RadioChannelTable {
 
@@ -21,9 +23,9 @@ public class RadioChannelTable {
 	private static final int NUM_COL_URL = 2;
 	private static final String COL_TAG = "tag";
 	private static final int NUM_COL_TAG = 3;
-	private static final String COL_TYPE = "type";
+	public static final String COL_TYPE = "type";
 	private static final int NUM_COL_TYPE = 4;
-	private static final String COL_FLAG = "favoris";
+	public static final String COL_FLAG = "favoris";
 	private static final int NUM_COL_FLAG = 5;
 
 	private SQLiteDatabase database;
@@ -41,7 +43,7 @@ public class RadioChannelTable {
 	
 	public void fillInitialTable() {
 
-		RadioChannel mosaique, ifm, shems, express, fun, nrj, rtl2, skyrock;
+		RadioChannel mosaique, ifm, shems, express, sabra, oasis, cap, fun, nrj, rtl2, skyrock;
 
 		mosaique = new RadioChannel("Mosaique FM", "mosaique",
 				"http://radio.mosaiquefm.net:8000/mosalive", "nationale", 0);
@@ -51,6 +53,12 @@ public class RadioChannelTable {
 				"http://radioifm.ice.infomaniak.ch/radioifm-128.mp3", "nationale", 1);
 		express = new RadioChannel("Express FM", "express",
 				"http://217.114.200.125/;stream.mp3", "nationale", 0);
+		sabra = new RadioChannel("Sabra FM", "sabra",
+				"http://188.165.248.163:8000/;stream.mp3", "nationale", 0);
+		oasis = new RadioChannel("Oasis FM", "oasis",
+				"http://stream8.tanitweb.com/Oasis", "nationale", 0);
+		cap = new RadioChannel("Cap FM", "cap",
+				"http://stream8.tanitweb.com/capfm", "nationale", 0);
 		fun = new RadioChannel("Fun Radio", "fun",
 				"http://streaming.radio.funradio.fr/fun-1-44-96?.wma", "internationale", 0);
 		nrj = new RadioChannel("NRJ", "nrj",
@@ -58,11 +66,16 @@ public class RadioChannelTable {
 		rtl2 = new RadioChannel("RTL2", "rtl2",
 				"http://streaming.radio.rtl2.fr/rtl2-1-44-96?.wma", "internationale", 0);
 		skyrock = new RadioChannel("Skyrock", "skyrock",
-				"http://player.skyrock.fm/V4/skyrock/skyrock.m3u", "internationale", 0);
+				"http://playerservices.streamtheworld.com/pls/CBC_R1_CGY_H.pls", "internationale", 0);
+		
+		
 		insertRadioChannel(mosaique);
 		insertRadioChannel(ifm);
 		insertRadioChannel(shems);
 		insertRadioChannel(express);
+		insertRadioChannel(sabra);
+		insertRadioChannel(oasis);
+		insertRadioChannel(cap);
 		insertRadioChannel(fun);
 		insertRadioChannel(nrj);
 		insertRadioChannel(rtl2);
@@ -99,10 +112,10 @@ public class RadioChannelTable {
 		return radioChannel;
 	}
 
-	public List<RadioChannel> getAllRadioChannels() {
+	public List<RadioChannel> getAllRadioChannels(String col, String value) {
 		Cursor c = database.query(TABLE_RADIO_CHANNEL, 
 				new String[] { COL_ID,COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG },
-				null, null, null, null, COL_FLAG + " DESC");
+				col+ "=?", new String[] { value }, null, null, COL_FLAG + " DESC");
 		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
 		if (c.getCount() != 0) {
 			c.moveToFirst();
@@ -113,6 +126,37 @@ public class RadioChannelTable {
 		}
 		c.close();
 		return radioChannels;
+	}
+	
+	
+	public List<String> getAllRadioChannelUrls(){
+		Cursor c = database.query(false, TABLE_RADIO_CHANNEL, 
+				new String[] { COL_ID,COL_NAME, COL_URL, COL_TAG, COL_TYPE, COL_FLAG }, null, null, null, null, null, null);
+		List<RadioChannel> radioChannels = new LinkedList<RadioChannel>();
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			for (int i = 0; i < c.getCount(); i++) {
+				radioChannels.add(cursorToRadioChannel(c));
+				c.moveToNext();
+			}
+		}
+		c.close();
+		
+		List<String> channelUrls = new LinkedList<String>();
+		for(int i=0 ; i<radioChannels.size() ; i++){
+			channelUrls.add(radioChannels.get(i).getUrl());
+		}
+		return channelUrls;
+		
+	}
+	
+	public List<String> getAllRadioChannelNames(String col, String value) {
+		List<RadioChannel> radioChannels = getAllRadioChannels(col, value);
+		List<String> channelNames = new LinkedList<String>();
+		for(int i=0 ; i<radioChannels.size() ; i++){
+			channelNames.add(radioChannels.get(i).getName());
+		}
+		return channelNames;
 	}
 	
 	private RadioChannel cursorToRadioChannel(Cursor c) {

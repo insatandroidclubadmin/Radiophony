@@ -1,6 +1,11 @@
-package tn.iac.radiostreaming;
+package tn.iac.radiostreaming.listener;
 
 import java.util.List;
+
+import tn.iac.radiostreaming.R;
+import tn.iac.radiostreaming.R.drawable;
+import tn.iac.radiostreaming.R.id;
+import tn.iac.radiostreaming.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,11 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class MySimpleArrayAdapter extends ArrayAdapter<String> {
+public class ListArrayAdapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final List<String> values;
 
-	public MySimpleArrayAdapter(Context context, List<String> values) {
+	public ListArrayAdapter(Context context, List<String> values) {
 		super(context, R.layout.rowlayout, values);
 		this.context = context;
 		this.values = values;

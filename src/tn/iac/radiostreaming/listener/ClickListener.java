@@ -1,11 +1,13 @@
-package tn.iac.radiostreaming;
+package tn.iac.radiostreaming.listener;
 
 import java.io.IOException;
 
-import java.io.InputStream;
-import java.util.Timer;
-
-import tn.iac.radiostreaming.bd.RadioChannelTable;
+import tn.iac.radiostreaming.MainActivity;
+import tn.iac.radiostreaming.R;
+import tn.iac.radiostreaming.R.drawable;
+import tn.iac.radiostreaming.R.id;
+import tn.iac.radiostreaming.R.string;
+import tn.iac.radiostreaming.db.RadioChannelTable;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.util.Log;
@@ -116,5 +118,15 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	public boolean isPlaying() {
 		return playing;
 	}
+
+	public void stopMediaPlayer() {
+		if(mediaPlayer != null){
+			mediaPlayer.stop();
+			mediaPlayer=null;
+			playing = false;
+		}
+	}
+	
+	
 
 }

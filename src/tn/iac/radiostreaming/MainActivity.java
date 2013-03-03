@@ -2,8 +2,11 @@ package tn.iac.radiostreaming;
 
 import java.util.LinkedList;
 import java.util.List;
-import tn.iac.radiostreaming.bd.RadioChannel;
-import tn.iac.radiostreaming.bd.RadioChannelTable;
+
+import tn.iac.radiostreaming.db.RadioChannel;
+import tn.iac.radiostreaming.db.RadioChannelTable;
+import tn.iac.radiostreaming.listener.ClickListener;
+import tn.iac.radiostreaming.listener.ListArrayAdapter;
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -16,7 +19,6 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,9 +29,11 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 
 	private static final int NOTIFICATION_ID = 1;
+	public static final int NATIONAL = 0;
+	public static final int INTERNATIONAL = 1;
+	public static final int FAVORITE = 2;
 	
-	ImageView ChannelButton,pauseButton;
-	Button backButton;
+	ImageView pauseButton;
 	NotificationManager notificationManager;
 	RadioChannelTable radioChannels;
 	ClickListener clickListener;
@@ -39,6 +43,9 @@ public class MainActivity extends Activity {
 	TextView scrollingText;
 	ListView listView;
 	
+	String column;
+	String value;
+	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,37 +53,19 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		setTheme(R.style.WidgetBackground);
 		
-		radioChannels = new RadioChannelTable(this);
-
-		clickListener = new ClickListener(MainActivity.this, radioChannels);
-
-	/*	
-		setTheme(R.style.WidgetBackground);
-		pauseButton = (ImageView) findViewById(R.id.pause);	
-		backButton = (ImageView) findViewById(R.drawable.back45);
-
-		clickListener = new ClickListener(MainActivity.this, radioChannels);
-		pauseButton.setOnClickListener(clickListener);
-		backButton.setOnClickListener(new View.OnClickListener() {
- 
-			public void onClick(View v) {
-				MainActivity.this.finish();
- 
-			}
-		});
-*/
+		setRadioChannelsToDisplay();
 		
+		radioChannels = new RadioChannelTable(this);
+		clickListener = new ClickListener(MainActivity.this, radioChannels);
+	
 		scrollingText = (TextView) findViewById(R.id.scrollingText);
 		pauseButton = (ImageView) findViewById(R.id.pause);
 		listView = (ListView) findViewById(R.id.list);				
-		
-		channels = radioChannels.getAllRadioChannels();	
+
 		channelNames = new LinkedList<String>();
-		for(int i=0 ; i<channels.size() ; i++){
-			channelNames.add(channels.get(i).getName());		
-		}
-			
-		adapter = new MySimpleArrayAdapter(this, channelNames);	
+		channelNames = radioChannels.getAllRadioChannelNames(column, value);
+		
+		adapter = new ListArrayAdapter(this, channelNames);	
 		listView.setAdapter(adapter); 
 		listView.setOnItemClickListener(clickListener);
 		registerForContextMenu(listView);
@@ -84,9 +73,28 @@ public class MainActivity extends Activity {
 		pauseButton.setOnClickListener(clickListener);
 		scrollingText.setSelected(true);
 	}
-
-	String selectedRadioName;
 	
+	private void setRadioChannelsToDisplay() {
+		Bundle bundle = getIntent().getExtras();
+		int list = (Integer) bundle.get("list");
+		
+		switch (list) {
+		case NATIONAL:
+			column = RadioChannelTable.COL_TYPE;
+			value = "nationale";
+			break;
+		case INTERNATIONAL:
+			column = RadioChannelTable.COL_TYPE;
+			value = "internationale";
+			break;
+		case FAVORITE:
+			column = RadioChannelTable.COL_FLAG;
+			value = "1";
+			break;
+		}
+		
+	}
+
 	@Override  
 	public void onCreateContextMenu(ContextMenu menu, View view,ContextMenuInfo menuInfo) {  
 		super.onCreateContextMenu(menu, view, menuInfo); 
@@ -126,6 +134,13 @@ public class MainActivity extends Activity {
 		deleteNotification();
 	}
 	
+	@Override
+    public void onBackPressed() {
+        super.onBackPressed(); 
+        clickListener.stopMediaPlayer();
+        finish();
+    }
+	
 	private final void createNotification(){
 		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -154,12 +169,6 @@ public class MainActivity extends Activity {
     	final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
     	notificationManager.cancel(NOTIFICATION_ID);
     }
-
-	public RadioChannelTable getRadioChannels() {
-		return radioChannels;
-	}
-	
-	
 
    }
 

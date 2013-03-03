@@ -1,33 +1,35 @@
 package tn.iac.radiostreaming;
 
-import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
-import android.view.Menu;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.Transformation;
-import android.view.animation.TranslateAnimation;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class HelloActivity extends Activity implements OnClickListener {
 
-	TextView redirect;
-	TextView quit;
+	Button national, international, favorite, about;
+	Button quit;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_hello);
 
-		redirect = (TextView) findViewById(R.id.red);
-		redirect.setOnClickListener(this);
+		national = (Button) findViewById(R.id.national);
+		national.setOnClickListener(this);
 
-		quit = (TextView) findViewById(R.id.qt);
+		international = (Button) findViewById(R.id.international);
+		international.setOnClickListener(this);
+		
+		favorite = (Button) findViewById(R.id.favorite);
+		favorite.setOnClickListener(this);
+		
+		//about = (Button) findViewById(R.id.about);
+		
+		quit = (Button) findViewById(R.id.quit);
 		quit.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -38,29 +40,32 @@ public class HelloActivity extends Activity implements OnClickListener {
 	}
 
 	@Override
-	public void onClick(View v) {
-
-		// animation bouton redirect
-		AnimationSet set = new AnimationSet(true);
-		Animation anim = new TranslateAnimation(Animation.RELATIVE_TO_SELF, 30,
-				Animation.RELATIVE_TO_SELF, 30);
-		anim.setDuration(1000);
-		set.addAnimation(anim);
-		redirect.setAnimation(set);
-		//intent
+	public void onClick(View view) {
+		Bundle bundle = new Bundle();
+		
+		switch (view.getId()) {
+		case R.id.national:
+			bundle.putInt("list", MainActivity.NATIONAL);
+			break;
+		case R.id.international:
+			bundle.putInt("list",  MainActivity.INTERNATIONAL);
+			break;
+		case R.id.favorite:
+			bundle.putInt("list", MainActivity.FAVORITE);
+			break;
+			
+		}
+		
 		Intent intent = new Intent(HelloActivity.this, MainActivity.class);
-		startActivity(intent);
-
-		// Set the transition -> method available from Android 2.0 and beyond
-		overridePendingTransition(R.anim.left_to_right, R.anim.right_to_left);
+		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+		intent.putExtras(bundle);
+		startActivityIfNeeded(intent, -1);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.hello, menu);
-		return true;
-
-	}
+	
+	
+	public void onClickAbout(View view){
+		
+		Intent intent = new Intent(getApplicationContext(),AboutActivity.class);
+		startActivity(intent);	}
 
 }
