@@ -43,11 +43,11 @@
         </activity>
         <activity
             android:name="tn.iac.radiostreaming.HelloActivity"
-            android:label="@string/title_activity_hello" >
+            android:label="@string/title_activity_hello">
         </activity>
         <activity
             android:name="tn.iac.radiostreaming.AboutActivity"
-            android:label="@string/title_activity_about" >
+            android:label="@string/title_activity_about" android:theme="@android:style/Theme.Dialog">
         </activity>
         <activity
             android:name="tn.iac.radiostreaming.InternationalChanActivity"
