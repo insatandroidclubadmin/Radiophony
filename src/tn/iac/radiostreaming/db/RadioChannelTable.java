@@ -149,6 +149,19 @@ public class RadioChannelTable {
 		return logo;
 	}
 	
+	public String getRadioChannelWebsite(String name){
+		Cursor c = database.query(TABLE_RADIO_CHANNEL, new String[] { COL_WEBSITE }, COL_NAME
+				+ "=?", new String[] { name }, null, null, null);
+		String website="None";
+		if (c.getCount() != 0) {
+			c.moveToFirst();
+			website = c.getString(0);
+			c.close();
+		}
+		System.out.println(website+ " "+ name);
+		return website;
+	}
+	
 	public void setFavoriteChannel(String name){
 		ContentValues values = new ContentValues();
 		values.put(COL_FLAG, 1);
