@@ -13,6 +13,9 @@
     <string name="title_activity_hello">Accueil</string>
     <string name="title_activity_about">A propos de Radiophony</string>
     
+    <string name="title_activity_national">National</string>
+    <string name="title_activity_international">International</string>
+    <string name="title_activity_favorite">Favoris</string>
     <string name="option_menu_title">Options</string>
     <string name="option_set_favorite">Marquer comme Favori</string>
     <string name="option_unset_favorite">Supprimer Favori</string>
@@ -25,5 +28,8 @@
     <string name="playing">--------------- Radio en écoute : </string>
     
     <string name="exception_network">Connexion internet indisponible</string>
+    
+    
+    
 
 </resources>

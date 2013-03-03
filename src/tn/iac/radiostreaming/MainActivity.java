@@ -79,14 +79,17 @@ public class MainActivity extends Activity {
 		case RadioChannel.NATIONAL:
 			column = RadioChannelTable.COL_TYPE;
 			value = "1";
+			setTitle(R.string.title_activity_national);
 			break;
 		case RadioChannel.INTERNATIONAL:
 			column = RadioChannelTable.COL_TYPE;
 			value = "2";
+			setTitle(R.string.title_activity_international);
 			break;
 		case RadioChannel.FAVORITE:
 			column = RadioChannelTable.COL_FLAG;
 			value = "1";
+			setTitle(R.string.title_activity_favorite);
 			break;
 		}
 		

@@ -13,6 +13,9 @@
     
     <string name="title_activity_hello">Home</string>
     <string name="title_activity_about">About Radiophony</string>
+    <string name="title_activity_national">National</string>
+    <string name="title_activity_international">International</string>
+    <string name="title_activity_favorite">Favorite</string>
     
     <string name="option_menu_title">Options</string>
     <string name="option_set_favorite">Set Favorite</string>

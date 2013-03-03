@@ -25,8 +25,8 @@
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="14dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="13dp"
         android:background="@drawable/quit" />
 
     <ImageView
@@ -43,9 +43,10 @@
         android:layout_height="25dp"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/guitar"
-        android:layout_marginBottom="4dp"
-        android:background="@drawable/about"
-        android:onClick="onClickAbout" />
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="13dp"
+        android:background="@drawable/about"/>
 
     <Button
         android:id="@+id/favorite"
@@ -53,7 +54,8 @@
         android:layout_height="25dp"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="14dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="13dp"
         android:layout_toLeftOf="@+id/about"
         android:background="@drawable/favorite" />
 
@@ -62,13 +64,12 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="28dp"
         android:layout_height="25dp"
-        android:layout_marginBottom="4dp"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="18dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="13dp"
         android:layout_toLeftOf="@+id/favorite"
-        android:background="@drawable/globe" 
-
-         />
+        android:background="@drawable/globe" />
 
 
     <Button
@@ -76,9 +77,10 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_marginBottom="4dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="14dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="13dp"
         android:layout_toLeftOf="@+id/international"
         android:background="@drawable/national" />
 
