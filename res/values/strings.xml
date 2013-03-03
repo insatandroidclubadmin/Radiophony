@@ -2,9 +2,18 @@
 <resources>
 
     <string name="app_name">Radiophony</string>
+    <string name="app_version">v1.0</string>
+    <string name="app_developers">Developed By : Khouni Balkis, Nfaiedh Mariem and Selmi Meriem</string>
+    <string name="app_year">© 2013</string>
+    
+    <string name="club_name">INSAT ANDROID CLUB</string>
+    <string name="club_website">www.insatandroidclub.org</string>
+    
     <string name="menu_about">About us</string>
+    
     <string name="title_activity_hello">Home</string>
     <string name="title_activity_about">About Radiophony</string>
+    
     <string name="option_menu_title">Options</string>
     <string name="option_set_favorite">Set Favorite</string>
     <string name="option_unset_favorite">Unset Favorite</string>
@@ -13,5 +22,10 @@
     <string name="playing_none">----------------------------------------  Now playing : None ----------------------------------------                                                                                          </string>
     <string name="playing">--------------- Playing now : </string>
     <string name="exception_network">Network connection disabled</string>
+    
+    
+    
+    
+    
 
 </resources>

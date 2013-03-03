@@ -17,7 +17,7 @@
         android:layout_alignTop="@+id/imageView1"
         android:layout_marginLeft="17dp"
         android:layout_toRightOf="@+id/imageView1"
-        android:text="Radiophony"
+        android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
         android:layout_below="@+id/textView1"
-        android:text="v1.0"
+        android:text="@string/app_version"
         android:textAppearance="?android:attr/textAppearance" />
 
     <ImageView
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/imageView2"
         android:layout_alignRight="@+id/textView3"
-        android:text="INSAT ANDROID CLUB" />
+        android:text="@string/club_name" />
 
     <TextView
         android:id="@+id/textView6"
@@ -54,7 +54,7 @@
         android:layout_alignRight="@+id/textView4"
         android:layout_below="@+id/textView4"
         android:paddingLeft="5dp"
-        android:text="www.insatandroidclub.org" />
+        android:text="@string/club_website" />
 
     <TextView
         android:id="@+id/textView5"
@@ -64,7 +64,7 @@
         android:layout_below="@+id/textView6"
         android:layout_marginTop="44dp"
         android:paddingLeft="5dp"
-        android:text="Developed By : Khouni Balkis, Nfaiedh Mariem and Selmi Meriem" />
+        android:text="@string/app_developers" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -83,7 +83,7 @@
         android:layout_alignTop="@+id/imageView2"
         android:layout_marginRight="30dp"
         android:layout_toLeftOf="@+id/imageView2"
-        android:text=" © 2013" />
+        android:text="@string/app_year" />
     
     </RelativeLayout>
     

@@ -2,6 +2,13 @@
 <resources>
 
     <string name="app_name">Radiophony</string>
+    <string name="app_version">v1.0</string>
+    <string name="app_developers">Developpé par : Khouni Balkis, Nfaiedh Mariem et Selmi Meriem</string>
+    <string name="app_year">© 2013</string>
+    
+    <string name="club_name">INSAT ANDROID CLUB</string>
+    <string name="club_website">www.insatandroidclub.org</string>
+    
     <string name="menu_about">A propos</string>
     <string name="title_activity_hello">Accueil</string>
     <string name="title_activity_about">A propos de Radiophony</string>
