@@ -3,8 +3,8 @@ package tn.iac.radiostreaming;
 import java.util.LinkedList;
 import java.util.List;
 
-import tn.iac.radiostreaming.db.RadioChannel;
 import tn.iac.radiostreaming.db.RadioChannelTable;
+import tn.iac.radiostreaming.domain.RadioChannel;
 import tn.iac.radiostreaming.listener.ClickListener;
 import tn.iac.radiostreaming.listener.ListArrayAdapter;
 import android.app.Activity;

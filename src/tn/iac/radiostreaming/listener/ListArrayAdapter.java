@@ -6,8 +6,8 @@ import tn.iac.radiostreaming.R;
 import tn.iac.radiostreaming.R.drawable;
 import tn.iac.radiostreaming.R.id;
 import tn.iac.radiostreaming.R.layout;
-import tn.iac.radiostreaming.db.RadioChannel;
 import tn.iac.radiostreaming.db.RadioChannelTable;
+import tn.iac.radiostreaming.domain.RadioChannel;
 
 import android.content.Context;
 import android.view.LayoutInflater;

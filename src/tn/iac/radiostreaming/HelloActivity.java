@@ -1,6 +1,6 @@
 package tn.iac.radiostreaming;
 
-import tn.iac.radiostreaming.db.RadioChannel;
+import tn.iac.radiostreaming.domain.RadioChannel;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

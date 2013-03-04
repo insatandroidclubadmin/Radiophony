@@ -109,17 +109,27 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 
             @Override
         protected void onPostExecute(final Boolean success) {
-            mediaPlayer.start();
             
-			Log.d("status", "playing");
+            this.dialog.dismiss();
+            	
+            if(success){
+	            mediaPlayer.start();
+	            
+				Log.d("status", "playing");
+				
+				playing = true;
+				playerButton.setOnClickListener(ClickListener.this);
+				scrollingText.setText(applicationContext.getResources().getText(
+						R.string.playing)
+						+ " " + radioName + " ---------------");
+				playerButton.setImageResource(R.drawable.pause);
+            }
+            else{
+            	Toast.makeText(applicationContext,
+						applicationContext.getString(R.string.exception_network), Toast.LENGTH_SHORT)
+						.show();
+            }
 			
-			playing = true;
-			playerButton.setOnClickListener(ClickListener.this);
-			scrollingText.setText(applicationContext.getResources().getText(
-					R.string.playing)
-					+ " " + radioName + " ---------------");
-			playerButton.setImageResource(R.drawable.pause);
-			this.dialog.dismiss();
         }
 
         protected Boolean doInBackground(final String... args) {
@@ -136,18 +146,15 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 				return true;
 
 			} catch (IllegalArgumentException e1) {
-				Toast.makeText(applicationContext, "Illegal argument problem",
-						Toast.LENGTH_SHORT).show();
+				// Toast.makeText(applicationContext, "Illegal argument problem",Toast.LENGTH_SHORT).show();
 			} catch (SecurityException e1) {
-				Toast.makeText(applicationContext, "Security problem",
-						Toast.LENGTH_SHORT).show();
+				// Toast.makeText(applicationContext, "Security problem", Toast.LENGTH_SHORT).show();
 			} catch (IllegalStateException e1) {
-				Toast.makeText(applicationContext, "Illegal state problem",
-						Toast.LENGTH_SHORT).show();
+				// Toast.makeText(applicationContext, "Illegal state problem",	Toast.LENGTH_SHORT).show();
 			} catch (IOException e1) {
-				Toast.makeText(applicationContext,
-						applicationContext.getString(R.string.exception_network), Toast.LENGTH_SHORT)
-						.show();
+				//Toast.makeText(applicationContext, applicationContext.getString(R.string.exception_network), Toast.LENGTH_SHORT).show();
+
+				Log.d("debug", "IOException");
 			}
         	return false;
         }

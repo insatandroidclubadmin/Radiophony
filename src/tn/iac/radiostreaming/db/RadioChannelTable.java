@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import tn.iac.radiostreaming.db.RadioChannelDB;
+import tn.iac.radiostreaming.domain.RadioChannel;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;

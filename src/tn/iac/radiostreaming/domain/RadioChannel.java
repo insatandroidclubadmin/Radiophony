@@ -1,4 +1,4 @@
-package tn.iac.radiostreaming.db;
+package tn.iac.radiostreaming.domain;
 
 public class RadioChannel{
 	
