@@ -19,8 +19,7 @@
     <string name="option_visit_website">Visit Website</string>
     <string name="notif_title">Radiophony ON</string>
     <string name="notif_text">Go to Radiophony application …</string>
-    <string name="playing_none">----------------------------------------  Now playing : None ----------------------------------------                                                                                          </string>
-    <string name="playing">--------------- Playing now : </string>
+    <string name="mp_loading">Loading </string>
     <string name="exception_network">Network connection disabled</string>
     <string name="title_activity_radio">RadioActivity</string>
     <string name="action_settings">Settings</string>

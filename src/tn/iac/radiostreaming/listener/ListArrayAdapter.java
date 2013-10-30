@@ -3,6 +3,7 @@ package tn.iac.radiostreaming.listener;
 import java.util.List;
 
 import tn.iac.radiostreaming.R;
+import tn.iac.radiostreaming.RadiophonyService;
 import tn.iac.radiostreaming.db.RadioStationTable;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -38,17 +39,15 @@ public class ListArrayAdapter extends ArrayAdapter<String> {
     label.setText(values.get(position));
     String logoName = radioStationTable.find(RadioStationTable.COL_NAME, values.get(position)).getLogo();
     logo.setImageResource(context.getResources().getIdentifier("drawable/logo_"+logoName, "drawable", context.getPackageName()));
-    /*
+    
     if(RadiophonyService.getInstance().isPlaying()){
-    	UIManager uiManager = UIManager.getInstance();
     	String radioName = RadiophonyService.getInstance().getPlayingRadioStation().getName();
     	if(radioName.equals(values.get(position))){
-    		uiManager.prepare(RadiophonyService.getInstance().getPlayingRadioStation(), play);
-    		uiManager.play();
+    		play.setImageResource(R.drawable.main_play);
     	}
     	
 	}
-    */
+    
     return rowView;
   }
 } 

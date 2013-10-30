@@ -15,6 +15,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
 
@@ -22,7 +26,11 @@ public class MainActivity extends FragmentActivity {
 	
 	FragmentStatePagerAdapter pagerAdapter;
 	ViewPager viewPager;
-
+	RelativeLayout bar; 
+	ImageView logo, pause;
+	TextView station;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,6 +42,18 @@ public class MainActivity extends FragmentActivity {
 		
 		radioStations = new RadioStationTable(this);
 
+		if(RadiophonyService.getInstance().isPlaying()){
+			RadioStation radioStation = RadiophonyService.getInstance().getPlayingRadioStation();
+			bar = (RelativeLayout) findViewById(R.id.main_bar);
+			logo = (ImageView) findViewById(R.id.main_bar_logo);
+			station = (TextView) findViewById(R.id.main_bar_station);
+			pause = (ImageView) findViewById(R.id.main_pause);
+			
+			logo.setImageResource(getResources().getIdentifier("drawable/logo_" + radioStation.getLogo(),
+						"drawable", getPackageName()));
+			station.setText(radioStation.getName());
+			bar.setVisibility(View.VISIBLE);
+		}
 	}
 
 	@Override

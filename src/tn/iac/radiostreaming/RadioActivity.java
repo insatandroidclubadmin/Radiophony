@@ -1,21 +1,44 @@
 package tn.iac.radiostreaming;
 
+import tn.iac.radiostreaming.db.RadioStationTable;
+import tn.iac.radiostreaming.domain.RadioStation;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.support.v4.app.NavUtils;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.os.Build;
 
 public class RadioActivity extends Activity {
 
+	RadioStationTable radioStations;
+	RadiophonyService radiophonyService;
+	Intent radiophonyServiceIntent;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_radio);
 		// Show the Up button in the action bar.
 		setupActionBar();
+		
+		this.radiophonyServiceIntent = new Intent(this, RadiophonyService.class);
+		this.radiophonyService = RadiophonyService.getInstance();
+		this.radioStations = new RadioStationTable(this);
+		
+		String name = getIntent().getExtras().getString(RadioStationTable.COL_NAME);
+		RadioStation station = radioStations.find(RadioStationTable.COL_NAME, name);
+
+		if (radiophonyService.isPlaying()) {
+			stopService(radiophonyServiceIntent);
+		}
+		RadiophonyService.initialize(this, station);
+		startService(radiophonyServiceIntent);
+		
 	}
 
 	/**
