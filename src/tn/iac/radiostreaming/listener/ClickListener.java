@@ -1,7 +1,7 @@
 package tn.iac.radiostreaming.listener;
-
+/*
 import java.io.IOException;
-import tn.iac.radiostreaming.MainActivity;
+import tn.iac.radiostreaming.MainnActivity;
 import tn.iac.radiostreaming.R;
 import tn.iac.radiostreaming.db.RadioChannelTable;
 import android.app.ProgressDialog;
@@ -34,7 +34,7 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 		super();
 		this.applicationContext = applicationContext;
 		this.radioChannelTable = radioChannelTable;
-		this.playerButton = (ImageView) ((MainActivity)applicationContext).findViewById(R.id.pause);
+		this.playerButton = (ImageView) ((MainnActivity)applicationContext).findViewById(R.id.pause);
 		playing = false;
 	}
 
@@ -67,7 +67,7 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 		
 		TextView itemView = (TextView) ((ViewGroup) view).getChildAt(1);
 		this.radioName = itemView.getText().toString();
-		this.scrollingText = (TextView) ((MainActivity) applicationContext)
+		this.scrollingText = (TextView) ((MainnActivity) applicationContext)
 				.findViewById(R.id.scrollingText);
 
 		try {
@@ -164,3 +164,4 @@ public class ClickListener implements OnClickListener, OnItemClickListener {
 	
 
 }
+*/
