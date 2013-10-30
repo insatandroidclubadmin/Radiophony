@@ -1,199 +1,112 @@
 package tn.iac.radiostreaming;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
-import tn.iac.radiostreaming.db.RadioChannelTable;
-import tn.iac.radiostreaming.domain.RadioChannel;
-import tn.iac.radiostreaming.listener.ClickListener;
-import tn.iac.radiostreaming.listener.ListArrayAdapter;
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
+import tn.iac.radiostreaming.db.RadioStationTable;
+import tn.iac.radiostreaming.domain.RadioStation;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
-	private static final int NOTIFICATION_ID = 1;
+	RadioStationTable radioStations;
 	
-	ImageView playerButton;
-	NotificationManager notificationManager;
-	RadioChannelTable radioChannels;
-	ClickListener clickListener;
-	List<RadioChannel> channels;
-	List<String> channelNames;
-	ArrayAdapter<String> adapter;
-	TextView scrollingText;
-	ListView listView;
-	
-	String column;
-	String value;
-	
-	
+	FragmentStatePagerAdapter pagerAdapter;
+	ViewPager viewPager;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		setTheme(R.style.WidgetBackground);
 		
-		setRadioChannelsToDisplay();
+		pagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+		viewPager = (ViewPager) findViewById(R.id.main_pager);
+		viewPager.setAdapter(pagerAdapter);
 		
-		radioChannels = new RadioChannelTable(this);
-		clickListener = new ClickListener(MainActivity.this, radioChannels);
-	
-		scrollingText = (TextView) findViewById(R.id.scrollingText);
-		listView = (ListView) findViewById(R.id.list);				
+		radioStations = new RadioStationTable(this);
 
-		channelNames = new LinkedList<String>();
-		channelNames = radioChannels.getAllRadioChannelNames(column, value);
-		
-		adapter = new ListArrayAdapter(this, channelNames, radioChannels);	
-		listView.setAdapter(adapter); 
-		listView.setOnItemClickListener(clickListener);
-		registerForContextMenu(listView);
-		
-		scrollingText.setSelected(true);
-	}
-	
-	private void setRadioChannelsToDisplay() {
-		Bundle bundle = getIntent().getExtras();
-		int list = (Integer) bundle.get("list");
-		
-		switch (list) {
-		case RadioChannel.NATIONAL:
-			column = RadioChannelTable.COL_TYPE;
-			value = "1";
-			setTitle(R.string.title_activity_national);
-			break;
-		case RadioChannel.INTERNATIONAL:
-			column = RadioChannelTable.COL_TYPE;
-			value = "2";
-			setTitle(R.string.title_activity_international);
-			break;
-		case RadioChannel.FAVORITE:
-			column = RadioChannelTable.COL_FLAG;
-			value = "1";
-			setTitle(R.string.title_activity_favorite);
-			break;
-		}
-		
 	}
 
-	@Override  
-	public void onCreateContextMenu(ContextMenu menu, View view,ContextMenuInfo menuInfo) {  
-		super.onCreateContextMenu(menu, view, menuInfo); 
-	    menu.setHeaderTitle(getString(R.string.option_menu_title)); 
-	    menu.add(0, view.getId(), 0, getString(R.string.option_set_favorite));  
-	    menu.add(0, view.getId(), 0, getString(R.string.option_unset_favorite)); 
-	    menu.add(0, view.getId(), 0, getString(R.string.option_visit_website));
-	} 
-	
-	 @Override  
-	 public boolean onContextItemSelected(MenuItem item) { 
-		AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
-	    long id = this.listView.getItemIdAtPosition(info.position);
-	    String radioName = listView.getItemAtPosition((int)id).toString();
-	    
-	    if(item.getTitle()==getString(R.string.option_set_favorite)){
-	        radioChannels.setFavoriteChannel(radioName);
-	    }  
-	    else if(item.getTitle()==getString(R.string.option_unset_favorite)){
-	    	radioChannels.unsetFavoriteChannel(radioName);
-	    }  
-	    else if(item.getTitle()==getString(R.string.option_visit_website)){
-	    	String uri = radioChannels.getRadioChannelWebsite(radioName);
-	    	Intent browser = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-	    	startActivity(browser);
-	    } 
-	    else {
-	    	return false;
-	    }  
-	 return true;  
-	 } 
-	 
-	 @Override
-		public boolean onCreateOptionsMenu(Menu menu) {
-			getMenuInflater().inflate(R.menu.menu, menu);
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.menu_about:
+			Intent intent = new Intent(this, AboutActivity.class);
+			startActivityIfNeeded(intent, -1);
 			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+	
+	/**
+	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
+	 * one of the sections/tabs/pages.
+	 */
+	public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
+
+		public SectionsPagerAdapter(FragmentManager fm) {
+			super(fm);
 		}
 
 		@Override
-		public boolean onOptionsItemSelected(MenuItem item) {
-			switch(item.getItemId())
-	        {
-	            case R.id.menu_about:
-	                Intent intent = new Intent(MainActivity.this, AboutActivity.class);
-	                startActivityIfNeeded(intent, -1);
-	                return true;
-	            default:
-	            	return super.onOptionsItemSelected(item);
-	        }
+		public Fragment getItem(int position) {
+			String column="", value="";
+			switch (position) {
+			case 0:
+				column = RadioStationTable.COL_FLAG;
+				value = RadioStation.FAVORITE + "";
+				break;
+			case 1:
+				column = RadioStationTable.COL_TYPE;
+				value = RadioStation.NATIONAL + "";
+				break;
+			case 2:
+				column = RadioStationTable.COL_TYPE;
+				value = RadioStation.INTERNATIONAL + "";
+				break;
+			}
+			
+			List<String> stationNames = radioStations.findAllStationNames(column, value);
+			SectionFragment fragment = new SectionFragment();
+			Bundle args = new Bundle();
+			args.putStringArrayList(SectionFragment.ARG_NAMES, (ArrayList<String>) stationNames);
+	        fragment.setArguments(args);
+			return fragment;
 		}
-	 
-	@Override
-	protected void onStop() {
-		super.onStop();
-		if(clickListener.isPlaying())
-			createNotification();
+
+		@Override
+		public int getCount() {
+			return 3;
+		}
+
+		@Override
+		public CharSequence getPageTitle(int position) {
+			switch (position) {
+			case 0:
+				return getString(R.string.title_activity_favorite);
+			case 1:
+				return getString(R.string.title_activity_national);
+			case 2:
+				return getString(R.string.title_activity_international);
+			}
+			return null;
+		}
 	}
-	
-	@Override
-	protected void onRestart() {
-		super.onRestart();
-		deleteNotification();
-	}
-	
-	@Override
-    public void onBackPressed() {
-        super.onBackPressed(); 
-        clickListener.stopMediaPlayer();
-        finish();
-    }
-	
-	private final void createNotification(){
-		notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
-        /* Create a notification */
-        String MyText = getString(R.string.notif_title);;
-        Notification mNotification = new Notification( R.drawable.ic_stat_play, MyText, System.currentTimeMillis()       ); // the time for the notification
-
-        /* Starting an intent */
-        String MyNotifyTitle =  getString(R.string.notif_title);
-        String MyNotifiyText  = getString(R.string.notif_text);
-        Intent MyIntent = new Intent( this, MainActivity.class );
-        MyIntent.putExtra("extendedTitle", MyNotifyTitle);
-        MyIntent.putExtra("extendedText" , MyNotifiyText);
-        PendingIntent StartIntent = PendingIntent.getActivity(  getApplicationContext(),0,MyIntent,0);
-
-        /* Set notification message */
-        mNotification.setLatestEventInfo(   getApplicationContext(), MyNotifyTitle, MyNotifiyText, StartIntent);
-
-  
-        /* Sent Notification to notification bar */
-        notificationManager.notify( NOTIFICATION_ID , mNotification );            
-
-     }
-	
-	private void deleteNotification(){
-    	final NotificationManager notificationManager = (NotificationManager)getSystemService(Context.NOTIFICATION_SERVICE);
-    	notificationManager.cancel(NOTIFICATION_ID);
-    }
-
-   }
-
+}
