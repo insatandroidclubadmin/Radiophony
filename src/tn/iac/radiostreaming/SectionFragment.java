@@ -19,13 +19,17 @@ package tn.iac.radiostreaming;
 import java.util.List;
 
 import tn.iac.radiostreaming.db.RadioStationTable;
+import tn.iac.radiostreaming.domain.RadioStation;
 import tn.iac.radiostreaming.listener.ListArrayAdapter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 public class SectionFragment extends ListFragment {
 
@@ -44,14 +48,15 @@ public class SectionFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		stationNames = getArguments().getStringArrayList(ARG_NAMES);
 		radioStations = new RadioStationTable(getActivity());
-		adapter = new ListArrayAdapter(getActivity(), stationNames, radioStations);
+		adapter = new ListArrayAdapter(getActivity(), stationNames,
+				radioStations);
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		ViewGroup view = (ViewGroup) inflater.inflate(
-				R.layout.fragment_list, container, false);
+		ViewGroup view = (ViewGroup) inflater.inflate(R.layout.fragment_list,
+				container, false);
 		return view;
 	}
 
@@ -60,5 +65,16 @@ public class SectionFragment extends ListFragment {
 		super.onActivityCreated(savedInstanceState);
 		setListAdapter(adapter);
 		registerForContextMenu(getListView());
+	}
+
+	@Override
+	public void onListItemClick(ListView list, View view, int position, long id) {
+		TextView itemView = (TextView) ((ViewGroup) view).getChildAt(1);
+		String radioName = itemView.getText().toString();
+		Bundle bundle = new Bundle();
+		bundle.putString(RadioStationTable.COL_NAME, radioName);
+		Intent intent = new Intent(getActivity(), RadioActivity.class);
+		intent.putExtras(bundle);
+		startActivity(intent);
 	}
 }
