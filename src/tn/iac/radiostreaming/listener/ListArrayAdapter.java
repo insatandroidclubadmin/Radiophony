@@ -15,13 +15,13 @@ import android.widget.TextView;
 public class ListArrayAdapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final List<String> values;
-	private final RadioStationTable radioChannelTable;
+	private final RadioStationTable radioStationTable;
 
-	public ListArrayAdapter(Context context, List<String> values, RadioStationTable radioChannelTable) {
-		super(context, R.layout.rowlayout, values);
+	public ListArrayAdapter(Context context, List<String> values, RadioStationTable radioStationTable) {
+		super(context, R.layout.row_layout, values);
 		this.context = context;
 		this.values = values;
-		this.radioChannelTable = radioChannelTable;
+		this.radioStationTable = radioStationTable;
 	}
 
 
@@ -29,15 +29,26 @@ public class ListArrayAdapter extends ArrayAdapter<String> {
   public View getView(int position, View convertView, ViewGroup parent) {
     LayoutInflater inflater = (LayoutInflater) context
         .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    View rowView = inflater.inflate(R.layout.rowlayout, parent, false);
-    ImageView play = (ImageView) rowView.findViewById(R.id.icon);
-    TextView textView = (TextView) rowView.findViewById(R.id.label);
-    ImageView logo = (ImageView) rowView.findViewById(R.id.logo);
     
-    textView.setText(values.get(position));
-    play.setImageResource(R.drawable.play4);
-    String logoName = radioChannelTable.find(RadioStationTable.COL_NAME, values.get(position)).getLogo();
+    View rowView = inflater.inflate(R.layout.row_layout, parent, false);
+    ImageView play = (ImageView) rowView.findViewById(R.id.row_play);
+    TextView label = (TextView) rowView.findViewById(R.id.row_label);
+    ImageView logo = (ImageView) rowView.findViewById(R.id.row_logo);
+    
+    label.setText(values.get(position));
+    String logoName = radioStationTable.find(RadioStationTable.COL_NAME, values.get(position)).getLogo();
     logo.setImageResource(context.getResources().getIdentifier("drawable/logo_"+logoName, "drawable", context.getPackageName()));
+    /*
+    if(RadiophonyService.getInstance().isPlaying()){
+    	UIManager uiManager = UIManager.getInstance();
+    	String radioName = RadiophonyService.getInstance().getPlayingRadioStation().getName();
+    	if(radioName.equals(values.get(position))){
+    		uiManager.prepare(RadiophonyService.getInstance().getPlayingRadioStation(), play);
+    		uiManager.play();
+    	}
+    	
+	}
+    */
     return rowView;
   }
 } 
