@@ -1,10 +1,11 @@
 package tn.iac.radiostreaming.domain;
 
-public class RadioChannel{
+public class RadioStation{
 	
 	public static final int NATIONAL = 0;
 	public static final int INTERNATIONAL = 1;
-	public static final int FAVORITE = 2;
+	public static final int NOT_FAVORITE = 2;
+	public static final int FAVORITE = 3;
 	
 	private int id;
 	private String name;
@@ -14,8 +15,8 @@ public class RadioChannel{
 	private int type;
 	private int flag;
 	
-	public RadioChannel(){}
-	public RadioChannel(String name, String url, String website, String logo ,int type, int flag){
+	public RadioStation(){}
+	public RadioStation(String name, String url, String website, String logo ,int type, int flag){
 		this.name = name;
 		this.url=url;
 		this.website= website;
@@ -68,7 +69,6 @@ public class RadioChannel{
 		return flag;
 	}
 
-
 	public void setFlag(int flag) {
 		this.flag = flag;
 	}
@@ -89,6 +89,10 @@ public class RadioChannel{
 		this.logo = logo;
 	}
 	
+	public boolean isFavorite() {
+		return (flag==FAVORITE);
+	}
+
 }
 
 
