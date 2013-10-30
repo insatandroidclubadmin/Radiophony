@@ -152,7 +152,7 @@ public class RadioStationTable {
 	
 	///////////////////////////// Useful public methods
 	
-	public List<String> finAllStationNames(String col, String value) {
+	public List<String> findAllStationNames(String col, String value) {
 		List<RadioStation> radioChannels = findAll(col, value);
 		List<String> channelNames = new LinkedList<String>();
 		for(int i=0 ; i<radioChannels.size() ; i++){
