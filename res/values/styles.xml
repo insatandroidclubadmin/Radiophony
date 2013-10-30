@@ -1,11 +1,21 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-   <style name="AppTheme" parent="android:Theme.Light" />
-    
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+        
+    <style name="DialogTheme"
+        parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">@color/light_grey</item>        
+    </style>
+ 
     <color name="black_color">#000</color>
     <color name="light_grey">#C7C7C7</color>
     <color name="white">#FFFFFF</color>
-    
     <style name = "whiteText">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textStyle">italic</item>
@@ -17,5 +27,5 @@
         <item name="android:textColor">@color/light_grey</item>      
         <item name="android:dividerHeight">12sp</item> 
         <item name="android:animateOnClick">true</item>
-     </style> 
+     </style>
 </resources>
