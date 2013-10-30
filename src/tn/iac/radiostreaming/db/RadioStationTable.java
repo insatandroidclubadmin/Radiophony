@@ -1,5 +1,6 @@
 package tn.iac.radiostreaming.db;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -154,7 +155,7 @@ public class RadioStationTable {
 	
 	public List<String> findAllStationNames(String col, String value) {
 		List<RadioStation> radioChannels = findAll(col, value);
-		List<String> channelNames = new LinkedList<String>();
+		List<String> channelNames = new ArrayList<String>();
 		for(int i=0 ; i<radioChannels.size() ; i++){
 			channelNames.add(radioChannels.get(i).getName());
 		}
