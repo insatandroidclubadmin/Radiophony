@@ -1,5 +1,5 @@
 package tn.iac.radiostreaming;
-
+/*
 import tn.iac.radiostreaming.domain.RadioChannel;
 import android.app.Activity;
 import android.content.Intent;
@@ -45,7 +45,7 @@ public class HelloActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View view) {
 		Bundle bundle = new Bundle();
-		Intent intent = new Intent(HelloActivity.this, MainActivity.class);
+		Intent intent = new Intent(HelloActivity.this, MainnActivity.class);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 		
 		switch (view.getId()) {
@@ -87,3 +87,4 @@ public class HelloActivity extends Activity implements OnClickListener {
 	}
 
 }
+*/
