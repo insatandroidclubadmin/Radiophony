@@ -17,11 +17,12 @@ import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends FragmentActivity implements OnClickListener{
 	
 	FragmentStatePagerAdapter pagerAdapter;
 	ViewPager viewPager;
@@ -47,6 +48,7 @@ public class MainActivity extends FragmentActivity {
 			logo = (ImageView) findViewById(R.id.main_bar_logo);
 			station = (TextView) findViewById(R.id.main_bar_station);
 			pause = (ImageView) findViewById(R.id.main_pause);
+			pause.setOnClickListener(this);
 			
 			logo.setImageResource(getResources().getIdentifier("drawable/logo_" + radioStation.getLogo(),
 						"drawable", getPackageName()));
@@ -126,6 +128,20 @@ public class MainActivity extends FragmentActivity {
 			}
 			return null;
 		}
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.main_pause:
+			stopService(new Intent(this, RadiophonyService.class));
+			bar.setVisibility(View.GONE);
+			break;
+
+		default:
+			break;
+		}
+		
 	}
 
 }
