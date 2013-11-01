@@ -4,42 +4,24 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import tn.iac.radiostreaming.db.RadioStationDB;
+import tn.iac.radiostreaming.db.RadioDB;
 import tn.iac.radiostreaming.domain.RadioStation;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class RadioStationTable {
+public class RadioManager {
 
-	private static final int DB_VERSION = 1;
-	private static final String DB_NAME = "radiostation.db";
-	private static final String TABLE_RADIO_STATION = "radiostation";
-	private static final String COL_ID = "ID";
-	private static final int NUM_COL_ID = 0;
-	public static final String COL_NAME = "name";
-	private static final int NUM_COL_NAME = 1;
-	private static final String COL_URL = "url";
-	private static final int NUM_COL_URL = 2;
-	private static final String COL_WEBSITE = "website";
-	private static final int NUM_COL_WEBSITE = 3;
-	private static final String COL_LOGO = "logo";
-	private static final int NUM_COL_LOGO = 4;
-	public static final String COL_TYPE = "type";
-	private static final int NUM_COL_TYPE = 5;
-	public static final String COL_FLAG = "favoris";
-	private static final int NUM_COL_FLAG = 6;
-
-	private SQLiteDatabase database;
-	private RadioStationDB mySQLiteBase;
-
-	public RadioStationTable(Context context) {
-		mySQLiteBase = new RadioStationDB(context, DB_NAME, null, DB_VERSION);
-		this.fillInitialTable();
+	private static SQLiteDatabase database;
+	private static RadioDB mySQLiteBase;
+	
+	public static void init(Context context){
+		mySQLiteBase = new RadioDB(context, RadioDB.DB_NAME, null, RadioDB.DB_VERSION);
+		fillInitialTable();
 	}
 	
-	public void fillInitialTable() {
+	private static void fillInitialTable() {
 		open();
 		insert(new RadioStation("Mosaique FM", 	"http://radio.mosaiquefm.net:8000/mosalive","http://www.mosaiquefm.net/", 				"mosaiquefm" , RadioStation.NATIONAL, RadioStation.FAVORITE));
 		insert(new RadioStation("Shems FM", 	"http://stream8.tanitweb.com/shems","http://www.shemsfm.net/",	 						"shemsfm" , RadioStation.NATIONAL, RadioStation.NOT_FAVORITE));
@@ -83,28 +65,28 @@ public class RadioStationTable {
 		close();
 	}
 
-	public long insert(RadioStation station) {
-		RadioStation existingStation = find(COL_NAME,station.getName());
+	public static long insert(RadioStation station) {
+		RadioStation existingStation = find(RadioDB.COL_NAME,station.getName());
 		long count = 0;
 		if (existingStation == null) {
 			ContentValues values = new ContentValues();
-			values.put(COL_NAME, station.getName());
-			values.put(COL_URL, station.getUrl());
-			values.put(COL_WEBSITE, station.getWebsite());
-			values.put(COL_LOGO, station.getLogo());
-			values.put(COL_TYPE, station.getType());
-			values.put(COL_FLAG, station.getFlag());
+			values.put(RadioDB.COL_NAME, station.getName());
+			values.put(RadioDB.COL_URL, station.getUrl());
+			values.put(RadioDB.COL_WEBSITE, station.getWebsite());
+			values.put(RadioDB.COL_LOGO, station.getLogo());
+			values.put(RadioDB.COL_TYPE, station.getType());
+			values.put(RadioDB.COL_FLAG, station.getFlag());
 			open();
-			count = database.insert(TABLE_RADIO_STATION, null, values);
+			count = database.insert(RadioDB.TABLE_RADIO_STATION, null, values);
 			close();
 		}
 		return count;
 	}
 	
-	public RadioStation find(String column, String value){
+	public static RadioStation find(String column, String value){
 		open();
-		Cursor c = database.query(TABLE_RADIO_STATION, new String[] { COL_ID,
-				COL_NAME, COL_URL,COL_WEBSITE,COL_LOGO, COL_TYPE, COL_FLAG }, column
+		Cursor c = database.query(RadioDB.TABLE_RADIO_STATION, new String[] { RadioDB.COL_ID,
+				RadioDB.COL_NAME, RadioDB.COL_URL,RadioDB.COL_WEBSITE,RadioDB.COL_LOGO, RadioDB.COL_TYPE, RadioDB.COL_FLAG }, column
 				+ "=?", new String[] { value }, null, null, null);
 		
 		RadioStation radioChannel = null;
@@ -117,11 +99,11 @@ public class RadioStationTable {
 		return radioChannel;
 	}
 
-	public List<RadioStation> findAll(String column, String value) {
+	public static List<RadioStation> findAll(String column, String value) {
 		open();
-		Cursor c = database.query(TABLE_RADIO_STATION, 
-				new String[] { COL_ID,COL_NAME, COL_URL,COL_WEBSITE,COL_LOGO, COL_TYPE, COL_FLAG },
-				column + "=?", new String[]{value}, null, null, COL_FLAG + " DESC");
+		Cursor c = database.query(RadioDB.TABLE_RADIO_STATION, 
+				new String[] { RadioDB.COL_ID,RadioDB.COL_NAME, RadioDB.COL_URL,RadioDB.COL_WEBSITE,RadioDB.COL_LOGO, RadioDB.COL_TYPE, RadioDB.COL_FLAG },
+				column + "=?", new String[]{value}, null, null, RadioDB.COL_FLAG + " DESC");
 		
 		List<RadioStation> stations = new LinkedList<RadioStation>();
 		if (c.getCount() != 0) {
@@ -136,16 +118,16 @@ public class RadioStationTable {
 		return stations;
 	}
 		
-	private RadioStation cursorToRadioStation(Cursor c) {
+	private static RadioStation cursorToRadioStation(Cursor c) {
 		RadioStation radioChannel = new RadioStation();
 
-		radioChannel.setId(c.getInt(NUM_COL_ID));
-		radioChannel.setName(c.getString(NUM_COL_NAME));
-		radioChannel.setUrl(c.getString(NUM_COL_URL));
-		radioChannel.setWebsite(c.getString(NUM_COL_WEBSITE));
-		radioChannel.setLogo(c.getString(NUM_COL_LOGO));
-		radioChannel.setType(c.getInt(NUM_COL_TYPE));
-		radioChannel.setFlag(c.getInt(NUM_COL_FLAG));
+		radioChannel.setId(c.getInt(RadioDB.NUM_COL_ID));
+		radioChannel.setName(c.getString(RadioDB.NUM_COL_NAME));
+		radioChannel.setUrl(c.getString(RadioDB.NUM_COL_URL));
+		radioChannel.setWebsite(c.getString(RadioDB.NUM_COL_WEBSITE));
+		radioChannel.setLogo(c.getString(RadioDB.NUM_COL_LOGO));
+		radioChannel.setType(c.getInt(RadioDB.NUM_COL_TYPE));
+		radioChannel.setFlag(c.getInt(RadioDB.NUM_COL_FLAG));
 		return radioChannel;
 	}
 	
@@ -153,7 +135,7 @@ public class RadioStationTable {
 	
 	///////////////////////////// Useful public methods
 	
-	public List<String> findAllStationNames(String col, String value) {
+	public static List<String> findAllStationNames(String col, String value) {
 		List<RadioStation> radioChannels = findAll(col, value);
 		List<String> channelNames = new ArrayList<String>();
 		for(int i=0 ; i<radioChannels.size() ; i++){
@@ -162,34 +144,34 @@ public class RadioStationTable {
 		return channelNames;
 	}
 	
-	public void setFavorite(String name, boolean favorite){
+	public static void setFavorite(String name, boolean favorite){
 		if(favorite)
-			update(name, COL_FLAG ,RadioStation.FAVORITE);
+			update(name, RadioDB.COL_FLAG ,RadioStation.FAVORITE);
 		else
-			update(name, COL_FLAG ,RadioStation.NOT_FAVORITE);
+			update(name, RadioDB.COL_FLAG ,RadioStation.NOT_FAVORITE);
 	}
 		
-	public int update(String name, String column, String value) {
+	public static int update(String name, String column, String value) {
 		ContentValues values = new ContentValues();
 		values.put(column, value);
 		open();
-		int count = database.update(TABLE_RADIO_STATION, values, COL_NAME + "=?", new String[]{name});
+		int count = database.update(RadioDB.TABLE_RADIO_STATION, values, RadioDB.COL_NAME + "=?", new String[]{name});
 		close();
 		return count;
 	}
 	
-	public int update(String name, String column, int value) {
+	public static int update(String name, String column, int value) {
 		ContentValues values = new ContentValues();
 		values.put(column, value);
 		open();
-		int count = database.update(TABLE_RADIO_STATION, values, COL_NAME + "=?", new String[]{name});
+		int count = database.update(RadioDB.TABLE_RADIO_STATION, values, RadioDB.COL_NAME + "=?", new String[]{name});
 		close();
 		return count;
 	}
 	
-	public int removeStationWithID(int id) {
+	public static int removeStationWithID(int id) {
 		open();
-		int count = database.delete(TABLE_RADIO_STATION, COL_ID + "=" + id, null);
+		int count = database.delete(RadioDB.TABLE_RADIO_STATION, RadioDB.COL_ID + "=" + id, null);
 		close();
 		return count;
 	}
@@ -197,11 +179,11 @@ public class RadioStationTable {
 	
 	//////////////////////////////////////////////////////// Open and close
 	
-	private void open() {
+	private static void open() {
 		database = mySQLiteBase.getWritableDatabase();
 	}
 	
-	private void close() {
+	private static void close() {
 		database.close();
 	}
 

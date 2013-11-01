@@ -4,7 +4,8 @@ import java.util.List;
 
 import tn.iac.radiostreaming.R;
 import tn.iac.radiostreaming.RadiophonyService;
-import tn.iac.radiostreaming.db.RadioStationTable;
+import tn.iac.radiostreaming.db.RadioDB;
+import tn.iac.radiostreaming.db.RadioManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +17,11 @@ import android.widget.TextView;
 public class ListArrayAdapter extends ArrayAdapter<String> {
 	private final Context context;
 	private final List<String> values;
-	private final RadioStationTable radioStationTable;
 
-	public ListArrayAdapter(Context context, List<String> values, RadioStationTable radioStationTable) {
+	public ListArrayAdapter(Context context, List<String> values) {
 		super(context, R.layout.row_layout, values);
 		this.context = context;
 		this.values = values;
-		this.radioStationTable = radioStationTable;
 	}
 
 
@@ -37,7 +36,7 @@ public class ListArrayAdapter extends ArrayAdapter<String> {
     ImageView logo = (ImageView) rowView.findViewById(R.id.row_logo);
     
     label.setText(values.get(position));
-    String logoName = radioStationTable.find(RadioStationTable.COL_NAME, values.get(position)).getLogo();
+    String logoName = RadioManager.find(RadioDB.COL_NAME, values.get(position)).getLogo();
     logo.setImageResource(context.getResources().getIdentifier("drawable/logo_"+logoName, "drawable", context.getPackageName()));
     
     if(RadiophonyService.getInstance().isPlaying()){

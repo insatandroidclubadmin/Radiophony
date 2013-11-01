@@ -17,9 +17,7 @@
 package tn.iac.radiostreaming;
 
 import java.util.List;
-
-import tn.iac.radiostreaming.db.RadioStationTable;
-import tn.iac.radiostreaming.domain.RadioStation;
+import tn.iac.radiostreaming.db.RadioDB;
 import tn.iac.radiostreaming.listener.ListArrayAdapter;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,21 +33,16 @@ public class SectionFragment extends ListFragment {
 
 	public static final String ARG_NAMES = "section_names";
 
-	RadioStationTable radioStations;
 	ArrayAdapter<String> adapter;
 	List<String> stationNames;
 
-	public SectionFragment() {
-
-	}
+	public SectionFragment() {}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		stationNames = getArguments().getStringArrayList(ARG_NAMES);
-		radioStations = new RadioStationTable(getActivity());
-		adapter = new ListArrayAdapter(getActivity(), stationNames,
-				radioStations);
+		adapter = new ListArrayAdapter(getActivity(), stationNames);
 	}
 
 	@Override
@@ -72,7 +65,7 @@ public class SectionFragment extends ListFragment {
 		TextView itemView = (TextView) ((ViewGroup) view).getChildAt(1);
 		String radioName = itemView.getText().toString();
 		Bundle bundle = new Bundle();
-		bundle.putString(RadioStationTable.COL_NAME, radioName);
+		bundle.putString(RadioDB.COL_NAME, radioName);
 		Intent intent = new Intent(getActivity(), RadioActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);

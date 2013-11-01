@@ -3,7 +3,8 @@ package tn.iac.radiostreaming;
 import java.util.ArrayList;
 import java.util.List;
 
-import tn.iac.radiostreaming.db.RadioStationTable;
+import tn.iac.radiostreaming.db.RadioDB;
+import tn.iac.radiostreaming.db.RadioManager;
 import tn.iac.radiostreaming.domain.RadioStation;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,8 +22,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity {
-
-	RadioStationTable radioStations;
 	
 	FragmentStatePagerAdapter pagerAdapter;
 	ViewPager viewPager;
@@ -40,7 +39,7 @@ public class MainActivity extends FragmentActivity {
 		viewPager = (ViewPager) findViewById(R.id.main_pager);
 		viewPager.setAdapter(pagerAdapter);
 		
-		radioStations = new RadioStationTable(this);
+		RadioManager.init(getApplicationContext());
 
 		if(RadiophonyService.getInstance().isPlaying()){
 			RadioStation radioStation = RadiophonyService.getInstance().getPlayingRadioStation();
@@ -89,20 +88,20 @@ public class MainActivity extends FragmentActivity {
 			String column="", value="";
 			switch (position) {
 			case 0:
-				column = RadioStationTable.COL_FLAG;
+				column = RadioDB.COL_FLAG;
 				value = RadioStation.FAVORITE + "";
 				break;
 			case 1:
-				column = RadioStationTable.COL_TYPE;
+				column = RadioDB.COL_TYPE;
 				value = RadioStation.NATIONAL + "";
 				break;
 			case 2:
-				column = RadioStationTable.COL_TYPE;
+				column = RadioDB.COL_TYPE;
 				value = RadioStation.INTERNATIONAL + "";
 				break;
 			}
 			
-			List<String> stationNames = radioStations.findAllStationNames(column, value);
+			List<String> stationNames = RadioManager.findAllStationNames(column, value);
 			SectionFragment fragment = new SectionFragment();
 			Bundle args = new Bundle();
 			args.putStringArrayList(SectionFragment.ARG_NAMES, (ArrayList<String>) stationNames);
