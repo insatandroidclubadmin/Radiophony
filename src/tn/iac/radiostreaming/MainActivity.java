@@ -24,12 +24,14 @@ import android.widget.TextView;
 
 public class MainActivity extends FragmentActivity implements OnClickListener{
 	
+	private static final int NB_FRAGMENTS = 3;
+	
 	FragmentStatePagerAdapter pagerAdapter;
 	ViewPager viewPager;
 	RelativeLayout bar; 
 	ImageView logo, pause;
 	TextView station;
-	
+	List<SectionFragment> fragments;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		viewPager.setAdapter(pagerAdapter);
 		
 		RadioManager.init(getApplicationContext());
-
+		
+		fragments = new ArrayList<SectionFragment>();
+		for (int i = 0; i < NB_FRAGMENTS; i++) {
+			fragments.add(new SectionFragment());
+		}
+		
 		if(RadiophonyService.getInstance().isPlaying()){
 			RadioStation radioStation = RadiophonyService.getInstance().getPlayingRadioStation();
 			bar = (RelativeLayout) findViewById(R.id.main_bar);
@@ -104,16 +111,15 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			}
 			
 			List<String> stationNames = RadioManager.findAllStationNames(column, value);
-			SectionFragment fragment = new SectionFragment();
 			Bundle args = new Bundle();
 			args.putStringArrayList(SectionFragment.ARG_NAMES, (ArrayList<String>) stationNames);
-	        fragment.setArguments(args);
-			return fragment;
+	        fragments.get(position).setArguments(args);
+			return fragments.get(position);
 		}
 
 		@Override
 		public int getCount() {
-			return 3;
+			return NB_FRAGMENTS;
 		}
 
 		@Override
