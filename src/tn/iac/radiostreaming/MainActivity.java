@@ -142,6 +142,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		case R.id.main_pause:
 			stopService(new Intent(this, RadiophonyService.class));
 			bar.setVisibility(View.GONE);
+			for (int i = 0; i < NB_FRAGMENTS; i++) {
+				fragments.get(i).pause();
+			}
 			break;
 
 		default:

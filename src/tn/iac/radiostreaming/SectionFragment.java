@@ -26,6 +26,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,15 +35,15 @@ public class SectionFragment extends ListFragment {
 	public static final String ARG_NAMES = "section_names";
 
 	ArrayAdapter<String> adapter;
-	List<String> stationNames;
+	List<String> radioNames;
 
 	public SectionFragment() {}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		stationNames = getArguments().getStringArrayList(ARG_NAMES);
-		adapter = new ListArrayAdapter(getActivity(), stationNames);
+		radioNames = getArguments().getStringArrayList(ARG_NAMES);
+		adapter = new ListArrayAdapter(getActivity(), radioNames);
 	}
 
 	@Override
@@ -69,5 +70,17 @@ public class SectionFragment extends ListFragment {
 		Intent intent = new Intent(getActivity(), RadioActivity.class);
 		intent.putExtras(bundle);
 		startActivity(intent);
+	}
+	
+	public void pause(){
+		if(isAdded()){
+			String radioName = RadiophonyService.getInstance().getPlayingRadioStation().getName();
+			if(radioNames.contains(radioName)){
+				int position = radioNames.indexOf(radioName);
+				ViewGroup view = (ViewGroup) adapter.getView(position, null, null);
+				ImageView play = (ImageView) view.findViewById(R.id.row_play);
+				play.setImageResource(0);
+			}
+		}
 	}
 }
