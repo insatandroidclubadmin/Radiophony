@@ -100,9 +100,9 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 				break;
 			}
 			
-			List<String> stationNames = RadioManager.findAllStationNames(column, value);
 			Bundle args = new Bundle();
-			args.putStringArrayList(SectionFragment.ARG_NAMES, (ArrayList<String>) stationNames);
+			args.putString(SectionFragment.ARG_COLUMN, column);
+			args.putString(SectionFragment.ARG_VALUE, value);
 	        fragments.get(position).setArguments(args);
 			return fragments.get(position);
 		}
@@ -161,6 +161,14 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 					"drawable", getPackageName()));
 		station.setText(radioStation.getName());
 		bar.setVisibility(View.VISIBLE);
+	}
+
+	public void refresh() {
+		for (int i = 0; i < NB_FRAGMENTS; i++) {
+			if(fragments.get(i).isAdded())
+				fragments.get(i).refresh();
+		}
+		
 	}
 
 }
