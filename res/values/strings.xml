@@ -8,21 +8,16 @@
     <string name="club_name">INSAT ANDROID CLUB</string>
     <string name="club_website">www.insatandroidclub.org</string>
     <string name="menu_about">About us</string>
-    <string name="title_activity_hello">Home</string>
     <string name="title_activity_about">About Radiophony</string>
-    <string name="title_activity_national">National</string>
+    <string name="title_activity_national">Tunisian</string>
     <string name="title_activity_international">International</string>
     <string name="title_activity_favorite">Favorite</string>
     <string name="option_menu_title">Options</string>
-    <string name="option_set_favorite">Set Favorite</string>
-    <string name="option_unset_favorite">Unset Favorite</string>
+    <string name="option_set_favorite">Add to favorites</string>
+    <string name="option_unset_favorite">Remove from favorites</string>
     <string name="option_visit_website">Visit Website</string>
     <string name="notif_title">Radiophony ON</string>
-    <string name="notif_text">Go to Radiophony application …</string>
     <string name="mp_loading">Loading </string>
     <string name="exception_network">Network connection disabled</string>
-    <string name="title_activity_radio">RadioActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-
+    
 </resources>

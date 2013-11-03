@@ -36,14 +36,6 @@
             android:label="@string/title_activity_about"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
-        <activity
-            android:name="tn.iac.radiostreaming.RadioActivity"
-            android:label="@string/title_activity_radio"
-            android:parentActivityName="tn.iac.radiostreaming.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="tn.iac.radiostreaming.MainActivity" />
-        </activity>
         <service android:name="tn.iac.radiostreaming.RadiophonyService" />
     </application>
 
