@@ -68,12 +68,23 @@ public class SectionFragment extends ListFragment {
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		TextView itemView = (TextView) ((ViewGroup) view).getChildAt(1);
 		String radioName = itemView.getText().toString();
-		RadioStation radio = RadioManager.find(RadioDB.COL_NAME, radioName);
-		if (!RadiophonyService.getInstance().isPlaying()) {
+		
+		if(RadiophonyService.getInstance().isPlaying()){
+			RadioStation playingRadio = RadiophonyService.getInstance().getPlayingRadioStation();
+			String playingRadioName = playingRadio.getName();
+			
+			if(radioName.equals(playingRadioName)){
+				((MainActivity)getActivity()).play(false);
+			}else{
+				((MainActivity)getActivity()).play(false);
+				RadioStation radio = RadioManager.find(RadioDB.COL_NAME, radioName);
+				RadiophonyService.initialize(getActivity(), radio);
+				((MainActivity)getActivity()).play(true);
+			}
+		}else {
+			RadioStation radio = RadioManager.find(RadioDB.COL_NAME, radioName);
 			RadiophonyService.initialize(getActivity(), radio);
 			((MainActivity)getActivity()).play(true);
-		}else{
-			((MainActivity)getActivity()).play(false);
 		}
 	}
 
