@@ -25,16 +25,15 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 public class RadiophonyService extends Service {
+	static private final int NOTIFICATION_ID = 1;
+	
 	static private RadiophonyService service;
 	static private Context context;
 	static private MediaPlayer mediaPlayer;
 
 	static private RadioStation station;
-	static private final int NOTIFICATION_ID = 1;
 	static public int list;
 	private WifiLock wifiLock;
-
-//	private RadiophonyService(){}
 
 	static public void initialize(Context context, RadioStation station) {
 		RadiophonyService.context = context;

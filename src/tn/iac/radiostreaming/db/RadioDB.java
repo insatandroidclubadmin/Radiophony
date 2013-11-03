@@ -17,7 +17,7 @@ public class RadioDB extends SQLiteOpenHelper {
 	public static final String COL_FLAG = "favoris";
 	
 	public static final int DB_VERSION = 1;
-	public static final String DB_NAME = "radiostation.db";
+	public static final String DB_NAME = "radiophony.db";
 	public static final int NUM_COL_ID = 0;
 	public static final int NUM_COL_NAME = 1;
 	public static final int NUM_COL_URL = 2;

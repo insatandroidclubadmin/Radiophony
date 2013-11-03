@@ -1,11 +1,10 @@
-package tn.iac.radiostreaming.listener;
+package tn.iac.radiostreaming.utils;
 
 import java.util.List;
 
 import tn.iac.radiostreaming.R;
 import tn.iac.radiostreaming.RadiophonyService;
 import tn.iac.radiostreaming.db.RadioDB;
-import tn.iac.radiostreaming.db.RadioManager;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

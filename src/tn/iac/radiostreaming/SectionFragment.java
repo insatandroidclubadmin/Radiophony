@@ -18,9 +18,9 @@ package tn.iac.radiostreaming;
 
 import java.util.List;
 import tn.iac.radiostreaming.db.RadioDB;
-import tn.iac.radiostreaming.db.RadioManager;
 import tn.iac.radiostreaming.domain.RadioStation;
-import tn.iac.radiostreaming.listener.ListArrayAdapter;
+import tn.iac.radiostreaming.utils.ListArrayAdapter;
+import tn.iac.radiostreaming.utils.RadioManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
