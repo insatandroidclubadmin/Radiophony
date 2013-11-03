@@ -141,6 +141,7 @@ public class RadiophonyService extends Service {
 				wifiLock.acquire();
 
 				mediaPlayer.start();
+				((MainActivity)context).notifyShowBar();
 				createNotification();
 			} else {
 				Toast.makeText(context,

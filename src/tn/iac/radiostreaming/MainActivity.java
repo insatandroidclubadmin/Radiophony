@@ -50,17 +50,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		}
 		
 		if(RadiophonyService.getInstance().isPlaying()){
-			RadioStation radioStation = RadiophonyService.getInstance().getPlayingRadioStation();
-			bar = (RelativeLayout) findViewById(R.id.main_bar);
-			logo = (ImageView) findViewById(R.id.main_bar_logo);
-			station = (TextView) findViewById(R.id.main_bar_station);
-			pause = (ImageView) findViewById(R.id.main_pause);
-			pause.setOnClickListener(this);
-			
-			logo.setImageResource(getResources().getIdentifier("drawable/logo_" + radioStation.getLogo(),
-						"drawable", getPackageName()));
-			station.setText(radioStation.getName());
-			bar.setVisibility(View.VISIBLE);
+			notifyShowBar();
 		}
 	}
 
@@ -81,7 +71,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	/**
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
@@ -140,17 +130,37 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.main_pause:
-			stopService(new Intent(this, RadiophonyService.class));
-			bar.setVisibility(View.GONE);
-			for (int i = 0; i < NB_FRAGMENTS; i++) {
-				fragments.get(i).pause();
-			}
+			play(false);
 			break;
 
 		default:
 			break;
 		}
+	}
+	
+	public void play(boolean toPlay){
+		if(!toPlay){
+			stopService(new Intent(this, RadiophonyService.class));
+			bar.setVisibility(View.GONE);
+		}else{
+			startService(new Intent(this, RadiophonyService.class));
+			//wait for the service to notify success, then notifyShowBar() will be called
+		}
+	}
+
+	//Called by service, this method show the bar. It does smth else too, it refreshed implicitly the listView (play button before the the radio station name will be displayed too (calling getView of the Adapter)
+	public void notifyShowBar() {
+		RadioStation radioStation = RadiophonyService.getInstance().getPlayingRadioStation();
+		bar = (RelativeLayout) findViewById(R.id.main_bar);
+		logo = (ImageView) findViewById(R.id.main_bar_logo);
+		station = (TextView) findViewById(R.id.main_bar_station);
+		pause = (ImageView) findViewById(R.id.main_pause);
+		pause.setOnClickListener(this);
 		
+		logo.setImageResource(getResources().getIdentifier("drawable/logo_" + radioStation.getLogo(),
+					"drawable", getPackageName()));
+		station.setText(radioStation.getName());
+		bar.setVisibility(View.VISIBLE);
 	}
 
 }

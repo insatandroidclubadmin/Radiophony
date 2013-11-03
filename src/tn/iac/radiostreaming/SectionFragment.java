@@ -18,6 +18,8 @@ package tn.iac.radiostreaming;
 
 import java.util.List;
 import tn.iac.radiostreaming.db.RadioDB;
+import tn.iac.radiostreaming.db.RadioManager;
+import tn.iac.radiostreaming.domain.RadioStation;
 import tn.iac.radiostreaming.listener.ListArrayAdapter;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,7 +28,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,7 +37,8 @@ public class SectionFragment extends ListFragment {
 
 	ArrayAdapter<String> adapter;
 	List<String> radioNames;
-
+	Intent radiophonyServiceIntent;
+	
 	public SectionFragment() {}
 
 	@Override
@@ -44,6 +46,7 @@ public class SectionFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		radioNames = getArguments().getStringArrayList(ARG_NAMES);
 		adapter = new ListArrayAdapter(getActivity(), radioNames);
+		this.radiophonyServiceIntent = new Intent(getActivity(), RadiophonyService.class);
 	}
 
 	@Override
@@ -65,22 +68,13 @@ public class SectionFragment extends ListFragment {
 	public void onListItemClick(ListView list, View view, int position, long id) {
 		TextView itemView = (TextView) ((ViewGroup) view).getChildAt(1);
 		String radioName = itemView.getText().toString();
-		Bundle bundle = new Bundle();
-		bundle.putString(RadioDB.COL_NAME, radioName);
-		Intent intent = new Intent(getActivity(), RadioActivity.class);
-		intent.putExtras(bundle);
-		startActivity(intent);
-	}
-	
-	public void pause(){
-		if(isAdded()){
-			String radioName = RadiophonyService.getInstance().getPlayingRadioStation().getName();
-			if(radioNames.contains(radioName)){
-				int position = radioNames.indexOf(radioName);
-				ViewGroup view = (ViewGroup) adapter.getView(position, null, null);
-				ImageView play = (ImageView) view.findViewById(R.id.row_play);
-				play.setImageResource(0);
-			}
+		RadioStation radio = RadioManager.find(RadioDB.COL_NAME, radioName);
+		if (!RadiophonyService.getInstance().isPlaying()) {
+			RadiophonyService.initialize(getActivity(), radio);
+			((MainActivity)getActivity()).play(true);
+		}else{
+			((MainActivity)getActivity()).play(false);
 		}
 	}
+
 }
