@@ -171,4 +171,10 @@ public class MainActivity extends FragmentActivity implements OnClickListener{
 		
 	}
 
+	
+	@Override
+	public void onStop(){
+		RadiophonyService.getInstance().onStop();
+		super.onStop();
+	}
 }

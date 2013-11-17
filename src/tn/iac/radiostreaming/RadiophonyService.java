@@ -34,7 +34,10 @@ public class RadiophonyService extends Service {
 	static private RadioStation station;
 	static public int list;
 	private WifiLock wifiLock;
+	static ProgressDialog dialog;
+	static ProgressTask task;
 
+	
 	static public void initialize(Context context, RadioStation station) {
 		RadiophonyService.context = context;
 		RadiophonyService.station = station;
@@ -59,12 +62,19 @@ public class RadiophonyService extends Service {
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
-		new ProgressTask().execute();
+		task =new ProgressTask();
+		task.execute();
 		return START_NOT_STICKY;
 	}
 
 	public void onDestroy() {
 		stop();
+	}
+	
+	public void onStop(){
+		if(dialog != null && dialog.isShowing()){
+			task.cancel(true);
+		}
 	}
 	
 	public void stop() {
@@ -82,17 +92,16 @@ public class RadiophonyService extends Service {
 	}
 
 	private class ProgressTask extends AsyncTask<String, Void, Boolean> {
-		private ProgressDialog dialog;
 
 		public ProgressTask() {
 			dialog = new ProgressDialog(context);
 		}
 
 		protected void onPreExecute() {
-			this.dialog.setMessage(context.getString(R.string.mp_loading) + " "
+			dialog.setMessage(context.getString(R.string.mp_loading) + " "
 					+ station.getName() + "...");
-			this.dialog.show();
-			this.dialog.setOnCancelListener(new OnCancelListener() {
+			dialog.show();
+			dialog.setOnCancelListener(new OnCancelListener() {
 
 				@Override
 				public void onCancel(DialogInterface dialog) {
@@ -130,7 +139,7 @@ public class RadiophonyService extends Service {
 		@Override
 		protected void onPostExecute(final Boolean success) {
 
-			this.dialog.dismiss();
+			dialog.dismiss();
 
 			if (success) {
 				wifiLock = ((WifiManager) context
