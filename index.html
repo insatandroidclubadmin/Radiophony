@@ -1,79 +1,134 @@
-<!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Radiophony : ">
+	<link rel="stylesheet" href="css/reveal.min.css">
+	<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+</head>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+<body>
+	<div class="reveal">
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+			<section>
+			<img style="border:none; box-shadow:0 0 0;" src="img/iac.png"/>
+				<br/>
+				<br/>
+				<br/>
+				<p>INSAT ANDROID CLUB<br/></p>
+				<a href="http://insatandroidclub.org" style="font-size:30px;">insatandroidclub.org</a>
+				<p></p>
+			</section>
+			<section>
+			<img style="border:none; box-shadow:0 0 0;" src="img/logo.PNG"/>
+				<br/>
+				<p>2ème prix au Challenge Interne 2013, INSAT Android Club</p><br/><br/>
+			</section>
+			<section>
+				<h2>Cahier des charges ?</h2>
+				<p>
+					Une application Android de streaming radio
+				</p>
+			</section>
+			<section>
+				<h3>La solution</h3>
+				<img style="border:none;" src="img/logo.PNG" width="50%">
+				<p>
+					Radiophony
+				</p>
+			</section>
+			<section>
+				<h2>Principales Fonctionnalités</h2>
+				<ul>
+					<li class="fragment roll-in">
+						Ecoutez vos radios classées par catégories : Tunisiennes et Internationales
+					</li>
+					<li class="fragment roll-in">
+						Gérez votre liste de Favoris
+					</li>
+					<li class="fragment roll-in">
+						Accédez rapidement à Radiophony via la barre de notifications
+					</li>
+				</ul>
+			</section>
+			<section>
+				<section>
+					<h2>Les fonctionalités de notre application</h2>
+					<p>(Allez vers le bas pour voir les captures d'écran)</p>
+				</section>
+				<section>
+					<img src="img/1 fav.PNG">
+				</section>
+				<section>
+					<img src="img/2 tn.PNG">
+					<img src="img/3 int.PNG">
+				</section>
+				<section>
+					<img src="img/4 menu.PNG">
+				</section>
+				<section>
+					<img src="img/5 notif.PNG">
+				</section>
+				<section>
+					<img src="img/6 about.PNG">
+				</section>
+			</section>
+			<section>
+				<h2>Travail collaboratif</h2>
+				<br/><br/>
+				<ul>
+					<li class="fragment roll-in">
+						Système de versioning: Git
+					</li>
+					<li class="fragment roll-in">
+						Le code source existe sur github<br/>
+						<a href="https://github.com/insatandroidclubadmin/Radiophony.git" style="font-size:30px;">github.com/insatandroidclubadmin/Radiophony.git</a>
 
-    <title>Radiophony</title>
-  </head>
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h2>Perspectives</h2>
+				<ul>
+					<li class="fragment roll-in">
+						Télécharger la liste des radios à partir du Cloud
+					</li>
+					<li class="fragment roll-in">
+						Permettre à l'utilisateur de recommender l'ajout d'une radio
+					</li>
+					<li class="fragment roll-in">
+						Intégrer les réseaux sociaux
+					</li>
+					<li class="fragment roll-in">
+						Améliorer le widget de la barre de notifications
+					</li>
+				</ul>
+			</section>
+			<section>
+				<h1>Merci!</h1>
+			</section>
+		</div>
 
-  <body>
+	</div>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/insatandroidclubadmin/Radiophony">View on GitHub</a>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.min.js"></script>
+	<script>
+		Reveal.initialize({
+			controls: true,
+			progress: true,
+			history: true,
+			center: true,
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+				]
+			});
 
-          <h1 id="project_title">Radiophony</h1>
-          <h2 id="project_tagline"></h2>
+	</script>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/insatandroidclubadmin/Radiophony/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/insatandroidclubadmin/Radiophony/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
-
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages?? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Radiophony maintained by <a href="https://github.com/insatandroidclubadmin">insatandroidclubadmin</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
-  </body>
+</body>
 </html>
